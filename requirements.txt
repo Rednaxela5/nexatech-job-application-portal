@@ -1,0 +1,4 @@
+tkinter
+tkcalendar
+os
+mysql-connector-python

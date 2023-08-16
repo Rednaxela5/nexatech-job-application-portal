@@ -1,0 +1,15 @@
+applicantNo,employmentHistory_ID,companyName,workStarted,workEnded,workPosition,reasonForLeaving
+56,EH00001,"DBZ Solutions",2015-05-05,2016-11-25,"Technical Support Specialist","Contract ended"
+56,EH00002,"ABC Corporation",2017-01-01,2023-05-25,"IT Support Analyst",Resigned
+72,EH00003,"JKL Systems",2017-08-10,2018-06-10,"IT Project Coordinator","Contract ended"
+72,EH00004,"XYZ Corporation",2019-01-01,2023-02-13,"IT Security Specialist",Relocation
+100,EH00005,"QWE Company",2019-12-11,2023-05-16,"Data Administrator","Contract ended"
+129,EH00002,"ABC Corporation",2012-01-23,2023-06-01,"IT Support Specialist",Burnout
+129,EH00006,"ASD Enterprise",1995-01-28,2000-07-23,"Network Administrator","Contract ended"
+129,EH00007,"YUP Intelligence",2000-08-01,2012-01-15,"Cloud Engineer",Relocation
+157,EH00001,"DBZ Solutions",2020-03-28,2023-06-07,"Quality Assurance","Contract ended"
+157,EH00004,"XYZ Corporation",2003-05-20,2010-11-01,"Software Developer","Contract ended"
+157,EH00008,"YES Enterprise",2011-03-19,2020-02-09,"IT Project Manager",Bankrupt
+234,EH00002,"ABC Corporation",2020-02-20,2022-08-19,"Network Engineer","Contract ended"
+234,EH00005,"QWE Company",2011-05-15,2019-10-03,"Data Analyst","Contract ended"
+234,EH00008,"YES Enterprise",2019-10-15,2020-02-09,"UI/UX Designer",Bankrupt
