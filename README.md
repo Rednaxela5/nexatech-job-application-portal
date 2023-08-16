@@ -3,18 +3,8 @@
 
 A System Proposal presented to the Faculty of the College of Computer and Information Sciences, Polytechnic University of the Philippines 
 
-
-In partial fulfillment for the course 
-
-COMP 20093 - Information Management 
-
-
+Collaborators:
 Agarin, Jerome Zaidee P. 
-
 Lozada, Luen P. 
-
 Porlares, Alexander S. 
-
 Roncales, Jallane E. 
-
-BSIT 2-1 
