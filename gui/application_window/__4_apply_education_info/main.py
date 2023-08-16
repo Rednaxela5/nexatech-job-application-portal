@@ -151,7 +151,8 @@ def education_main():
             # print(sd3.educ_attainment)
 
         window.destroy()
-        from __3_apply_employment import employment_main
+        # from __3_apply_employment import employment_main
+        from gui.application_window.__3_employment_info.main import employment_main
         employment_main()
     
     def next_clicked():
@@ -207,7 +208,8 @@ def education_main():
 
             # connection_database()
             window.destroy()
-            from __5_apply_work_exp import work_experience_main
+            # from __5_apply_work_exp import work_experience_main
+            from gui.application_window.__5_work_experience.main import work_experience_main
             work_experience_main()
 
 

@@ -9,13 +9,7 @@ import os
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
-from gui.admin_window.main_menu._2_main_menu import selection_main
-from gui.admin_window.medium_window._4_0_medium_window import medium_main
-from gui.admin_window.easy_window.easy_prob1._3_1_easyprob import easy_1_main
-from gui.admin_window.easy_window.easy_prob2._3_2_easyprob import easy_2_main
-from gui.admin_window.easy_window.easy_prob3._3_3_easyprob import easy_3_main
-from gui.admin_window.easy_window.easy_prob4._3_4_easyprob import easy_4_main
-from gui.admin_window.easy_window.easy_prob5._3_5_easyprob import easy_5_main
+
 
 def easy_main():
     # Get the script's directory path
@@ -30,36 +24,43 @@ def easy_main():
     def menu_clicked():
         window.destroy()
         # from _2_main_menu import selection_main
+        from gui.admin_window.main_menu.main import selection_main
         selection_main()
 
     def medium_clicked():
         window.destroy()
         # from _4_0_medium_window import medium_main
+        from gui.admin_window.medium_window.main import medium_main
         medium_main()
 
     def easy_1_clicked():
         window.destroy()
         # from _3_1_easyprob import easy_1_main
+        from gui.admin_window.easy_window.easy_prob1.main import easy_1_main
         easy_1_main()
     
     def easy_2_clicked():
         window.destroy()
         # from _3_2_easyprob import easy_2_main
+        from gui.admin_window.easy_window.easy_prob2.main import easy_2_main
         easy_2_main()
 
     def easy_3_clicked():
         window.destroy()
         # from _3_3_easyprob import easy_3_main
+        from gui.admin_window.easy_window.easy_prob3.main import easy_3_main
         easy_3_main()
     
     def easy_4_clicked():
         window.destroy()
         # from _3_4_easyprob import easy_4_main
+        from gui.admin_window.easy_window.easy_prob4.main import easy_4_main
         easy_4_main()
     
     def easy_5_clicked():
         window.destroy()
         # from _3_5_easyprob import easy_5_main
+        from gui.admin_window.easy_window.easy_prob5.main import easy_5_main
         easy_5_main()
 
     window = Tk()

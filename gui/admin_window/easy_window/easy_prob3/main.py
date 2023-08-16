@@ -14,27 +14,29 @@ from tkinter import ttk
 import mysql.connector
 from mysql.connector import Error
 
-def easy_4_main():
+def easy_3_main():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
     # Set the relative path to the assets directory
     ASSETS_PATH = SCRIPT_DIR / "assets"
-    
+
     def relative_to_assets(path: str) -> Path:
         return ASSETS_PATH / Path(path)
 
-    def easy_3_clicked():
+    def easy_2_clicked():
         window.destroy()
-        from _3_3_easyprob import easy_3_main
-        easy_3_main()
+        # from _3_2_easyprob import easy_2_main
+        from gui.admin_window.easy_window.easy_prob2.main import easy_2_main
+        easy_2_main()
 
-    def easy_5_clicked():
+    def easy_4_clicked():
         window.destroy()
-        from _3_5_easyprob import easy_5_main
-        easy_5_main()
+        #from _3_4_easyprob import easy_4_main
+        from gui.admin_window.easy_window.easy_prob4.main import easy_4_main
+        easy_4_main()
 
-    def display_easy_4_clicked():
+    def display_easy_3_clicked():
         # Assigning the database details to variables
         host = 'localhost'
         user = 'root'
@@ -43,13 +45,12 @@ def easy_4_main():
 
         # Display the mysql codes in the box
         canvas.create_text(
-            0.0,
+            50.0,
             348.0,
             anchor="w",
-            text="""            SELECT applicantNo, name, employmentType, 
-                            desiredSalary
+            text="""            SELECT applicantNo, name
             FROM applicant_details
-            WHERE jobPosition = 'IT Support Specialist';""",
+            WHERE employmentType = 'Part-time';""",
             fill="#0F2634",
             font=("Montserrat", 35 * -1)
         )
@@ -60,7 +61,7 @@ def easy_4_main():
                                                     database=database)
             cursor = connection.cursor()
             # Execute the MySQL query
-            query = "SELECT applicantNo, name, employmentType, desiredSalary FROM applicant_details WHERE jobPosition = 'IT Support Specialist';"
+            query = "SELECT applicantNo, name FROM applicant_details WHERE employmentType = 'Part-time';"
             cursor.execute(query)
 
             # Fetch all the rows from the result
@@ -80,11 +81,9 @@ def easy_4_main():
             style.configure("Treeview", font=("Gotham", 9))
 
             # Create a Treeview widget to display the data in tabular format
-            tree = ttk.Treeview(result_window, columns=("applicantNo", "name", "employmentType", "desiredSalary"), show="headings")
-            tree.heading("applicantNo", text="Applicant No.", anchor="w")
-            tree.heading("name", text="Name", anchor="w")
-            tree.heading("employmentType", text="Employment Type", anchor="w")
-            tree.heading("desiredSalary", text="Desired Salary", anchor="w")
+            tree = ttk.Treeview(result_window, columns=("Applicant No.", "Name"), show="headings")
+            tree.heading("Applicant No.", text="Applicant No.", anchor="w")
+            tree.heading("Name", text="Name", anchor="w")
 
             # Insert the data into the treeview
             for row in rows:
@@ -93,6 +92,8 @@ def easy_4_main():
         except Error as e:
             print(f"Error connecting to the database: {e}")
 
+
+    # Main window        
     window = Tk()
 
     window.geometry("1024x568")
@@ -125,7 +126,7 @@ def easy_4_main():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=easy_5_clicked,
+        command=easy_4_clicked,
         relief="flat"
     )
     button_1.place(
@@ -141,7 +142,7 @@ def easy_4_main():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=easy_3_clicked,
+        command=easy_2_clicked,
         relief="flat"
     )
     button_2.place(
@@ -157,7 +158,7 @@ def easy_4_main():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=display_easy_4_clicked,
+        command=display_easy_3_clicked,
         relief="flat"
     )
     button_3.place(
@@ -170,7 +171,7 @@ def easy_4_main():
     image_image_2 = PhotoImage(
         file=relative_to_assets("image_2.png"))
     image_2 = canvas.create_image(
-        506.0,
+        504.0,
         86.0,
         image=image_image_2
     )
@@ -193,4 +194,4 @@ def easy_4_main():
     window.resizable(False, False)
     window.mainloop()
 
-# easy_4_main()
+# easy_3_main()

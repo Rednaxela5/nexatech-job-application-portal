@@ -105,7 +105,8 @@ def major_skill_main():
             # print(sn6.skill_name)
 
         window.destroy()
-        from __5_apply_work_exp import work_experience_main
+        # from __5_apply_work_exp import work_experience_main
+        from gui.application_window.__5_work_experience.main import work_experience_main
         work_experience_main()
     
     def submit_clicked():
@@ -250,7 +251,8 @@ def major_skill_main():
 
                 
                 window.destroy()
-                from __7_apply_end_form import end_application_main
+                # from __7_apply_end_form import end_application_main
+                from gui.application_window.__7_apply_end_form.main import end_application_main
                 end_application_main()
             else:
                 pass

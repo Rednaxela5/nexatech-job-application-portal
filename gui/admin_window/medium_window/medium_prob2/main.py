@@ -14,7 +14,8 @@ from tkinter import ttk
 import mysql.connector
 from mysql.connector import Error
 
-def medium_3_main():
+
+def medium_2_main():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
@@ -24,17 +25,19 @@ def medium_3_main():
     def relative_to_assets(path: str) -> Path:
         return ASSETS_PATH / Path(path)
 
-    def medium_2_clicked():
+    def medium_1_clicked():
         window.destroy()
-        from _4_2_mediumprob import medium_2_main
-        medium_2_main()
+        # from _4_1_mediumprob import medium_1_main
+        from gui.admin_window.medium_window.medium_prob1.main import medium_1_main
+        medium_1_main()
     
-    def medium_4_clicked():
+    def medium_3_clicked():
         window.destroy()
-        from _4_4_mediumprob import medium_4_main
-        medium_4_main()
+        #from _4_3_mediumprob import medium_3_main
+        from gui.admin_window.medium_window.medium_prob3.main import medium_3_main
+        medium_3_main()
 
-    def display_medium_3_clicked():
+    def display_medium_2_clicked():
         # Assigning the database details to variables
         host = 'localhost'
         user = 'root'
@@ -43,16 +46,15 @@ def medium_3_main():
 
         # Display the mysql codes in the box
         canvas.create_text(
-            50.0,
+            0,
             348.0,
             anchor="w",
-            text="""            SELECT skillCode, skillName, COUNT(*)
-            FROM major_skill
-            GROUP BY skillCode, skillName;""",
+            text="""            SELECT companyName, COUNT(*) AS 'Number'
+            FROM work_experience
+            GROUP BY companyName;""",
             fill="#0F2634",
             font=("Montserrat", 35 * -1)
         )
-
         try:
             connection = mysql.connector.connect(host=host,
                                                     user=user,
@@ -60,7 +62,7 @@ def medium_3_main():
                                                     database=database)
             cursor = connection.cursor()
             # Execute the MySQL query
-            query = "SELECT skillCode, skillName, COUNT(*) FROM major_skill GROUP BY skillCode, skillName;"
+            query = "SELECT companyName, COUNT(*) AS 'Number' FROM work_experience GROUP BY companyName;"
             cursor.execute(query)
 
             # Fetch all the rows from the result
@@ -80,9 +82,8 @@ def medium_3_main():
             style.configure("Treeview", font=("Gotham", 9))
 
             # Create a Treeview widget to display the data in tabular format
-            tree = ttk.Treeview(result_window, columns=("skillCode", "skillName", "count(*)"), show="headings")
-            tree.heading("skillCode", text="Skill Code", anchor="w")
-            tree.heading("skillName", text="Skill Name", anchor="w")
+            tree = ttk.Treeview(result_window, columns=("companyName", "count(*)"), show="headings")
+            tree.heading("companyName", text="Company Name", anchor="w")
             tree.heading("count(*)", text="Number", anchor="w")
 
             # Insert the data into the treeview
@@ -91,6 +92,7 @@ def medium_3_main():
             tree.pack()
         except Error as e:
             print(f"Error connecting to the database: {e}")
+
 
     window = Tk()
 
@@ -123,7 +125,7 @@ def medium_3_main():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=display_medium_3_clicked,
+        command=display_medium_2_clicked,
         relief="flat"
     )
     button_1.place(
@@ -163,7 +165,7 @@ def medium_3_main():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=medium_4_clicked,
+        command=medium_3_clicked,
         relief="flat"
     )
     button_2.place(
@@ -179,7 +181,7 @@ def medium_3_main():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=medium_2_clicked,
+        command=medium_1_clicked,
         relief="flat"
     )
     button_3.place(
@@ -191,4 +193,4 @@ def medium_3_main():
     window.resizable(False, False)
     window.mainloop()
 
-# medium_3_main()
+# medium_2_main()

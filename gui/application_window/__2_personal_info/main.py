@@ -42,7 +42,7 @@ def apply_personal():
         applicant_data.emailaddress = ""
         
         window.destroy()
-        from __1_apply_home_page import apply_home
+        from gui.homepage.main import apply_home
         apply_home() 
 
     def next_clicked():
@@ -83,7 +83,7 @@ def apply_personal():
 
             
             window.destroy()
-            from __3_apply_employment import employment_main
+            from gui.application_window.__3_employment_info.main import employment_main
             employment_main()
 
 

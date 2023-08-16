@@ -14,27 +14,28 @@ from tkinter import ttk
 import mysql.connector
 from mysql.connector import Error
 
-def easy_3_main():
+def medium_5_main():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
     # Set the relative path to the assets directory
     ASSETS_PATH = SCRIPT_DIR / "assets"
-
     def relative_to_assets(path: str) -> Path:
         return ASSETS_PATH / Path(path)
 
-    def easy_2_clicked():
+    def medium_4_clicked():
         window.destroy()
-        from _3_2_easyprob import easy_2_main
-        easy_2_main()
-
-    def easy_4_clicked():
+        # from _4_4_mediumprob import medium_4_main
+        from gui.admin_window.medium_window.medium_prob4.main import medium_4_main
+        medium_4_main()
+    
+    def hard_clicked():
         window.destroy()
-        from _3_4_easyprob import easy_4_main
-        easy_4_main()
+        #from _5_0_hard_window import hard_main
+        from gui.admin_window.hard_window.main import hard_main
+        hard_main()
 
-    def display_easy_3_clicked():
+    def display_medium_5_clicked():
         # Assigning the database details to variables
         host = 'localhost'
         user = 'root'
@@ -46,11 +47,11 @@ def easy_3_main():
             50.0,
             348.0,
             anchor="w",
-            text="""            SELECT applicantNo, name
+            text="""            SELECT employmentType, COUNT(*) AS 'Applicants'
             FROM applicant_details
-            WHERE employmentType = 'Part-time';""",
+            GROUP BY employmentType;""",
             fill="#0F2634",
-            font=("Montserrat", 35 * -1)
+            font=("Montserrat", 28 * -1)
         )
         try:
             connection = mysql.connector.connect(host=host,
@@ -59,7 +60,7 @@ def easy_3_main():
                                                     database=database)
             cursor = connection.cursor()
             # Execute the MySQL query
-            query = "SELECT applicantNo, name FROM applicant_details WHERE employmentType = 'Part-time';"
+            query = "SELECT employmentType, COUNT(*) AS 'Applicants' FROM applicant_details GROUP BY employmentType;"
             cursor.execute(query)
 
             # Fetch all the rows from the result
@@ -79,10 +80,10 @@ def easy_3_main():
             style.configure("Treeview", font=("Gotham", 9))
 
             # Create a Treeview widget to display the data in tabular format
-            tree = ttk.Treeview(result_window, columns=("Applicant No.", "Name"), show="headings")
-            tree.heading("Applicant No.", text="Applicant No.", anchor="w")
-            tree.heading("Name", text="Name", anchor="w")
-
+            tree = ttk.Treeview(result_window, columns=("employmentType", "count(*)"), show="headings")
+            tree.heading("employmentType", text="Employment Type", anchor="w")
+            tree.heading("count(*)", text="Applicants", anchor="w")
+          
             # Insert the data into the treeview
             for row in rows:
                 tree.insert("", "end", values=row)
@@ -90,14 +91,11 @@ def easy_3_main():
         except Error as e:
             print(f"Error connecting to the database: {e}")
 
-
-    # Main window        
     window = Tk()
 
     window.geometry("1024x568")
     window.configure(bg = "#CCD4D9")
     window.title("Nexatech System Administration")
-
 
     canvas = Canvas(
         window,
@@ -124,42 +122,10 @@ def easy_3_main():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=easy_4_clicked,
+        command=display_medium_5_clicked,
         relief="flat"
     )
     button_1.place(
-        x=873.0,
-        y=64.0,
-        width=136.0,
-        height=44.0
-    )
-
-    button_image_2 = PhotoImage(
-        file=relative_to_assets("button_2.png"))
-    button_2 = Button(
-        image=button_image_2,
-        borderwidth=0,
-        highlightthickness=0,
-        command=easy_2_clicked,
-        relief="flat"
-    )
-    button_2.place(
-        x=14.0,
-        y=64.0,
-        width=136.0,
-        height=44.0
-    )
-
-    button_image_3 = PhotoImage(
-        file=relative_to_assets("button_3.png"))
-    button_3 = Button(
-        image=button_image_3,
-        borderwidth=0,
-        highlightthickness=0,
-        command=display_easy_3_clicked,
-        relief="flat"
-    )
-    button_3.place(
         x=436.0,
         y=519.0,
         width=134.0,
@@ -169,8 +135,8 @@ def easy_3_main():
     image_image_2 = PhotoImage(
         file=relative_to_assets("image_2.png"))
     image_2 = canvas.create_image(
-        504.0,
-        86.0,
+        516.0,
+        85.0,
         image=image_image_2
     )
 
@@ -189,7 +155,39 @@ def easy_3_main():
         348.0,
         image=image_image_4
     )
+
+    button_image_2 = PhotoImage(
+        file=relative_to_assets("button_2.png"))
+    button_2 = Button(
+        image=button_image_2,
+        borderwidth=0,
+        highlightthickness=0,
+        command=medium_4_clicked,
+        relief="flat"
+    )
+    button_2.place(
+        x=14.0,
+        y=61.0,
+        width=157.0,
+        height=44.0
+    )
+
+    button_image_3 = PhotoImage(
+        file=relative_to_assets("button_3.png"))
+    button_3 = Button(
+        image=button_image_3,
+        borderwidth=0,
+        highlightthickness=0,
+        command=hard_clicked,
+        relief="flat"
+    )
+    button_3.place(
+        x=894.0,
+        y=61.0,
+        width=114.0,
+        height=44.0
+    )
     window.resizable(False, False)
     window.mainloop()
 
-# easy_3_main()
+# medium_5_main()

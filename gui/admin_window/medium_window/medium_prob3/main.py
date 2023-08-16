@@ -14,7 +14,7 @@ from tkinter import ttk
 import mysql.connector
 from mysql.connector import Error
 
-def medium_4_main():
+def medium_3_main():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
@@ -24,17 +24,19 @@ def medium_4_main():
     def relative_to_assets(path: str) -> Path:
         return ASSETS_PATH / Path(path)
 
-    def medium_3_clicked():
+    def medium_2_clicked():
         window.destroy()
-        from _4_3_mediumprob import medium_3_main
-        medium_3_main()
+        # from _4_2_mediumprob import medium_2_main
+        from gui.admin_window.medium_window.medium_prob2.main import medium_2_main
+        medium_2_main()
     
-    def medium_5_clicked():
+    def medium_4_clicked():
         window.destroy()
-        from _4_5_mediumprob import medium_5_main
-        medium_5_main()
+        # from _4_4_mediumprob import medium_4_main
+        from gui.admin_window.medium_window.medium_prob4.main import medium_4_main
+        medium_4_main()
 
-    def display_medium_4_clicked():
+    def display_medium_3_clicked():
         # Assigning the database details to variables
         host = 'localhost'
         user = 'root'
@@ -43,16 +45,16 @@ def medium_4_main():
 
         # Display the mysql codes in the box
         canvas.create_text(
-            0.0,
+            50.0,
             348.0,
             anchor="w",
-            text="""            SELECT school_ID, schoolName, educationAttainment, 
-                        COUNT(*)
-            FROM school
-            GROUP BY school_ID, schoolName, educationAttainment;""",
+            text="""            SELECT skillCode, skillName, COUNT(*)
+            FROM major_skill
+            GROUP BY skillCode, skillName;""",
             fill="#0F2634",
-            font=("Montserrat", 30 * -1)
+            font=("Montserrat", 35 * -1)
         )
+
         try:
             connection = mysql.connector.connect(host=host,
                                                     user=user,
@@ -60,7 +62,7 @@ def medium_4_main():
                                                     database=database)
             cursor = connection.cursor()
             # Execute the MySQL query
-            query = "SELECT school_ID, schoolName, educationAttainment, COUNT(*) FROM school GROUP BY school_ID, schoolName, educationAttainment;"
+            query = "SELECT skillCode, skillName, COUNT(*) FROM major_skill GROUP BY skillCode, skillName;"
             cursor.execute(query)
 
             # Fetch all the rows from the result
@@ -80,12 +82,10 @@ def medium_4_main():
             style.configure("Treeview", font=("Gotham", 9))
 
             # Create a Treeview widget to display the data in tabular format
-            tree = ttk.Treeview(result_window, columns=("school_ID", "schoolName", "educationAttainment", "count(*)"), show="headings")
-            tree.heading("school_ID", text="School ID", anchor="w")
-            tree.heading("schoolName", text="School Name", anchor="w")
-            tree.heading("educationAttainment", text="Education Attainment", anchor="w")
+            tree = ttk.Treeview(result_window, columns=("skillCode", "skillName", "count(*)"), show="headings")
+            tree.heading("skillCode", text="Skill Code", anchor="w")
+            tree.heading("skillName", text="Skill Name", anchor="w")
             tree.heading("count(*)", text="Number", anchor="w")
-            
 
             # Insert the data into the treeview
             for row in rows:
@@ -94,7 +94,6 @@ def medium_4_main():
         except Error as e:
             print(f"Error connecting to the database: {e}")
 
-        
     window = Tk()
 
     window.geometry("1024x568")
@@ -126,7 +125,7 @@ def medium_4_main():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=display_medium_4_clicked,
+        command=display_medium_3_clicked,
         relief="flat"
     )
     button_1.place(
@@ -139,7 +138,7 @@ def medium_4_main():
     image_image_2 = PhotoImage(
         file=relative_to_assets("image_2.png"))
     image_2 = canvas.create_image(
-        518.0,
+        516.0,
         85.0,
         image=image_image_2
     )
@@ -166,7 +165,7 @@ def medium_4_main():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=medium_5_clicked,
+        command=medium_4_clicked,
         relief="flat"
     )
     button_2.place(
@@ -182,7 +181,7 @@ def medium_4_main():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=medium_3_clicked,
+        command=medium_2_clicked,
         relief="flat"
     )
     button_3.place(
@@ -194,4 +193,4 @@ def medium_4_main():
     window.resizable(False, False)
     window.mainloop()
 
-# medium_4_main()
+# medium_3_main()

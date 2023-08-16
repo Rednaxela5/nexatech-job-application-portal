@@ -9,7 +9,7 @@ import os
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
-from gui.admin_window._1_login_page import login_menu
+
 # from _1_login_page import login_menu
 
 def apply_home():
@@ -28,11 +28,13 @@ def apply_home():
         # Close the login window
         window.destroy()
         # Open the main application window
+        from gui.admin_window.login import login_menu
         login_menu()
 
     def apply_now_clicked():
         window.destroy()
-        from __2_apply_personal_info import apply_personal
+        # from __2_apply_personal_info import apply_personal
+        from gui.application_window.__2_personal_info.main import apply_personal
         apply_personal()
 
     window = Tk()

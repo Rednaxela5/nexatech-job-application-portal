@@ -33,7 +33,8 @@ def employment_main():
         applicant_data.application_date = application_date_entry.get_date()
 
         window.destroy()
-        from __2_apply_personal_info import apply_personal
+        # from __2_apply_personal_info import apply_personal
+        from gui.application_window.__2_personal_info.main import apply_personal
         apply_personal()
 
     def next_clicked():
@@ -53,7 +54,8 @@ def employment_main():
             applicant_data.application_date = appli_date
 
             window.destroy()
-            from __4_apply_education import education_main
+            # from __4_apply_education import education_main
+            from gui.application_window.__4_apply_education_info.main import education_main
             education_main()
 
     def display_values():

@@ -27,12 +27,14 @@ def medium_1_main():
 
     def back_clicked():
         window.destroy()
-        from _4_0_medium_window import medium_main
+        #from _4_0_medium_window import medium_main
+        from gui.admin_window.medium_window.main import medium_main
         medium_main()   
 
     def medium_2_clicked():
         window.destroy()
-        from _4_2_mediumprob import medium_2_main
+        #from _4_2_mediumprob import medium_2_main
+        from gui.admin_window.medium_window.medium_prob2.main import medium_2_main
         medium_2_main()
     
     def display_medium_1_clicked():

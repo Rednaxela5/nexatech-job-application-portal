@@ -21,7 +21,8 @@ def end_application_main():
 
     def return_home_clicked():
         window.destroy()
-        from __1_apply_home_page import apply_home
+        #from __1_apply_home_page import apply_home
+        from gui.homepage.main import apply_home
         apply_home()
     
     window = Tk()

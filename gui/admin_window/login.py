@@ -9,9 +9,8 @@ import os
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
-from gui.admin_window.main_menu._2_main_menu import selection_main
-from gui.homepage.__1_apply_home_page import apply_home
-from default_entry import DefaultTextEntry
+from gui.admin_window.main_menu.main import selection_main
+from gui.default_entry import DefaultTextEntry
 
 def login_menu():
     USERNAME = "admin"
@@ -43,6 +42,7 @@ def login_menu():
     def return_home():
         window.destroy()
         # from __1_apply_home_page import apply_home
+        from gui.homepage.main import apply_home
         apply_home()
 
     window = Tk()

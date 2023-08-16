@@ -1,6 +1,6 @@
 import tkinter as tk
-from gui.homepage.__1_apply_home_page import apply_home
-from gui.admin_window._1_login_page import login_menu
+from gui.homepage.main import apply_home
+from gui.admin_window.login import login_menu
 
 
 # Main Window Constructor

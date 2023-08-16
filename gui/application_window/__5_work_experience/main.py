@@ -53,7 +53,8 @@ def work_experience_main():
             wd3.reason_for_leaving = reason_for_leaving
 
         window.destroy()
-        from __4_apply_education import education_main
+        # from __4_apply_education import education_main
+        from gui.application_window.__4_apply_education_info.main import education_main
         education_main()
 
     def next_clicked():
@@ -88,7 +89,8 @@ def work_experience_main():
                 wd3.reason_for_leaving = reason_for_leaving
 
             window.destroy()
-            from __6_apply_major_skills import major_skill_main
+            # from __6_apply_major_skills import major_skill_main
+            from gui.application_window.__6_apply_major_skills.main import major_skill_main
             major_skill_main()
 
     def display_values():
