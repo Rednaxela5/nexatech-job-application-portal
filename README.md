@@ -1,4 +1,4 @@
-# tkinter-job-application-form
+# nexatech-job-application-form
  A job application form that will let you input values and store it in mysql database.
 
 A System Proposal presented to the Faculty of the College of Computer and Information Sciences, Polytechnic University of the Philippines 
