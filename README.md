@@ -6,7 +6,6 @@ A System Proposal presented to the Faculty of the College of Computer and Inform
 ## Collaborators
 * Agarin, Jerome Zaidee P. 
 * [@lnlzd](https://github.com/lnlzd)
-* Porlares, Alexander S. 
 * Roncales, Jallane E. 
 
 ## Credits
