@@ -8,13 +8,13 @@ import sys
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
-from default_entry import DefaultTextEntry
+from gui.default_entry import DefaultTextEntry
 import tkinter as tk
 from tkcalendar import DateEntry
 import datetime
-from storage import applicant_data as ad, school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3, work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3
-from storage import skill_data_1 as sn1, skill_data_2 as sn2, skill_data_3 as sn3, skill_data_4 as sn4, skill_data_5 as sn5, skill_data_6 as sn6
-from sql_connection import connection_database
+from gui.storage import applicant_data as ad, school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3, work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3
+from gui.storage import skill_data_1 as sn1, skill_data_2 as sn2, skill_data_3 as sn3, skill_data_4 as sn4, skill_data_5 as sn5, skill_data_6 as sn6
+from gui.sql_connection import connection_database
 def major_skill_main():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent

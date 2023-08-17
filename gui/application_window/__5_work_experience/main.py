@@ -10,8 +10,8 @@ import tkinter as tk
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Button, PhotoImage, Entry, ttk, messagebox
 from tkcalendar import DateEntry
-from default_entry import DefaultTextEntry
-from storage import work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3
+from gui.default_entry import DefaultTextEntry
+from gui.storage import work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3
 
 
 def work_experience_main():

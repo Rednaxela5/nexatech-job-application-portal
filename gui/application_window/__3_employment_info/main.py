@@ -8,11 +8,11 @@ import sys
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, ttk, messagebox, font
-from default_entry import DefaultTextEntry
+from gui.default_entry import DefaultTextEntry
 import tkinter as tk
 from tkcalendar import DateEntry
 import datetime
-from storage import applicant_data
+from gui.storage import applicant_data
 
 def employment_main():
     # Get the script's directory path

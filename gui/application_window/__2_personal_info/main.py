@@ -9,11 +9,11 @@ import os
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar, ttk, messagebox
-from default_entry import DefaultTextEntry
 import tkinter as tk
 from tkcalendar import DateEntry
 import datetime
-from storage import applicant_data
+from gui.default_entry import DefaultTextEntry
+from gui.storage import applicant_data
 
 def apply_personal():
     # Get the script's directory path

@@ -8,18 +8,46 @@ import sys
 import os
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Toplevel, Canvas, Entry, Text, Button, PhotoImage
 
-# from _1_login_page import login_menu
+# def home_page_main():
+#     homepage()
 
+# class homepage(Toplevel):
+#     def __init__(self, *args, **kwargs):
+
+#         self.title("Nexatech Homepage")
+#         self.geometry("1024x568")
+#         self.configure(bg = "#0F2634")
+#         self.resizable(False, False)
+
+#         self.canvas = Canvas(
+#             self,
+#             bg = "#0F2634",
+#             height = 568,
+#             width = 1024,
+#             bd = 0,
+#             highlightthickness = 0,
+#             relief = "ridge"
+#         )
+
+#         self.canvas.place(x = 0, y = 0)
+#         self.image_image_1 = PhotoImage(
+#             file=self.relative_to_assets("image_1.png"))
+#         self.image_1 = self.canvas.create_image(
+#             512.0,
+#             23.0,
+#             image=self.image_image_1
+#         )
 def apply_home():
-    # Get the script's directory path
-    SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
+    # # Get the script's directory path
+    # SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
-    # Set the relative path to the assets directory
-    ASSETS_PATH = SCRIPT_DIR / "assets"
+    # # Set the relative path to the assets directory
+    # ASSETS_PATH = SCRIPT_DIR / "assets"
 
-
+    OUTPUT_PATH = Path(__file__).parent
+    ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
     def relative_to_assets(path: str) -> Path:
         return ASSETS_PATH / Path(path)
@@ -28,7 +56,7 @@ def apply_home():
         # Close the login window
         window.destroy()
         # Open the main application window
-        from gui.admin_window.login import login_menu
+        from gui.admin_window.main import login_menu
         login_menu()
 
     def apply_now_clicked():

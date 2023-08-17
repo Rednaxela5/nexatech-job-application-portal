@@ -10,9 +10,9 @@ from pathlib import Path
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Button, PhotoImage, ttk, messagebox
 from tkcalendar import DateEntry
-from default_entry import DefaultTextEntry
-from storage import school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3
-from sql_connection import connection_database
+from gui.default_entry import DefaultTextEntry
+from gui.storage import school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3
+from gui.sql_connection import connection_database
 
 def education_main():
     # Get the script's directory path

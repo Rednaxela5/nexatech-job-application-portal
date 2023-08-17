@@ -45,7 +45,7 @@ def selection_main():
     def logout_clicked():
         window.destroy()
         # from _1_login_page import login_menu
-        from gui.admin_window.login import login_menu
+        from gui.admin_window.main import login_menu
         login_menu()
 
     window = Tk()
