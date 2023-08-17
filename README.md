@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-  <h3 align="center">Nexatech Job Application Portal</h3>
+  <h1 align="center">Nexatech Job Application Portal</h3>
 
   <p align="center">
     Elevate Hiring: Apply with Ease, Manage with Control – Introducing Our Job Application Portal!
@@ -118,7 +118,7 @@ Contributions are what make the open source community such an amazing place to b
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](https://github.com/Rednaxela5/nexatech-job-application-portal/blob/main/LICENSE.md) for more information.
+Distributed under the MIT License. See [LICENSE](https://github.com/Rednaxela5/nexatech-job-application-portal/blob/main/LICENSE) for more information.
 
 ## Authors
 
