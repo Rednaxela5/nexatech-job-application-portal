@@ -5,9 +5,9 @@ A System Proposal presented to the Faculty of the College of Computer and Inform
 
 ## Collaborators
 * Agarin, Jerome Zaidee P. 
-* Lozada, Luen P. 
+* [@lnlzd](https://github.com/lnlzd)
 * Porlares, Alexander S. 
 * Roncales, Jallane E. 
 
 ## Credits
-- Thanks to [ParthJadhav/Tkinter-Designer](https://github.com/ParthJadhav/Tkinter-Designer) for his awesome project that made our workflow better and faster.
+- Thanks to [ParthJadhav/Tkinter-Designer](https://github.com/ParthJadhav/Tkinter-Designer), a brilliant project that made our workflow better and faster.

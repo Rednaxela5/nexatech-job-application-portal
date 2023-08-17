@@ -1,0 +1,11 @@
+applicantNo,school_ID,schoolName,schoolAddress,dateGraduated,educationAttainment
+56,SID00001,"Philippines Science High School","Quezon City",2011-05-09,SHS
+56,SID00002,"University of the Philippines Diliman","Quezon City",2015-01-06,CO
+72,SID00003,"University of the East","Manila City",2017-06-15,CO
+72,SID00004,"Japan-Philippines Institue of Technology Plaridel Campus Inc.","Plaridel, Bulacan",2013-03-23,SHS
+100,SID00005,"Polytechnic University of the Philippines","Manila City",2019-07-26,CO
+129,SID00005,"Polytechnic University of the Philippines","Manila City",1994-05-27,CO
+157,SID00006,"Technological Institute of the Philippines","Quezon City",2002-04-24,CO
+201,SID00007,"Ateneo de Manila University","Quezon City",2018-04-19,SHS
+201,SID00008,"Far Eastern University","Manila City",2023-05-29,CO
+234,SID00005,"Polytechnic University of the Philippines","Manila City",2011-03-27,CO

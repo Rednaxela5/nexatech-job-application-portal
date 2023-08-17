@@ -1,0 +1,8 @@
+applicantNo,name,dateOfBirth,SSS_ID,address,city,province,zipcode,phoneNumber,emailAddress,employmentType,jobPosition,desiredSalary,startingDate,applicationDate
+56,"John Doe",1990-01-01,1234567890,"123 Main Street",Makati,"Metro Manila",1234,9123456789,johndoe@email.com,Full-time,"IT Support Specialist",60000,2023-06-01,2023-05-10
+72,"Jane Smith",1995-05-15,9876543210,"456 Oak Street","Quezon City","Metro Manila",5678,9001122334,janesmith@email.com,Part-time,"IT Project Manager",40000,2023-06-15,2023-05-04
+100,"Juan Cruz",2000-02-03,8792134560,"789 Wood Street",Imus,Cavite,5319,9123043123,juancruz@email.com,Full-time,"Data Analyst",50000,2023-05-12,2023-06-27
+129,"Mark Santos",1972-07-07,5693142708,"890 Birch Street",Caloocan,"Metro Manila",1478,9313402212,marksantos@email.com,Part-time,"IT Consultant",45000,2023-06-25,2023-06-10
+157,"Mary Garcia",1980-10-21,6710958243,"765 Stone Street",Pasay,"Metro Manila",8426,9412323031,marygarcia@email.com,Full-time,"IT Support Specialist",55000,2023-07-30,2023-07-15
+201,"Paul Perez",1999-12-24,7315894602,"268 Pilar Street",Malabon,"Metro Manila",8139,9230131244,paulperez@email.com,Full-time,"Web Developer",35000,2023-08-01,2023-07-12
+234,"Peter Gomez",1989-10-04,3150742968,"645 Kamote Street",Valenzuela,"Metro Manila",3579,9403112302,petergomez@email.com,Part-time,"Systems Administrator",30000,2023-08-01,2023-07-22

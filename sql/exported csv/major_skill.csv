@@ -1,0 +1,29 @@
+applicantNo,skillCode,skillName
+56,SC00001,"Technical Support"
+56,SC00002,Troubleshooting
+56,SC00003,Networking
+72,SC00003,Networking
+72,SC00004,"Project Management"
+72,SC00005,Agile
+100,SC00002,Troubleshooting
+100,SC00006,Maintenance
+100,SC00007,Optimization
+129,SC00001,"Technical Support"
+129,SC00002,Troubleshooting
+129,SC00006,Maintenance
+129,SC00008,Security
+129,SC00009,Collaboration
+129,SC00010,Client-focused
+157,SC00001,"Technical Support"
+157,SC00003,Networking
+157,SC00011,Programming
+201,SC00002,Troubleshooting
+201,SC00007,Optimization
+201,SC00011,Programming
+201,SC00012,Backend
+201,SC00013,Testing
+234,SC00002,Troubleshooting
+234,SC00005,Agile
+234,SC00009,Collaboration
+234,SC00014,Analytical
+234,SC00015,Creativity

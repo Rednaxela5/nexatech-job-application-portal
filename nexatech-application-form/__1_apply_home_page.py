@@ -9,7 +9,7 @@ import os
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
-from _1_login_page import login_menu
+
 
 def apply_home():
     # Get the script's directory path
@@ -19,7 +19,6 @@ def apply_home():
     ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame0"
 
 
-
     def relative_to_assets(path: str) -> Path:
         return ASSETS_PATH / Path(path)
 
@@ -27,6 +26,7 @@ def apply_home():
         # Close the login window
         window.destroy()
         # Open the main application window
+        from _1_login_page import login_menu
         login_menu()
 
     def apply_now_clicked():

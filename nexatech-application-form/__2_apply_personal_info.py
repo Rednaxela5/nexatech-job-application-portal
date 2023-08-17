@@ -13,7 +13,7 @@ from default_entry import DefaultTextEntry
 import tkinter as tk
 from tkcalendar import DateEntry
 import datetime
-from storage import applicant_data
+from storage import applicant_data as ad, school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3, work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3, skill_data_1 as md1, skill_data_2 as md2, skill_data_3 as md3, skill_data_4 as md4, skill_data_5 as md5, skill_data_6 as md6
 
 def apply_personal():
     # Get the script's directory path
@@ -31,16 +31,27 @@ def apply_personal():
         return ASSETS_PATH / Path(path)
 
     def return_home_clicked():
-        applicant_data.name = ""
-        applicant_data.birthdate = ""
-        applicant_data.sss_id = ""
-        applicant_data.address = ""
-        applicant_data.city = ""
-        applicant_data.province = ""
-        applicant_data.zipcode = ""
-        applicant_data.phoneNumber = ""
-        applicant_data.emailaddress = ""
-        
+        # Empty the values in the applicant_data
+        ad.reset_values()
+
+        # Empty the values in the school_data
+        sd1.reset_values()
+        sd2.reset_values()
+        sd3.reset_values()
+
+        # Empty the values in the work_data
+        wd1.reset_values()
+        wd2.reset_values()
+        wd3.reset_values()
+
+        # Empth the values in the skill_data
+        md1.reset_values()
+        md2.reset_values()
+        md3.reset_values()
+        md4.reset_values()
+        md5.reset_values()
+        md6.reset_values()
+
         window.destroy()
         from __1_apply_home_page import apply_home
         apply_home() 
@@ -60,15 +71,15 @@ def apply_personal():
             messagebox.showerror("Error", "Please fill out all fields.")
         else:
 
-            applicant_data.name = fullname_entry.get()
-            applicant_data.birthdate = dateOfBirth.get_date()
-            applicant_data.sss_id = sssID_entry.get()
-            applicant_data.address = address_entry.get()
-            applicant_data.city = city_entry.get()
-            applicant_data.province = province_entry.get()
-            applicant_data.zipcode = zip_code_entry.get()
-            applicant_data.phoneNumber = phone_number_entry.get()
-            applicant_data.emailaddress = email_address_entry.get()
+            ad.name = fullname_entry.get()
+            ad.birthdate = dateOfBirth.get_date()
+            ad.sss_id = sssID_entry.get()
+            ad.address = address_entry.get()
+            ad.city = city_entry.get()
+            ad.province = province_entry.get()
+            ad.zipcode = zip_code_entry.get()
+            ad.phoneNumber = phone_number_entry.get()
+            ad.emailaddress = email_address_entry.get()
 
             # For Debugging Purposes
             # print(applicant_data.name)
@@ -89,70 +100,70 @@ def apply_personal():
 
     def display_values():
         # Full Name
-        if applicant_data.name == d_fullname_entry:
+        if ad.name == d_fullname_entry:
             pass
-        elif applicant_data.name != "":
+        elif ad.name != "":
             fullname_entry.delete(0, tk.END)
-            fullname_entry.insert(0, applicant_data.name)
+            fullname_entry.insert(0, ad.name)
             fullname_entry.config(fg="black")
 
         # Date of Birth
-        if applicant_data.birthdate != "":
-            dateOfBirth.set_date(applicant_data.birthdate)
+        if ad.birthdate != "":
+            dateOfBirth.set_date(ad.birthdate)
         # SSS ID
-        if applicant_data.sss_id == d_sssID_entry:
+        if ad.sss_id == d_sssID_entry:
             pass
-        elif applicant_data.sss_id != "":
+        elif ad.sss_id != "":
             sssID_entry.delete(0, tk.END)
-            sssID_entry.insert(0, applicant_data.sss_id)
+            sssID_entry.insert(0, ad.sss_id)
             sssID_entry.config(fg="black")
         
         # Address
-        if applicant_data.address == d_address_entry:
+        if ad.address == d_address_entry:
             pass
-        elif applicant_data.address != "":
+        elif ad.address != "":
             address_entry.delete(0, tk.END)
-            address_entry.insert(0, applicant_data.address)
+            address_entry.insert(0, ad.address)
             address_entry.config(fg="black")
 
         # City
-        if applicant_data.city == d_city_entry:
+        if ad.city == d_city_entry:
             pass
-        elif applicant_data.city != "":
+        elif ad.city != "":
             city_entry.delete(0, tk.END)
-            city_entry.insert(0, applicant_data.city)
+            city_entry.insert(0, ad.city)
             city_entry.config(fg="black")
 
         # Province
-        if applicant_data.province == d_province_entry:
+        if ad.province == d_province_entry:
             pass
-        elif applicant_data.province != "":
+        elif ad.province != "":
             province_entry.delete(0, tk.END)
-            province_entry.insert(0, applicant_data.province)
+            province_entry.insert(0, ad.province)
             province_entry.config(fg="black")
         
         # ZIP Code
-        if applicant_data.zipcode == d_zipcode_entry:
+        if ad.zipcode == d_zipcode_entry:
             pass
-        elif applicant_data.zipcode != "":
+        elif ad.zipcode != "":
             zip_code_entry.delete(0, tk.END)
-            zip_code_entry.insert(0, applicant_data.zipcode)
+            zip_code_entry.insert(0, ad.zipcode)
             zip_code_entry.config(fg="black")
         
         # Phone Number
-        if applicant_data.phoneNumber == d_phone_number_entry:
+        if ad.phoneNumber == d_phone_number_entry:
             pass
-        elif applicant_data.phoneNumber != "":
+        elif ad.phoneNumber != "":
             phone_number_entry.delete(0, tk.END)
-            phone_number_entry.insert(0, applicant_data.phoneNumber)
+            phone_number_entry.insert(0, ad.phoneNumber)
             phone_number_entry.config(fg="black")
         
         # Email Address
-        if applicant_data.emailaddress == d_email_address_entry:
+        if ad.emailaddress == d_email_address_entry:
             pass
-        elif applicant_data.emailaddress != "":
+        elif ad.emailaddress != "":
             email_address_entry.delete(0, tk.END)
-            email_address_entry.insert(0, applicant_data.emailaddress)
+            email_address_entry.insert(0, ad.emailaddress)
             email_address_entry.config(fg="black")
 
         
@@ -267,7 +278,7 @@ def apply_personal():
     )
     # load_current(0, tk.END)
     # fullname_value = StringVar()
-    # fullname_value.set(applicant_data.name)
+    # fullname_value.set(ad.name)
     # fullname_entry = Entry(
     #     bd=0,
     #     textvariable=fullname_value,
