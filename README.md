@@ -17,7 +17,15 @@
   </p>
 </p>
 
-![Downloads](https://img.shields.io/github/downloads/Rednaxela5/nexatech-job-application-portal/total) ![Contributors](https://img.shields.io/github/contributors/Rednaxela5/nexatech-job-application-portal?color=dark-green) ![Forks](https://img.shields.io/github/forks/Rednaxela5/nexatech-job-application-portal?style=social) ![Stargazers](https://img.shields.io/github/stars/Rednaxela5/nexatech-job-application-portal?style=social) ![Issues](https://img.shields.io/github/issues/Rednaxela5/nexatech-job-application-portal) ![License](https://img.shields.io/github/license/Rednaxela5/nexatech-job-application-portal) 
+
+<p align="center">
+  <img alt="Downloads" src="https://img.shields.io/github/downloads/Rednaxela5/nexatech-job-application-portal/total">
+  <img alt="Contributors" src="https://img.shields.io/github/contributors/Rednaxela5/nexatech-job-application-portal?color=dark-green">
+  <img alt="Forks" src="https://img.shields.io/github/forks/Rednaxela5/nexatech-job-application-portal?style=social">
+  <img alt="Stargazers" src="https://img.shields.io/github/stars/Rednaxela5/nexatech-job-application-portal?style=social">
+  <img alt="Issues" src="https://img.shields.io/github/issues/Rednaxela5/nexatech-job-application-portal">
+  <img alt="License" src="https://img.shields.io/github/license/Rednaxela5/nexatech-job-application-portal">
+</p>
 
 ## Table Of Contents
 
