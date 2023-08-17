@@ -43,7 +43,7 @@ def education_main():
                 elif education_attainment_var.get() == "College":
                     education_attainment_var.set("CO")
 
-                school_name = school_name_entry.get()
+                school_name = school_name_var.get()
                 school_address = school_address_entry.get()
                 date_graduated = date_graduated_entry.get_date()
                 education_attainment = education_attainment_var.get()
@@ -57,7 +57,7 @@ def education_main():
                         sd1.date_graduated = date_graduated
                         sd1.educ_attainment = education_attainment
 
-                        school_name_entry.delete(0, "end")
+                        school_name_var.set("Select your school")
                         school_address_entry.delete(0, "end")
                         date_graduated_entry.delete(0, "end")
                         education_attainment_var.set("Select Education Attainment")
@@ -73,7 +73,7 @@ def education_main():
                         sd2.date_graduated = date_graduated
                         sd2.educ_attainment = education_attainment
 
-                        school_name_entry.delete(0, "end")
+                        school_name_var.set("Select your school")
                         school_address_entry.delete(0, "end")
                         date_graduated_entry.delete(0, "end")
                         education_attainment_var.set("Select Education Attainment")
@@ -112,7 +112,7 @@ def education_main():
 
 
     def back_clicked():
-        school_name = school_name_entry.get()
+        school_name = school_name_var.get()
         school_address = school_address_entry.get()
         date_graduated = date_graduated_entry.get_date()
         education_attainment = education_attainment_var.get()
@@ -162,7 +162,7 @@ def education_main():
         elif education_attainment_var.get() == "College":
             education_attainment_var.set("CO")
 
-        school_name = school_name_entry.get()
+        school_name = school_name_var.get()
         school_address = school_address_entry.get()
         date_graduated = date_graduated_entry.get_date()
         education_attainment = education_attainment_var.get()
@@ -218,9 +218,7 @@ def education_main():
             if sd1.school_name == d_school_name_entry:
                 pass
             elif sd1.school_name != "":
-                school_name_entry.delete(0, tk.END)
-                school_name_entry.insert(0, sd1.school_name)
-                school_name_entry.config(fg="black")
+                school_name_var.set(sd1.school_name)
 
             # School Address
             if sd1.school_address == d_school_address_entry:
@@ -241,9 +239,7 @@ def education_main():
             if sd2.school_name == d_school_name_entry:
                 pass
             elif sd2.school_name != "":
-                school_name_entry.delete(0, tk.END)
-                school_name_entry.insert(0, sd2.school_name)
-                school_name_entry.config(fg="black")
+                school_name_var.set(sd2.school_name)
 
             # School Address
             if sd2.school_address == d_school_address_entry:
@@ -265,9 +261,7 @@ def education_main():
             if sd3.school_name == d_school_name_entry:
                 pass
             elif sd3.school_name != "":
-                school_name_entry.delete(0, tk.END)
-                school_name_entry.insert(0, sd3.school_name)
-                school_name_entry.config(fg="black")
+                school_name_var.set(sd3.school_name)
 
             # School Address
             if sd3.school_address == d_school_address_entry:
@@ -281,13 +275,24 @@ def education_main():
             if sd3.date_graduated != "":
                 date_graduated_entry.set_date(sd3.date_graduated)
 
+            # Educational Attainment
             if sd3.educ_attainment != "":
                 education_attainment_var.set(sd3.educ_attainment)
 
-    d_school_name_entry = "Enter Name of School"
+    # Function to update the school address entry
+    def update_school_address(event):
+        selected_school = school_name_var.get()
+        school_address_entry.delete(0, tk.END)
+        school_address_entry.insert(0, school_addresses.get(selected_school, "Address not available"))
+
+    d_school_name_entry = "Select your school"
     d_school_address_entry = "Enter School Address"
     window = Tk()
 
+    # --------------------------------------------------------------------------------#
+    # ---------------------------------- GUI SETUP ---------------------------------- #
+    # --------------------------------------------------------------------------------#
+    
     window.geometry("1024x568")
     window.configure(bg = "#CCD4D9")
     fontstyle = "Montserrat"
@@ -358,20 +363,6 @@ def education_main():
         261.0,
         image=entry_image_1
     )
-    school_address_entry = DefaultTextEntry(
-        default_text=d_school_address_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
-    )
-    school_address_entry.place(
-        x=528.0,
-        y=241.0,
-        width=336.0,
-        height=38.0
-    )
 
     entry_image_2 = PhotoImage(
         file=relative_to_assets("entry_2.png"))
@@ -379,29 +370,6 @@ def education_main():
         696.0,
         347.0,
         image=entry_image_2
-    )
-    education_attainment_options = ["Junior High School", "Senior High School", "College"]
-    education_attainment_var = tk.StringVar()
-    education_attainment_var.set("Select Education Attainment")
-
-    education_attainment_entry = ttk.Combobox(
-        window,
-        textvariable=education_attainment_var,
-        values=education_attainment_options,
-        font=fontstyle,
-        state="readonly",
-    )
-    # education_attainment_entry = Entry(
-    #     bd=0,
-    #     bg="#FFFFFF",
-    #     fg="#000716",
-    #     highlightthickness=0
-    # )
-    education_attainment_entry.place(
-        x=528.0,
-        y=328.0,
-        width=336.0,
-        height=38.0
     )
 
     entry_image_3 = PhotoImage(
@@ -411,20 +379,6 @@ def education_main():
         261.0,
         image=entry_image_3
     )
-    school_name_entry = DefaultTextEntry(
-        default_text=d_school_name_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
-    )
-    school_name_entry.place(
-        x=159.0,
-        y=241.0,
-        width=336.0,
-        height=38.0
-    )
 
     entry_image_4 = PhotoImage(
         file=relative_to_assets("entry_4.png"))
@@ -432,27 +386,6 @@ def education_main():
         327.0,
         347.0,
         image=entry_image_4
-    )
-    date_graduated_entry = DateEntry(
-        window,
-        font=fontstyle,
-        background="#FFFFFF",
-        foreground="#000716",
-        borderwidth=2,  # Set the borderwidth to 0 to remove the border
-        selectbackground="#359ca6",  # Customize the background color when the date is selected
-        selectforeground="white",  # Customize the foreground color when the date is selected
-        normalbackground="#FFFFFF",  # Customize the background color when the widget is not focused
-        normalforeground="#000716",  # Customize the foreground color when the widget is not focused
-        highlightthickness=0,
-        arrowcolor="#FFFFFF",
-        date_pattern="yyyy-mm-dd",  # Customize the date pattern to your preference
-        firstweekday = "sunday"
-    )
-    date_graduated_entry.place(
-        x=159.0,
-        y=328.0,
-        width=336.0,
-        height=38.0
     )
 
     image_image_7 = PhotoImage(
@@ -495,6 +428,128 @@ def education_main():
         image=image_image_11
     )
 
+    # --------------------------------------------------------------------------------#
+    # --------------------------------- ENTRY SETUP --------------------------------- #
+    # --------------------------------------------------------------------------------#
+
+    # Name of School
+    school_name_options = [ "Ateneo de Manila University",
+                            "Far Eastern University",
+                            "Polytechnic University of the Philippines",
+                            "Polytechnic University of the Philippines-San Juan",
+                            "Polytechnic University of the Philippines-Parañaque",
+                            "Polytechnic University of the Philippines-Taguig",
+                            "Philippines Science High School",
+                            "University of the East",
+                            "Japan-Philippines Institue of Technology Plaridel Campus Inc.",
+                            "Technological Institute of the Philippines",
+                            "University of the Philippines-Diliman",
+                            "University of the Philippines-Manila",
+                            "University of the Philippines-Los Banos",
+                        ]
+    school_name_var = tk.StringVar()
+    school_name_var.set("Select your school")
+
+    school_name_entry = ttk.Combobox(
+        window,
+        textvariable=school_name_var,
+        values=school_name_options,
+        font= ("Montserrat", 12),
+        state="readonly",
+    )
+
+    school_name_entry.place(
+        x=159.0,
+        y=241.0,
+        width=336.0,
+        height=38.0
+    )
+
+    # School Address
+    school_addresses = {
+        "Ateneo de Manila University": "Katipunan Ave, Quezon City",
+        "Far Eastern University": "Sampaloc, Manila",
+        "Polytechnic University of the Philippines": "Sta. Mesa, Manila",
+        "Polytechnic University of the Philippines-San Juan": "San Juan, Metro Manila",
+        "Polytechnic University of the Philippines-Parañaque": "Parañaque, Metro Manila",
+        "Polytechnic University of the Philippines-Taguig": "Taguig, Metro Manila",
+        "Philippines Science High School": "Agham Rd, Diliman, Quezon City",
+        "University of the East": "Sampaloc, Manila",
+        "Japan-Philippines Institute of Technology-Plaridel": "Plaridel, Bulacan",
+        "Technological Institute of the Philippines": "Manila, Metro Manila",
+        "Technological University of the Philippines": "Ermita, Manila",
+        "University of the Philippines-Diliman": "Diliman, Quezon City",
+        "University of the Philippines-Los Baños": "Los Baños, Laguna",
+    }
+
+    school_address_entry = tk.Entry(
+        bd=0,
+        font=("Montserrat", 12),
+        bg="#FFFFFF",
+        highlightthickness=0
+    )
+    school_address_entry.place(
+        x=528.0,
+        y=241.0,
+        width=336.0,
+        height=38.0
+    )
+    # Bind the ComboboxSelected event to the update_school_address function
+    school_name_entry.bind("<<ComboboxSelected>>", update_school_address)
+
+
+    
+    # Education Attainment
+    education_attainment_options = ["Junior High School", "Senior High School", "College"]
+    education_attainment_var = tk.StringVar()
+    education_attainment_var.set("Select Education Attainment")
+
+    education_attainment_entry = ttk.Combobox(
+        window,
+        textvariable=education_attainment_var,
+        values=education_attainment_options,
+        font=fontstyle,
+        state="readonly",
+    )
+
+    education_attainment_entry.place(
+        x=528.0,
+        y=328.0,
+        width=336.0,
+        height=38.0
+    )
+
+    
+    
+    # Date Graduated
+    date_graduated_entry = DateEntry(
+        window,
+        font=fontstyle,
+        background="#FFFFFF",
+        foreground="#000716",
+        borderwidth=2,  # Set the borderwidth to 0 to remove the border
+        selectbackground="#359ca6",  # Customize the background color when the date is selected
+        selectforeground="white",  # Customize the foreground color when the date is selected
+        normalbackground="#FFFFFF",  # Customize the background color when the widget is not focused
+        normalforeground="#000716",  # Customize the foreground color when the widget is not focused
+        highlightthickness=0,
+        arrowcolor="#FFFFFF",
+        date_pattern="yyyy-mm-dd",  # Customize the date pattern to your preference
+        firstweekday = "sunday"
+    )
+    date_graduated_entry.place(
+        x=159.0,
+        y=328.0,
+        width=336.0,
+        height=38.0
+    )
+
+    
+    # --------------------------------------------------------------------------------#
+    # ----------------------------------- BUTTONS ----------------------------------- #
+    # --------------------------------------------------------------------------------#
+    
+    # Add More Button
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
     button_1 = Button(
@@ -511,6 +566,7 @@ def education_main():
         height=33.0
     )
 
+    # Back Button
     button_image_2 = PhotoImage(
         file=relative_to_assets("button_2.png"))
     button_2 = Button(
@@ -527,6 +583,7 @@ def education_main():
         height=33.0
     )
 
+    # Next Button
     button_image_3 = PhotoImage(
         file=relative_to_assets("button_3.png"))
     button_3 = Button(
