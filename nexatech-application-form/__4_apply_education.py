@@ -459,9 +459,9 @@ def education_main():
     )
 
     school_name_entry.place(
-        x=159.0,
-        y=241.0,
-        width=336.0,
+        x=158.0,
+        y=242.0,
+        width=338.0,
         height=38.0
     )
 
