@@ -126,16 +126,16 @@ Distributed under the MIT License. See [LICENSE](https://github.com/Rednaxela5/n
 
 # Authors
 
-* **Alexander Porlares** - *IT Student* - [Alexander Porlares](https://github.com/Rednaxela5) - *Head/Back End*
-* **Jallane Roncales** - *IT Student* - [Jallane Roncales]() - *Front End*
-* **Jerome Agarin** - *IT Student* - [Jerome Agarin](none) - *Fron End*
-* **Luen Lozada** - *IT Student* - [Luen Lozada](https://github.com/lnlzd) - *Back End*
+* **Alexander Porlares** - [@Rednaxela5](https://github.com/Rednaxela5) - Head/Back End
+* **Jallane Roncales** - [Jallane Roncales]() - Front End
+* **Jerome Agarin** - [Jerome Agarin](none) - Fron End
+* **Luen Lozada** - [lnlzd](https://github.com/lnlzd) - Back End
 
 # Acknowledgements
 
-* [Parth Jadhav](https://github.com/ParthJadhav)
-* [Mohit Yadav](https://github.com/Just-Moh-it)
-* [ShaanCoding](https://github.com/ShaanCoding/)
+* [Parth Jadhav](https://github.com/ParthJadhav) and his [contributors](https://github.com/ParthJadhav/Tkinter-Designer/graphs/contributors) for their awesome [Tkinter-Designer](https://github.com/ParthJadhav/Tkinter-Designer). This project would look dull if we used the common tkinter. So thank you very much for this helpful project.
+* [Mohit Yadav](https://github.com/Just-Moh-it) for his [HotinGo](https://github.com/Just-Moh-it/HotinGo) project. Learned a lot from his approach in making README.md as well as the whole project.
+* [raja2505](https://github.com/raja2505) for his [Name Patcher](https://github.com/ParthJadhav/Tkinter-Designer/issues/345). Made renaming and editing code a lot faster.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
