@@ -1,12 +1,18 @@
-<br/>
+
+<br />
+<div align="center">
+  <a href="https://github.com/Rednaxela5/nexatech-job-application-portal">
+    <img src="assets/Readme-assets/banner.png" alt="Project Banner" width="100%">
+  </a>
+
 <p align="center">
-  <h1 align="center">Nexatech Job Application Portal</h3>
+  <h3 align="center">Nexatech Job Application Portal</h3>
 
   <p align="center">
-    Elevate Hiring: Apply with Ease, Manage with Control – Introducing Our Job Application Portal!
+    Apply with Ease, Manage with Control – Introducing Our Job Application Portal!
     <br/>
     <br/>
-    <a href="https://github.com/Rednaxela5/nexatech-job-application-portal"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Rednaxela5/nexatech-job-application-portal/blob/main/documents/Group6_InfoMan.docx"><strong>Explore the docs »</strong></a>
     <br/>
     <br/>
     <a href="https://github.com/Rednaxela5/nexatech-job-application-portal">View Demo</a>
@@ -15,9 +21,8 @@
     .
     <a href="https://github.com/Rednaxela5/nexatech-job-application-portal/issues">Request Feature</a>
   </p>
+  
 </p>
-
-
 <p align="center">
   <img alt="Downloads" src="https://img.shields.io/github/downloads/Rednaxela5/nexatech-job-application-portal/total">
   <img alt="Contributors" src="https://img.shields.io/github/contributors/Rednaxela5/nexatech-job-application-portal?color=dark-green">
@@ -26,11 +31,13 @@
   <img alt="Issues" src="https://img.shields.io/github/issues/Rednaxela5/nexatech-job-application-portal">
   <img alt="License" src="https://img.shields.io/github/license/Rednaxela5/nexatech-job-application-portal">
 </p>
+</div>
 
 ## Table Of Contents
 
 * [About the Project](#about-the-project)
-* [Built With](#built-with)
+  * [Screenshots](#screenshots)
+  * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
@@ -113,9 +120,10 @@ Contributions are what make the open source community such an amazing place to b
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+3. Clone and checkout that branch locally.
+4. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the Branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -128,14 +136,14 @@ Distributed under the MIT License. See [LICENSE](https://github.com/Rednaxela5/n
 
 * **Alexander Porlares** - [@Rednaxela5](https://github.com/Rednaxela5) - Head/Back End
 * **Jallane Roncales** - [Jallane Roncales]() - Front End
-* **Jerome Agarin** - [Jerome Agarin](none) - Fron End
+* **Jerome Agarin** - [Jerome Agarin](none) - Front End
 * **Luen Lozada** - [lnlzd](https://github.com/lnlzd) - Back End
 
 # Acknowledgements
 
 * [Parth Jadhav](https://github.com/ParthJadhav) and his [contributors](https://github.com/ParthJadhav/Tkinter-Designer/graphs/contributors) for their awesome [Tkinter-Designer](https://github.com/ParthJadhav/Tkinter-Designer). This project would look dull if we used the common tkinter. So thank you very much for this helpful project.
 * [Mohit Yadav](https://github.com/Just-Moh-it) for his [HotinGo](https://github.com/Just-Moh-it/HotinGo) project. Learned a lot from his approach in making README.md as well as the whole project.
-* [raja2505](https://github.com/raja2505) for his [Name Patcher](https://github.com/ParthJadhav/Tkinter-Designer/issues/345). Made renaming and editing code a lot faster.
+* [raja2505](https://github.com/raja2505) for his [Name Patcher](https://github.com/ParthJadhav/Tkinter-Designer/issues/345). Made renaming elements and editing code a lot faster.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
