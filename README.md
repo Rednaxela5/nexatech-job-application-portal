@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Rednaxela5/nexatech-job-application-portal">
-    <img src="assets/Readme-assets/banner.png" alt="Project Banner" width="100%">
+    <img src="assets/Readme-assets/Banner.png" alt="Project Banner" width="100%">
   </a>
 
 <p align="center">
