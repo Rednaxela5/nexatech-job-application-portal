@@ -75,7 +75,7 @@ Take a look at some screenshots showcasing the intuitive application form and po
             <br />
             <p align="center">Desired Employment</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/education.png" alt="Education" />
+            <img src="assets/readme-assets/screenshots/Education.png" alt="Education" />
             <br />
             <p align="center">Education</p></td>
     </tr>
@@ -95,7 +95,7 @@ Take a look at some screenshots showcasing the intuitive application form and po
             <br />
             <p align="center">Ending Page</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Login Page.png" alt="Login Page" />
+            <img src="assets/readme-assets/screenshots/Login page.png" alt="Login Page" />
             <br />
             <p align="center">Login Page</p></td>
     </tr>
