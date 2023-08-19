@@ -1,1 +1,2 @@
-e().parent
+
+                            "AMA Computer College Tuguegarao",
