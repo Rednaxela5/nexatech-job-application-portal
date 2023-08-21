@@ -11,6 +11,8 @@ import os
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
+
+
 def apply_home():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
@@ -31,9 +33,15 @@ def apply_home():
 
     def apply_now_clicked():
         window.destroy()
-        from __2_apply_personal_info import apply_personal
-        apply_personal()
+        from __2_apply_personal_info import personal_main
+        a_window = Tk()
+        a_window.geometry("1024x568")
+        a_window.configure(bg = "#0F2634")
+        a_window.title("Nexatech Job Application Form")
+        a_window.resizable(False, False)
+        personal_main(a_window)
 
+    global window
     window = Tk()
 
     window.geometry("1024x568")

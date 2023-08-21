@@ -14,103 +14,106 @@ from tkcalendar import DateEntry
 import datetime
 from storage import applicant_data
 
-def employment_main():
-    # Get the script's directory path
-    SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
-    # Set the relative path to the assets directory
-    ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame2"
+# Get the script's directory path
+SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
+
+# Set the relative path to the assets directory
+ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame2"
 
 
-    def relative_to_assets(path: str) -> Path:
-        return ASSETS_PATH / Path(path)
+def relative_to_assets(path: str) -> Path:
+    return ASSETS_PATH / Path(path)
 
-    def back_clicked():
-        applicant_data.employment_type = employment_type_var.get()
-        applicant_data.job_pos = job_position_entry.get()
-        applicant_data.desired_salary = desired_salary_entry.get()
-        applicant_data.desired_start_date = desired_starting_entry.get_date()
-        applicant_data.application_date = application_date_entry.get_date()
+def back_clicked(parent):
+    applicant_data.employment_type = employment_type_var.get()
+    applicant_data.job_pos = job_position_entry.get()
+    applicant_data.desired_salary = desired_salary_entry.get()
+    applicant_data.desired_start_date = desired_starting_entry.get_date()
+    applicant_data.application_date = application_date_entry.get_date()
 
-        window.destroy()
-        from __2_apply_personal_info import apply_personal
-        apply_personal()
+    # parent.destroy()
+    from __2_apply_personal_info import personal_main
+    personal_main(parent)
 
-    def next_clicked():
-        emp_type = employment_type_var.get()
-        job_pos = job_position_entry.get()
-        des_sal = desired_salary_entry.get()
-        des_start_date = desired_starting_entry.get_date()
-        appli_date = application_date_entry.get_date()
+def next_clicked():
+    emp_type = employment_type_var.get()
+    job_pos = job_position_entry.get()
+    des_sal = desired_salary_entry.get()
+    des_start_date = desired_starting_entry.get_date()
+    appli_date = application_date_entry.get_date()
 
-        if not (emp_type or job_pos or des_sal or des_start_date or appli_date) or emp_type == "Select Employment Type" or job_pos == d_job_position_entry or des_sal == d_desired_sal_entry or des_start_date == "" or appli_date == "":
-                messagebox.showerror("Error", "Please fill out all fields.")
-        else:
-            applicant_data.employment_type = emp_type
-            applicant_data.job_pos = job_pos
-            applicant_data.desired_salary = des_sal
-            applicant_data.desired_start_date = des_start_date
-            applicant_data.application_date = appli_date
+    if not (emp_type or job_pos or des_sal or des_start_date or appli_date) or emp_type == "Select Employment Type" or job_pos == d_job_position_entry or des_sal == d_desired_sal_entry or des_start_date == "" or appli_date == "":
+            messagebox.showerror("Error", "Please fill out all fields.")
+    else:
+        applicant_data.employment_type = emp_type
+        applicant_data.job_pos = job_pos
+        applicant_data.desired_salary = des_sal
+        applicant_data.desired_start_date = des_start_date
+        applicant_data.application_date = appli_date
 
-            window.destroy()
-            from __4_apply_education import education_main
-            education_main()
+        parent.destroy()
+        from __4_apply_education import education_main
+        education_main()
 
-    def display_values():
-        # Employment Type
-        if applicant_data.employment_type != "":
-            employment_type_var.set(applicant_data.employment_type)
-        # Job Position
-        if applicant_data.job_pos == d_job_position_entry:
-            pass
-        elif applicant_data.job_pos != "":
-            job_position_entry.delete(0, tk.END)
-            job_position_entry.insert(0, applicant_data.job_pos)
-            job_position_entry.config(fg="black")
+def display_values():
+    # Employment Type
+    if applicant_data.employment_type != "":
+        employment_type_var.set(applicant_data.employment_type)
+    # Job Position
+    if applicant_data.job_pos == d_job_position_entry:
+        pass
+    elif applicant_data.job_pos != "":
+        job_position_entry.delete(0, tk.END)
+        job_position_entry.insert(0, applicant_data.job_pos)
+        job_position_entry.config(fg="black")
 
-        # Desired Salary
-        if applicant_data.desired_salary == d_desired_sal_entry:
-            pass
-        elif applicant_data.desired_salary != "":
-            desired_salary_entry.delete(0, tk.END)
-            desired_salary_entry.insert(0, applicant_data.desired_salary)
-            desired_salary_entry.config(fg="black")
-        
-        # Desired Starting Date
-        if applicant_data.desired_start_date != "":
-            desired_starting_entry.set_date(applicant_data.desired_start_date)
-        
-        # Application Date
-        if applicant_data.application_date != "":
-            application_date_entry.set_date(applicant_data.application_date)
+    # Desired Salary
+    if applicant_data.desired_salary == d_desired_sal_entry:
+        pass
+    elif applicant_data.desired_salary != "":
+        desired_salary_entry.delete(0, tk.END)
+        desired_salary_entry.insert(0, applicant_data.desired_salary)
+        desired_salary_entry.config(fg="black")
+    
+    # Desired Starting Date
+    if applicant_data.desired_start_date != "":
+        desired_starting_entry.set_date(applicant_data.desired_start_date)
+    
+    # Application Date
+    if applicant_data.application_date != "":
+        application_date_entry.set_date(applicant_data.application_date)
+
+def emp_main(parent):
+    global d_job_position_entry
+    global d_desired_sal_entry
 
     d_job_position_entry = "Enter Job Position"
     d_desired_sal_entry = "Enter Desired Salary"
-    window = Tk()
-
-    window.geometry("1024x568")
-    window.configure(bg = "#CCD4D9")
+   
     fontstyle = "Montserrat"
-
+    
     canvas = Canvas(
-        window,
+        parent,
         bg = "#CCD4D9",
         height = 568,
         width = 1024,
         bd = 0,
         highlightthickness = 0,
-        relief = "ridge"
+        relief = "sunken"
     )
 
     canvas.place(x = 0, y = 0)
     image_image_1 = PhotoImage(
         file=relative_to_assets("image_1.png"))
+
+    global image_1, image_2, image_3, image_4, image_5, image_6, entry_image_1, entry_image_2, entry_image_3, entry_image_4, entry_image_5
     image_1 = canvas.create_image(
         512.0,
         23.0,
         image=image_image_1
     )
-
+    
     image_image_2 = PhotoImage(
         file=relative_to_assets("image_2.png"))
     image_2 = canvas.create_image(
@@ -149,152 +152,6 @@ def employment_main():
         176.0,
         147.0,
         image=image_image_6
-    )
-
-    entry_image_1 = PhotoImage(
-        file=relative_to_assets("entry_1.png"))
-    entry_bg_1 = canvas.create_image(
-        696.0,
-        248.0,
-        image=entry_image_1
-    )
-
-    # https://stackoverflow.com/questions/28938758/combobox-fontsize-in-tkinter
-    # bigfont = ttk.FOnt(family="Helvetica",size=36)
-    # window.option_add("*TCombobox*Listbox*Font", bigfont)
-
-    # Create a Combobox for employment type selection
-    employment_type_options = ["Full-time", "Part-time"]
-    employment_type_var = tk.StringVar()
-    employment_type_combobox = ttk.Combobox(
-        window,
-        values=employment_type_options,
-        textvariable=employment_type_var,
-        font=fontstyle,
-        state="readonly",
-    )
-    employment_type_combobox.set("Select Employment Type")
-    employment_type_combobox.place(x=159.0, y=229.0, width=336.0, height=38.0)
-
-
-    # Customize the font size of the Combobox options
-    
-    # employment_type_entry = Entry(
-    #     bd=0,
-    #     bg="#FFFFFF",
-    #     fg="#000716",
-    #     highlightthickness=0
-    # )
-    # employment_type_entry.place(
-    #     x=159.0,
-    #     y=228.0,
-    #     width=336.0,
-    #     height=38.0
-    # )
-
-    job_position_entry = DefaultTextEntry(
-        default_text=d_job_position_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
-    )
-    job_position_entry.place(
-        x=528.0,
-        y=228.0,
-        width=336.0,
-        height=38.0
-    )
-
-    entry_image_2 = PhotoImage(
-        file=relative_to_assets("entry_2.png"))
-    entry_bg_2 = canvas.create_image(
-        696.0,
-        334.0,
-        image=entry_image_2
-    )
-    desired_starting_entry = DateEntry(
-        window,
-        font=fontstyle,
-        background="#FFFFFF",
-        foreground="#000716",
-        borderwidth=2,  # Set the borderwidth to 0 to remove the border
-        selectbackground="#359ca6",  # Customize the background color when the date is selected
-        selectforeground="white",  # Customize the foreground color when the date is selected
-        normalbackground="#FFFFFF",  # Customize the background color when the widget is not focused
-        normalforeground="#000716",  # Customize the foreground color when the widget is not focused
-        highlightthickness=0,
-        arrowcolor="#FFFFFF",
-        date_pattern="yyyy-mm-dd",  # Customize the date pattern to your preference
-        firstweekday = "sunday"
-    )
-    desired_starting_entry.place(
-        x=528.0,
-        y=315.0,
-        width=336.0,
-        height=38.0
-    )
-
-    entry_image_3 = PhotoImage(
-        file=relative_to_assets("entry_3.png"))
-    entry_bg_3 = canvas.create_image(
-        327.0,
-        413.0,
-        image=entry_image_3
-    )
-    application_date_entry = DateEntry(
-        window,
-        font=fontstyle,
-        fieldbackground='light green',
-        background="#FFFFFF",
-        foreground="#000716",
-        borderwidth=2,  # Set the borderwidth to 0 to remove the border
-        selectbackground="#359ca6",  # Customize the background color when the date is selected
-        selectforeground="white",  # Customize the foreground color when the date is selected
-        normalbackground="#FFFFFF",  # Customize the background color when the widget is not focused
-        normalforeground="#000716",  # Customize the foreground color when the widget is not focused
-        highlightthickness=0,
-        arrowcolor="#FFFFFF",
-        date_pattern="yyyy-mm-dd",  # Customize the date pattern to your preference
-        firstweekday = "sunday"
-    )
-    application_date_entry.place(
-        x=159.0,
-        y=394.0,
-        width=336.0,
-        height=38.0
-    )
-
-    entry_image_4 = PhotoImage(
-        file=relative_to_assets("entry_4.png"))
-    entry_bg_4 = canvas.create_image(
-        327.0,
-        248.0,
-        image=entry_image_4
-    )
-    
-
-    entry_image_5 = PhotoImage(
-        file=relative_to_assets("entry_5.png"))
-    entry_bg_5 = canvas.create_image(
-        327.0,
-        334.0,
-        image=entry_image_5
-    )
-    desired_salary_entry = DefaultTextEntry(
-        default_text=d_desired_sal_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
-    )
-    desired_salary_entry.place(
-        x=159.0,
-        y=314.0,
-        width=336.0,
-        height=38.0
     )
 
     image_image_7 = PhotoImage(
@@ -337,13 +194,182 @@ def employment_main():
         image=image_image_11
     )
 
+    image_image_12 = PhotoImage(
+        file=relative_to_assets("image_12.png"))
+    image_12 = canvas.create_image(
+        511.0,
+        78.0,
+        image=image_image_12
+    )
+
+
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        696.0,
+        248.0,
+        image=entry_image_1
+    )
+
+    entry_image_2 = PhotoImage(
+        file=relative_to_assets("entry_2.png"))
+    entry_bg_2 = canvas.create_image(
+        696.0,
+        334.0,
+        image=entry_image_2
+    )
+
+    entry_image_3 = PhotoImage(
+        file=relative_to_assets("entry_3.png"))
+    entry_bg_3 = canvas.create_image(
+        327.0,
+        413.0,
+        image=entry_image_3
+    )
+
+    entry_image_4 = PhotoImage(
+        file=relative_to_assets("entry_4.png"))
+    entry_bg_4 = canvas.create_image(
+        327.0,
+        248.0,
+        image=entry_image_4
+    )
+    
+
+    entry_image_5 = PhotoImage(
+        file=relative_to_assets("entry_5.png"))
+    entry_bg_5 = canvas.create_image(
+        327.0,
+        334.0,
+        image=entry_image_5
+    )
+
+
+    # https://stackoverflow.com/questions/28938758/combobox-fontsize-in-tkinter
+    # bigfont = ttk.FOnt(family="Helvetica",size=36)
+    # window.option_add("*TCombobox*Listbox*Font", bigfont)
+
+    # Create a Combobox for employment type selection
+    employment_type_options = ["Full-time", "Part-time"]
+    global employment_type_var
+    employment_type_var = tk.StringVar()
+    employment_type_combobox = ttk.Combobox(
+        values=employment_type_options,
+        textvariable=employment_type_var,
+        font=fontstyle,
+        state="readonly",
+    )
+    employment_type_combobox.set("Select Employment Type")
+    employment_type_combobox.place(x=159.0, y=229.0, width=336.0, height=38.0)
+
+
+    # Customize the font size of the Combobox options
+    
+    # employment_type_entry = Entry(
+    #     bd=0,
+    #     bg="#FFFFFF",
+    #     fg="#000716",
+    #     highlightthickness=0
+    # )
+    # employment_type_entry.place(
+    #     x=159.0,
+    #     y=228.0,
+    #     width=336.0,
+    #     height=38.0
+    # )
+
+    global job_position_entry
+    job_position_entry = DefaultTextEntry(
+        default_text=d_job_position_entry,
+        bd=0,
+        font=fontstyle,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    job_position_entry.place(
+        x=528.0,
+        y=228.0,
+        width=336.0,
+        height=38.0
+    )
+
+    
+
+    global desired_starting_entry
+    desired_starting_entry = DateEntry(
+        parent,
+        font=fontstyle,
+        background="#FFFFFF",
+        foreground="#000716",
+        borderwidth=2,  # Set the borderwidth to 0 to remove the border
+        selectbackground="#359ca6",  # Customize the background color when the date is selected
+        selectforeground="white",  # Customize the foreground color when the date is selected
+        normalbackground="#FFFFFF",  # Customize the background color when the widget is not focused
+        normalforeground="#000716",  # Customize the foreground color when the widget is not focused
+        highlightthickness=0,
+        arrowcolor="#FFFFFF",
+        date_pattern="yyyy-mm-dd",  # Customize the date pattern to your preference
+        firstweekday = "sunday"
+    )
+    desired_starting_entry.place(
+        x=528.0,
+        y=315.0,
+        width=336.0,
+        height=38.0
+    )
+
+    
+
+    global application_date_entry
+    application_date_entry = DateEntry(
+        font=fontstyle,
+        fieldbackground='light green',
+        background="#FFFFFF",
+        foreground="#000716",
+        borderwidth=2,  # Set the borderwidth to 0 to remove the border
+        selectbackground="#359ca6",  # Customize the background color when the date is selected
+        selectforeground="white",  # Customize the foreground color when the date is selected
+        normalbackground="#FFFFFF",  # Customize the background color when the widget is not focused
+        normalforeground="#000716",  # Customize the foreground color when the widget is not focused
+        highlightthickness=0,
+        arrowcolor="#FFFFFF",
+        date_pattern="yyyy-mm-dd",  # Customize the date pattern to your preference
+        firstweekday = "sunday"
+    )
+    application_date_entry.place(
+        x=159.0,
+        y=394.0,
+        width=336.0,
+        height=38.0
+    )
+
+    
+    global desired_salary_entry
+    desired_salary_entry = DefaultTextEntry(
+        default_text=d_desired_sal_entry,
+        bd=0,
+        font=fontstyle,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    desired_salary_entry.place(
+        x=159.0,
+        y=314.0,
+        width=336.0,
+        height=38.0
+    )
+
+    
+
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=back_clicked,
+        command=lambda: back_clicked(parent),
         relief="flat"
     )
     button_1.place(
@@ -369,17 +395,6 @@ def employment_main():
         height=33.0
     )
 
-    image_image_12 = PhotoImage(
-        file=relative_to_assets("image_12.png"))
-    image_12 = canvas.create_image(
-        511.0,
-        78.0,
-        image=image_image_12
-    )
-
+    
     display_values()
-    window.resizable(False, False)
-    window.mainloop()
-
-if __name__ == "__main__":
-    employment_main()
+    parent.mainloop()
