@@ -1,2 +1,2 @@
 
-                            "AMA Computer College Tuguegarao",
+    )
