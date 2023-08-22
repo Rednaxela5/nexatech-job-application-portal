@@ -229,7 +229,7 @@ COMING SOON!
 
 # Roadmap
 
--   [ ] Improve the education page
+-   [x] Improve the education page
 -   [ ] Add error handler for each page in application from
 -   [ ] Fix the errors in the database
 -   [ ] Redesign the admin control (make it real)

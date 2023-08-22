@@ -35,9 +35,7 @@ def add_more_clicked():
         # Show the confirmation messagebox
         confirm = messagebox.askquestion("Confirmation", confirmation_message)
         if confirm == 'yes':
-            custom_input_checkbox.set(0)  # Uncheck the checkbox
-            custom_school_entry.place_forget()  # Hide the custom entry
-            school_name_entry.place(x=158.0, y=242.0, width=338.0, height=38.0)  # Place the combobox
+            
             if education_attainment_var.get() == "Junior High School":
                 education_attainment_var.set("JHS")
             elif education_attainment_var.get() == "Senior High School":
@@ -53,7 +51,7 @@ def add_more_clicked():
             date_graduated = date_graduated_entry.get_date()
             education_attainment = education_attainment_var.get()
 
-            if school_name == d_school_name_entry or school_address == d_school_address_entry or date_graduated == "" or education_attainment == "Select Education Attainment":
+            if (school_name == d_school_name_entry and school_name == d_custom_school_entry)  or school_address == d_school_address_entry or date_graduated == "" or education_attainment == "Select Education Attainment":
                 messagebox.showerror("Error", "Please fill out all fields.")
             else:
                 if sd1.cur_educ_list == 1:
@@ -113,16 +111,18 @@ def add_more_clicked():
                     # print(sd3.school_address)
                     # print(sd3.date_graduated)
                     # print(sd3.educ_attainment)
+            custom_input_checkbox.set(0)  # Uncheck the checkbox
+            custom_school_entry.place_forget()  # Hide the custom entry
+            school_name_entry.place(x=158.0, y=242.0, width=338.0, height=38.0)  # Place the combobox
 
-                    
         else:
             # Do nothing, the user clicked 'no'
             pass
 
 
 def back_clicked(parent):
-    if custom_school_entry:
-        school_name = custom_school_entry
+    if custom_input_checkbox.get() == 1:
+        school_name = custom_school_entry.get()
     else:
         school_name = school_name_var.get()
     school_address = school_address_entry.get()
@@ -982,7 +982,7 @@ def education_main(parent):
     custom_school_entry.place_forget()
 
     school_addresses = {
-                                                        "Abe International Business College": "Quezon City, Metro Manila",
+                            "Abe International Business College": "Quezon City, Metro Manila",
                             "Abra State Institute of Science and Technology": "Lagangilang, Abra",
                             "ACLC College of Butuan": "Butuan City, Agusan del Norte",
                             "ACTS Computer College Sta Cruz": "Sta. Cruz, Laguna",

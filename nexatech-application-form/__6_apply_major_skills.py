@@ -247,8 +247,7 @@ def submit_clicked(parent):
             
             
             connection_database()
-
-            
+    
             from __7_apply_end_form import end_application_main
             end_application_main(parent)
         else:
@@ -325,7 +324,7 @@ def major_skill_main(parent):
     # --------------------------------------------------------------------------------#
     # ---------------------------------- GUI SETUP ---------------------------------- #
     # --------------------------------------------------------------------------------#
-    fontstyle = "Monsterrat"
+    fontstyle = "Montserrat"
 
     canvas = Canvas(
         parent,

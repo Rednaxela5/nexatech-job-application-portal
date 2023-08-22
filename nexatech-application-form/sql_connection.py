@@ -19,40 +19,42 @@ def connect_to_mysql():
     except mysql.connector.Error as err:
         print("Error connecting to MySQL:", err)
         return None
+    
 
-def get_next_school_id(school_name, school_address):
+    
+# def get_next_school_id(school_name, school_address):
 
-    conn = connect_to_mysql()
-    try:
-        cursor = conn.cursor()
-        query = "SELECT school_ID FROM school WHERE schoolName = %s AND schoolAddress = %s"
-        values = (school_name, school_address)
-        cursor.execute(query, values)
-        result = cursor.fetchone()
+#     conn = connect_to_mysql()
+#     try:
+#         cursor = conn.cursor()
+#         query = "SELECT school_ID FROM school WHERE schoolName = %s AND schoolAddress = %s"
+#         values = (school_name, school_address)
+#         cursor.execute(query, values)
+#         result = cursor.fetchone()
         
         
     
-        if cursor.rowcount > 0:
-            result = cursor.fetchone()
-            school_id = result[0]
-            return school_id
-        else:
-            cursor = conn.cursor()
-            query = "SELECT MAX(dump_id) FROM school"
-            cursor.execute(query)
-            result = cursor.fetchone()
-            max_dump_id = result[0]
-            if max_dump_id:
-                next_school_id = max_dump_id + 1
-            else:
-                next_school_id = 1
-            school_id = "SID" + str(next_school_id).zfill(5)
-            return school_id
-    except mysql.connector.Error as err:
-        print("Error getting next school ID:", err)
-        return None
-    finally:
-        cursor.close()
+#         if cursor.rowcount > 0:
+#             result = cursor.fetchone()
+#             school_id = result[0]
+#             return school_id
+#         else:
+#             cursor = conn.cursor()
+#             query = "SELECT MAX(dump_id) FROM school"
+#             cursor.execute(query)
+#             result = cursor.fetchone()
+#             max_dump_id = result[0]
+#             if max_dump_id:
+#                 next_school_id = max_dump_id + 1
+#             else:
+#                 next_school_id = 1
+#             school_id = "SID" + str(next_school_id).zfill(5)
+#             return school_id
+#     except mysql.connector.Error as err:
+#         print("Error getting next school ID:", err)
+#         return None
+#     finally:
+#         cursor.close()
         
 def insert_applicant_details():
     conn = connect_to_mysql()
@@ -73,23 +75,62 @@ def insert_applicant_details():
             conn.close()
     return None
 
+
+def get_next_school_id(school_name, school_address, cursor):
+    try:
+        query = "SELECT MAX(school_id) FROM school_db"
+        cursor.execute(query)
+        result = cursor.fetchone()
+        max_school_id = result[0]
+        if max_school_id:
+            # Split the 'SID' and the integer part
+            prefix, max_number = max_school_id.split('SID')
+            next_number = int(max_number) + 1
+            next_school_id = f"SID{next_number:05d}"  # Format with leading zeros
+        else:
+            next_school_id = "SID00001"
+        
+        sdb_query = "INSERT into school_db (school_id, school_name, school_address) VALUES (%s, %s, %s)"
+        sdb_values = (next_school_id, school_name, school_address)
+        cursor.execute(sdb_query, sdb_values)
+
+        return next_school_id
+    except mysql.connector.Error as err:
+        print("Error getting next school ID:", err)
+        return None
+
+def get_school_id(school_name, school_address, cursor):
+    query = "SELECT school_id FROM school_db WHERE school_name = %s"
+    values = (school_name,)
+    cursor.execute(query, values)
+    result = cursor.fetchone()
+    
+    if result:
+        return result[0]
+    else:
+        return None
+
+def get_or_create_school_id(school_name, school_address, cursor):
+    school_id = get_school_id(school_name, school_address, cursor)
+    
+    if school_id:
+        return school_id
+    else:
+        return get_next_school_id(school_name, school_address, cursor)
+    
 def insert_school_details_1():
     conn = connect_to_mysql()
     if conn is not None:
         try:
             cursor = conn.cursor()
-            school_id = get_next_school_id(sd1.school_name, sd1.school_address)
-            if school_id is None:
-                return
+            school_id = get_or_create_school_id(sd1.school_name, sd1.school_address, cursor)
 
-            query = "INSERT INTO school (dump_id, applicantNo, school_ID, schoolName, schoolAddress, dateGraduated, educationAttainment) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            values = (None, ad.applicantNo, school_id, sd1.school_name, sd1.school_address, sd1.date_graduated, sd1.educ_attainment)
+            query = "INSERT INTO school (applicantNo, school_ID, schoolName, schoolAddress, dateGraduated, educationAttainment) VALUES (%s, %s, %s, %s, %s, %s)"
+            values = (ad.applicantNo, school_id, sd1.school_name, sd1.school_address, sd1.date_graduated, sd1.educ_attainment)
             cursor.execute(query, values)
             conn.commit()
             print("School details inserted successfully.")
 
-            # Read and discard any unread results from the cursor
-            cursor.fetchall()
         except mysql.connector.Error as err:
             print("Error inserting school details:", err)
         finally:
@@ -102,18 +143,13 @@ def insert_school_details_2():
     if conn is not None:
         try:
             cursor = conn.cursor()
-            school_id = get_next_school_id(sd2.school_name, sd2.school_address)
-            if school_id is None:
-                return
+            school_id = get_or_create_school_id(sd2.school_name, sd2.school_address, cursor)
 
-            query = "INSERT INTO school (dump_id, applicantNo, school_ID, schoolName, schoolAddress, dateGraduated, educationAttainment) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            values = (None, ad.applicantNo, school_id, sd2.school_name, sd2.school_address, sd2.date_graduated, sd2.educ_attainment)
+            query = "INSERT INTO school (applicantNo, school_ID, schoolName, schoolAddress, dateGraduated, educationAttainment) VALUES (%s, %s, %s, %s, %s, %s)"
+            values = (ad.applicantNo, school_id, sd2.school_name, sd2.school_address, sd2.date_graduated, sd2.educ_attainment)
             cursor.execute(query, values)
             conn.commit()
             print("School details inserted successfully.")
-            
-            # Read and discard any unread results from the cursor
-            cursor.fetchall()
 
         except mysql.connector.Error as err:
             print("Error inserting school details:", err)
@@ -126,18 +162,13 @@ def insert_school_details_3():
     if conn is not None:
         try:
             cursor = conn.cursor()
-            school_id = get_next_school_id(sd3.school_name, sd3.school_address)
-            if school_id is None:
-                return
+            school_id = get_or_create_school_id(sd3.school_name, sd3.school_address, cursor)
 
-            query = "INSERT INTO school (dump_id, applicantNo, school_ID, schoolName, schoolAddress, dateGraduated, educationAttainment) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            query = "INSERT INTO school (applicantNo, school_ID, schoolName, schoolAddress, dateGraduated, educationAttainment) VALUES (%s, %s, %s, %s, %s, %s)"
             values = (None, ad.applicantNo, school_id, sd3.school_name, sd3.school_address, sd3.date_graduated, sd3.educ_attainment)
             cursor.execute(query, values)
             conn.commit()
             print("School details inserted successfully.")
-            
-            # Read and discard any unread results from the cursor
-            cursor.fetchall()
 
         except mysql.connector.Error as err:
             print("Error inserting school details:", err)
