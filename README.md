@@ -229,9 +229,9 @@ COMING SOON!
 
 # Roadmap
 
--   [x] Improve the education page
--   [x] Add error handler for each page in application from
--   [ ] Fix the errors in the database
+-   [x] ~~Improve the education page~~
+-   [x] ~~Add error handler for each page in application from~~
+-   [ ] Improve the database
 -   [ ] Redesign the admin control (make it real)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
