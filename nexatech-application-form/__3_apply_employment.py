@@ -57,7 +57,11 @@ def next_clicked(parent, canvas):
     appli_date = application_date_entry.get_date()
 
     if not (emp_type or job_pos or des_sal or des_start_date or appli_date) or emp_type == "Select Employment Type" or job_pos == d_job_position_entry or des_sal == d_desired_sal_entry or des_start_date == "" or appli_date == "":
-            messagebox.showerror("Error", "Please fill out all fields.")
+        messagebox.showerror("Error", "Please fill out all fields.")
+    elif len(job_pos) < 3:
+        messagebox.showerror("Error", "Please enter a valid job position.")
+    elif not des_sal.isdigit() or len(des_sal) < 3:
+        messagebox.showerror("Error", "Please enter a valid desired salary.")
     else:
         ad.employment_type = emp_type
         ad.job_pos = job_pos
