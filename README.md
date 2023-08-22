@@ -49,9 +49,7 @@
 * [Acknowledgements](#acknowledgements)
 
 # About The Project
-
-COMING SOON!
-
+Nexatech is a cool open source project that features job application form and administration control. The application was created as a project in our Database subject. The goal of this project is to showcase our knowledge in programming (especially in GUI) and database management using MySQL. 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Screenshots
@@ -210,7 +208,6 @@ The following tools and techonologies were involved in the making of this projec
 * [Tkinter Designer](https://github.com/ParthJadhav/Tkinter-Designer)
 
 # Getting Started
-
 To get a local copy up and running follow these simple example steps.
 
 ## Prerequisites
@@ -222,20 +219,74 @@ To get a local copy up and running follow these simple example steps.
 If all the above are satisfied, you may proceed to the next section.
 
 ## Installation
+Follow these instructions to setup your own instance of the app:
+### 1. Clone the repo
+You may follow this instruction: [cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
-COMING SOON!
+You may use github desktop for easy cloning.
+
+```sh
+gh repo clone Rednaxela5/nexatech-job-application-portal
+``````
+
+Or if you have git command line installed, clone using this command:
+```sh
+git clone https://github.com/Rednaxela5/nexatech-job-application-portal.git
+```
+### 2. Change the directory
+Open terminal/cmd/powershell and change the directory to the cloned folder. You can also open the directory to your preferred IDE. 
+
+```sh
+cd Location\nexatech-job-application-portal
+```
+
+### 3. Install the necessary dependencies
+```sh
+pip install -r requirements.txt
+```
+In the event that pip doesn't work, also try the following commands:
+
+`pip3 install -r requirements.txt`
+
+`python -m pip install -r requirements.txt`
+
+`python3 -m pip install -r requirements.txt`
+
+### 4. Setup the database
+Create the database from the MySQL schema:
+1. Copy-paste the contents of [nexatech.sql](sql/nexatech.sql) directly into the MySQL command line, or simply open and run the MySQL file.
+2. Verify the settings of each table in the schema.
+
+
+### 5. Modify the config file
+You need to modify the codes inside the config.py file before running the app.
+1. Open [config.py](nexatech_app/config.py) and adjust these lines depending on your setup
+```sh
+USERNAME = "admin"
+PASSWORD = "password"
+
+MYSQL_HOST = 'localhost'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = 'P@ssw0rd2023!'
+MYSQL_DATABASE = 'nexatech'
+```
+
+### 6. Install the fonts
+This application used the "Montserrat" font. Install the fonts inside the [font](assets/font)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+### 7. Run the app 🎉
+Run the `application.bat` and you should see the home page window if there are no issues.
 
 # Roadmap
 
--   [ ] Improve the education page
--   [ ] Add error handler for each page in application from
--   [ ] Fix the errors in the database
+-   [x] ~~Improve the education page~~
+-   [x] ~~Add error handler for each page in application from~~
+-   [ ] Improve the database
 -   [ ] Redesign the admin control (make it real)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-# Contributing
+# Contribute
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 * If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/Rednaxela5/nexatech-job-application-portal/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
@@ -264,7 +315,7 @@ Distributed under the MIT License. See [LICENSE](https://github.com/Rednaxela5/n
 * **Alexander Porlares** - [@Rednaxela5](https://github.com/Rednaxela5) - Head/Back End
 * **Jallane Roncales** - [Jallane Roncales]() - Front End
 * **Jerome Agarin** - [Jerome Agarin](none) - Front End
-* **Luen Lozada** - [lnlzd](https://github.com/lnlzd) - Back End
+* **Luen Lozada** - [@lnlzd](https://github.com/lnlzd) - Back End
 
 # Acknowledgements
 
