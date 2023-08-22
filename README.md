@@ -208,7 +208,7 @@ The following tools and techonologies were involved in the making of this projec
 * [Tkinter Designer](https://github.com/ParthJadhav/Tkinter-Designer)
 
 # Getting Started
-To get a local copy up and running follow these simple example steps.
+If you're looking to set up a local copy that runs seamlessly, just follow these straightforward example steps.
 
 ## Prerequisites
 
@@ -244,7 +244,7 @@ cd Location\nexatech-job-application-portal
 ```sh
 pip install -r requirements.txt
 ```
-In the event that pip doesn't work, also try the following commands:
+In the event that pip doesn't work, you can also try the following commands:
 
 `pip3 install -r requirements.txt`
 
@@ -273,10 +273,11 @@ MYSQL_DATABASE = 'nexatech'
 
 ### 6. Install the fonts
 This application used the "Montserrat" font. Install the fonts inside the [font](assets/font)
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### 7. Run the app 🎉
 Run the `application.bat` and you should see the home page window if there are no issues.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 # Roadmap
 
