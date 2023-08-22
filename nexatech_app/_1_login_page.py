@@ -14,9 +14,6 @@ from default_entry import DefaultTextEntry
 from config import USERNAME, PASSWORD
 
 def login_menu():
-    USERNAME = "admin"
-    PASSWORD = "password"
-
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
@@ -44,6 +41,9 @@ def login_menu():
         window.destroy()
         from __1_apply_home_page import apply_home
         apply_home()
+
+    def on_password_entry_enter(event):
+        login()
 
     window = Tk()
 
@@ -158,6 +158,9 @@ def login_menu():
         width=270.0,
         height=40.0
     )
+
+    # Bind the <Return> event to the password_entry widget
+    password_entry.bind("<Return>", on_password_entry_enter)
 
     image_image_6 = PhotoImage(
         file=relative_to_assets("image_6.png"))
