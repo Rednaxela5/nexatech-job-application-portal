@@ -12,7 +12,6 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 
-
 def apply_home():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
@@ -41,6 +40,9 @@ def apply_home():
         a_window.resizable(False, False)
         personal_main(a_window)
 
+    # --------------------------------------------------------------------------------#
+    # ---------------------------------- GUI SETUP ---------------------------------- #
+    # --------------------------------------------------------------------------------#
     global window
     window = Tk()
 
@@ -48,6 +50,7 @@ def apply_home():
     window.configure(bg = "#0F2634")
     window.title("Nexatech Job Portal")
 
+    
     canvas = Canvas(
         window,
         bg = "#0F2634",
@@ -56,7 +59,7 @@ def apply_home():
         bd = 0,
         highlightthickness = 0,
         relief = "ridge"
-    )
+    )   
 
     canvas.place(x = 0, y = 0)
     image_image_1 = PhotoImage(
@@ -123,6 +126,10 @@ def apply_home():
         image=image_image_8
     )
 
+    # --------------------------------------------------------------------------------#
+    # ----------------------------------- BUTTONS ----------------------------------- #
+    # --------------------------------------------------------------------------------#
+
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
     button_1 = Button(
@@ -154,6 +161,7 @@ def apply_home():
         width=228.0,
         height=38.0
     )
+
     window.resizable(False, False)
     window.mainloop()
 

@@ -29,6 +29,7 @@ ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame1"
 
 
 
+
 def update_date():
     dateOfBirth.set_date(datetime.date.today())
 
@@ -98,7 +99,17 @@ def next_clicked(parent):
         # print(applicant_data.emailaddress)
         
         # fullname_entry.place_forget()
+        # dateOfBirth.place_forget()
+        # sssID_entry.place_forget()
+        # address_entry.place_forget()
+        # city_entry.place_forget()
+        # province_entry.place_forget()
+        # zip_code_entry.place_forget()
+        # phone_number_entry.place_forget()
+        # email_address_entry.place_forget()
+        # canvas.place_forget()
         
+ 
         from __3_apply_employment import emp_main
         emp_main(parent)
 
@@ -181,7 +192,7 @@ def personal_main(parent):
     global province_entry
     global zip_code_entry
     global phone_number_entry
-    global email_address_entry
+    global email_address_entry 
 
     global d_fullname_entry
     global d_sssID_entry
@@ -202,13 +213,15 @@ def personal_main(parent):
     d_phone_number_entry = "Enter Phone Number"
     d_email_address_entry = "Enter Email Address"
 
+    # --------------------------------------------------------------------------------#
+    # ---------------------------------- GUI SETUP ---------------------------------- #
+    # --------------------------------------------------------------------------------#
     # parent = Tk()
 
     # parent.geometry("1024x568")
     # parent.title("Nexatech Job Application Form")
     # parent.configure(bg = "#CCD4D9")
     fontstyle = "Montserrat"
-
 
     canvas = Canvas(
         parent,
@@ -221,6 +234,7 @@ def personal_main(parent):
     )
 
     canvas.place(x = 0, y = 0)
+
     image_image_1 = PhotoImage(
         file=relative_to_assets("image_1.png"))
     image_1 = canvas.create_image(
@@ -228,16 +242,6 @@ def personal_main(parent):
         23.0,
         image=image_image_1
     )
-
-
-    image_image_16 = PhotoImage(
-        file=relative_to_assets("image_16.png"))
-    image_16 = canvas.create_image(
-        511.0,
-        78.0,
-        image=image_image_16
-    )
-
     image_image_2 = PhotoImage(
         file=relative_to_assets("image_2.png"))
     image_2 = canvas.create_image(
@@ -278,287 +282,6 @@ def personal_main(parent):
         image=image_image_6
     )
 
-    entry_image_1 = PhotoImage(
-        file=relative_to_assets("entry_1.png"))
-    entry_bg_1 = canvas.create_image(
-        696.0,
-        452.0,
-        image=entry_image_1
-
-
-    )  
-    entry_image_3 = PhotoImage(
-        file=relative_to_assets("entry_3.png"))
-    entry_bg_3 = canvas.create_image(
-        755.5,
-        372.0,
-        image=entry_image_3
-    )
-    fullname_entry = DefaultTextEntry(
-        default_text=d_fullname_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
-    )
-    # load_current(0, tk.END)
-    # fullname_value = StringVar()
-    # fullname_value.set(ad.name)
-    # fullname_entry = Entry(
-    #     bd=0,
-    #     textvariable=fullname_value,
-    #     font=fontstyle,
-    #     bg="#FFFFFF",
-    #     fg="#000716",
-    #     highlightthickness=0
-    # )
-
-    
-    dateOfBirth = DateEntry(
-        parent,
-        font=fontstyle,
-        fieldbackground='light green',
-        background="#FFFFFF",
-        foreground="#000716",
-        borderwidth=2,  # Set the borderwidth to 0 to remove the border
-        selectbackground="#359ca6",  # Customize the background color when the date is selected
-        selectforeground="white",  # Customize the foreground color when the date is selected
-        normalbackground="#FFFFFF",  # Customize the background color when the widget is not focused
-        normalforeground="#000716",  # Customize the foreground color when the widget is not focused
-        highlightthickness=0,
-        arrowcolor="#FFFFFF",
-        date_pattern="yyyy-mm-dd",  # Customize the date pattern to your preference
-        firstweekday = "sunday"
-    )
-    sssID_entry = DefaultTextEntry(
-        default_text=d_sssID_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
-    )
-
-
-    fullname_entry.place(
-        x=159.0,
-        y=205.0,
-        width=217.0,
-        height=38.0
-    )
-    dateOfBirth.place(
-        x=402.0,
-        y=206.0,
-        width=220.0,
-        height=38.0
-    )
-    sssID_entry.place(
-        x=647.0,
-        y=205.0,
-        width=217.0,
-        height=38.0
-    )
-
-    address_entry = DefaultTextEntry(
-        default_text=d_address_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
-    )
-    city_entry = DefaultTextEntry(
-        default_text=d_city_entry,
-        bd=0,
-        bg="#FFFFFF",
-        font=fontstyle,
-        fg="#000716",
-        highlightthickness=0
-    )
-
-
-    address_entry.place(
-        x=159.0,
-        y=277.0,
-        width=705.0,
-        height=38.0
-    )
-
-
-
-    city_entry.place(
-        x=159.0,
-        y=352.0,
-        width=217.0,
-        height=38.0
-    )
-
-    province_entry = DefaultTextEntry(
-        parent,
-        default_text=d_province_entry,
-        bd=0,
-        bg="#FFFFFF",
-        font=fontstyle,
-        fg="#000716",
-        highlightthickness=0
-    )
-    province_entry.place(
-        x=403.0,
-        y=352.0,
-        width=217.0,
-        height=38.0
-    )
-    zip_code_entry = DefaultTextEntry(
-        default_text=d_zipcode_entry,
-        bd=0,
-        bg="#FFFFFF",
-        font=fontstyle,
-        fg="#000716",
-        highlightthickness=0
-    )
-    zip_code_entry.place(
-        x=647.0,
-        y=352.0,
-        width=217.0,
-        height=38.0
-    )
-
-    phone_number_entry = DefaultTextEntry(
-        parent,
-        default_text=d_phone_number_entry,
-        bd=0,
-        bg="#FFFFFF",
-        font=fontstyle,
-        fg="#000716",
-        highlightthickness=0
-    )
-    phone_number_entry.place(
-        x=159.0,
-        y=432.0,
-        width=336.0,
-        height=38.0
-    )
-
-    email_address_value = StringVar()
-
-    email_address_entry = DefaultTextEntry(
-        parent,
-        default_text=d_email_address_entry,
-        textvariable=email_address_value,
-        font=fontstyle,
-        bd=0,
-        bg="#FFFFFF",
-        highlightthickness=0,
-        
-    )
-
-
-    email_address_entry.place(
-        x=528.0,
-        y=432.0,
-        width=336.0,
-        height=38.0
-    )
-
-    entry_image_2 = PhotoImage(
-        file=relative_to_assets("entry_2.png"))
-    entry_bg_2 = canvas.create_image(
-        327.0,
-        452.0,
-        image=entry_image_2
-    )
-
-
-
-
-
-    entry_image_4 = PhotoImage(
-        file=relative_to_assets("entry_4.png"))
-    entry_bg_4 = canvas.create_image(
-        511.5,
-        372.0,
-        image=entry_image_4
-    )
-
-
-    entry_image_5 = PhotoImage(
-        file=relative_to_assets("entry_5.png"))
-    entry_bg_5 = canvas.create_image(
-        267.5,
-        372.0,
-        image=entry_image_5
-    )
-    city_entry = DefaultTextEntry(
-        default_text='Enter City',
-        bd=0,
-        bg="#FFFFFF",
-        font=fontstyle,
-        fg="#000716",
-        highlightthickness=0
-    )
-    city_entry.place(
-        x=159.0,
-        y=352.0,
-        width=217.0,
-        height=38.0
-    )
-
-    entry_image_6 = PhotoImage(
-        file=relative_to_assets("entry_6.png"))
-    entry_bg_6 = canvas.create_image(
-        511.5,
-        297.0,
-        image=entry_image_6
-    )
-
-    entry_image_7 = PhotoImage(
-        file=relative_to_assets("entry_7.png"))
-    entry_bg_7 = canvas.create_image(
-        755.5,
-        225.0,
-        image=entry_image_7
-    )
-
-
-    entry_image_8 = PhotoImage(
-        file=relative_to_assets("entry_8.png"))
-    entry_bg_8 = canvas.create_image(
-        511.5,
-        225.0,
-        image=entry_image_8
-    )
-
-
-
-    # dateOfBirth_Entry = DefaultTextEntry(
-    #     default_text='Select Date',
-    #     bd=0,
-    #     font=fontstyle,
-    #     bg="#FFFFFF",
-    #     fg="#000716",
-    #     highlightthickness=0
-    # )
-    # dateOfBirth_Entry.place(
-    #     x=403.0,
-    #     y=205.0,
-    #     width=217.0,
-    #     height=38.0
-    # )
-
-    entry_image_9 = PhotoImage(
-        file=relative_to_assets("entry_9.png"))
-    entry_bg_9 = canvas.create_image(
-        267.5,
-        225.0,
-        image=entry_image_9
-    )
-
-    # DefaultTextEntry.default_text.config
-    # if DefaultTextEntry.set_default_text != "Enter Full Name":
-    #     DefaultTextEntry.default_text = applicant_details.name
-        
-
     image_image_7 = PhotoImage(
         file=relative_to_assets("image_7.png"))
     image_7 = canvas.create_image(
@@ -574,7 +297,6 @@ def personal_main(parent):
         340.0,
         image=image_image_8
     )
-
     image_image_9 = PhotoImage(
         file=relative_to_assets("image_9.png"))
     image_9 = canvas.create_image(
@@ -631,6 +353,279 @@ def personal_main(parent):
         image=image_image_15
     )
 
+    image_image_16 = PhotoImage(
+        file=relative_to_assets("image_16.png"))
+    image_16 = canvas.create_image(
+        511.0,
+        78.0,
+        image=image_image_16
+    )
+
+
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        696.0,
+        452.0,
+        image=entry_image_1
+    )  
+
+    entry_image_2 = PhotoImage(
+        file=relative_to_assets("entry_2.png"))
+    entry_bg_2 = canvas.create_image(
+        327.0,
+        452.0,
+        image=entry_image_2
+    )
+
+    entry_image_3 = PhotoImage(
+        file=relative_to_assets("entry_3.png"))
+    entry_bg_3 = canvas.create_image(
+        755.5,
+        372.0,
+        image=entry_image_3
+    )
+
+    entry_image_4 = PhotoImage(
+        file=relative_to_assets("entry_4.png"))
+    entry_bg_4 = canvas.create_image(
+        511.5,
+        372.0,
+        image=entry_image_4
+    )
+
+    entry_image_5 = PhotoImage(
+        file=relative_to_assets("entry_5.png"))
+    entry_bg_5 = canvas.create_image(
+        267.5,
+        372.0,
+        image=entry_image_5
+    )
+
+    entry_image_6 = PhotoImage(
+        file=relative_to_assets("entry_6.png"))
+    entry_bg_6 = canvas.create_image(
+        511.5,
+        297.0,
+        image=entry_image_6
+    )
+
+    entry_image_7 = PhotoImage(
+        file=relative_to_assets("entry_7.png"))
+    entry_bg_7 = canvas.create_image(
+        755.5,
+        225.0,
+        image=entry_image_7
+    )
+
+
+    entry_image_8 = PhotoImage(
+        file=relative_to_assets("entry_8.png"))
+    entry_bg_8 = canvas.create_image(
+        511.5,
+        225.0,
+        image=entry_image_8
+    )
+
+    entry_image_9 = PhotoImage(
+        file=relative_to_assets("entry_9.png"))
+    entry_bg_9 = canvas.create_image(
+        267.5,
+        225.0,
+        image=entry_image_9
+    )
+
+    
+    
+    # --------------------------------------------------------------------------------#
+    # --------------------------------- ENTRY SETUP --------------------------------- #
+    # --------------------------------------------------------------------------------#
+    
+    fullname_entry = DefaultTextEntry(
+        default_text=d_fullname_entry,
+        bd=0,
+        font=fontstyle,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    fullname_entry.place(
+        x=159.0,
+        y=205.0,
+        width=217.0,
+        height=38.0
+    )
+    # load_current(0, tk.END)
+    # fullname_value = StringVar()
+    # fullname_value.set(ad.name)
+    # fullname_entry = Entry(
+    #     bd=0,
+    #     textvariable=fullname_value,
+    #     font=fontstyle,
+    #     bg="#FFFFFF",
+    #     fg="#000716",
+    #     highlightthickness=0
+    # )
+    dateOfBirth = DateEntry(
+        font=fontstyle,
+        fieldbackground='light green',
+        background="#FFFFFF",
+        foreground="#000716",
+        borderwidth=2,  # Set the borderwidth to 0 to remove the border
+        selectbackground="#359ca6",  # Customize the background color when the date is selected
+        selectforeground="white",  # Customize the foreground color when the date is selected
+        normalbackground="#FFFFFF",  # Customize the background color when the widget is not focused
+        normalforeground="#000716",  # Customize the foreground color when the widget is not focused
+        highlightthickness=0,
+        arrowcolor="#FFFFFF",
+        date_pattern="yyyy-mm-dd",  # Customize the date pattern to your preference
+        firstweekday = "sunday"
+    )
+    dateOfBirth.place(
+        x=402.0,
+        y=206.0,
+        width=220.0,
+        height=38.0
+    )
+
+    sssID_entry = DefaultTextEntry(
+        default_text=d_sssID_entry,
+        bd=0,
+        font=fontstyle,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    sssID_entry.place(
+        x=647.0,
+        y=205.0,
+        width=217.0,
+        height=38.0
+    )
+
+    address_entry = DefaultTextEntry(
+        default_text=d_address_entry,
+        bd=0,
+        font=fontstyle,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    address_entry.place(
+        x=159.0,
+        y=277.0,
+        width=705.0,
+        height=38.0
+    )
+
+    city_entry = DefaultTextEntry(
+        default_text=d_city_entry,
+        bd=0,
+        bg="#FFFFFF",
+        font=fontstyle,
+        fg="#000716",
+        highlightthickness=0
+    )
+    city_entry.place(
+        x=159.0,
+        y=352.0,
+        width=217.0,
+        height=38.0
+    )
+
+    province_entry = DefaultTextEntry(
+        default_text=d_province_entry,
+        bd=0,
+        bg="#FFFFFF",
+        font=fontstyle,
+        fg="#000716",
+        highlightthickness=0
+    )
+    province_entry.place(
+        x=403.0,
+        y=352.0,
+        width=217.0,
+        height=38.0
+    )
+
+    zip_code_entry = DefaultTextEntry(
+        default_text=d_zipcode_entry,
+        bd=0,
+        bg="#FFFFFF",
+        font=fontstyle,
+        fg="#000716",
+        highlightthickness=0
+    )
+    zip_code_entry.place(
+        x=647.0,
+        y=352.0,
+        width=217.0,
+        height=38.0
+    )
+
+    phone_number_entry = DefaultTextEntry(
+        default_text=d_phone_number_entry,
+        bd=0,
+        bg="#FFFFFF",
+        font=fontstyle,
+        fg="#000716",
+        highlightthickness=0
+    )
+    phone_number_entry.place(
+        x=159.0,
+        y=432.0,
+        width=336.0,
+        height=38.0
+    )
+
+    email_address_value = StringVar()
+
+    email_address_entry = DefaultTextEntry(
+        default_text=d_email_address_entry,
+        textvariable=email_address_value,
+        font=fontstyle,
+        bd=0,
+        bg="#FFFFFF",
+        highlightthickness=0,
+        
+    )
+    email_address_entry.place(
+        x=528.0,
+        y=432.0,
+        width=336.0,
+        height=38.0
+    )
+
+    
+
+    # dateOfBirth_Entry = DefaultTextEntry(
+    #     default_text='Select Date',
+    #     bd=0,
+    #     font=fontstyle,
+    #     bg="#FFFFFF",
+    #     fg="#000716",
+    #     highlightthickness=0
+    # )
+    # dateOfBirth_Entry.place(
+    #     x=403.0,
+    #     y=205.0,
+    #     width=217.0,
+    #     height=38.0
+    # )
+
+    
+
+    # DefaultTextEntry.default_text.config
+    # if DefaultTextEntry.set_default_text != "Enter Full Name":
+    #     DefaultTextEntry.default_text = applicant_details.name
+        
+
+    
+
+    # --------------------------------------------------------------------------------#
+    # ----------------------------------- BUTTONS ----------------------------------- #
+    # --------------------------------------------------------------------------------#
+    
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
     button_1 = Button(
@@ -664,7 +659,7 @@ def personal_main(parent):
     )
 
 
-
+    # show_frame(frame_2)
     display_values()
     parent.mainloop()
 

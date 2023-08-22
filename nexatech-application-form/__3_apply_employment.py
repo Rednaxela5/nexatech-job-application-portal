@@ -12,7 +12,7 @@ from default_entry import DefaultTextEntry
 import tkinter as tk
 from tkcalendar import DateEntry
 import datetime
-from storage import applicant_data
+from storage import applicant_data as ad
 
 
 # Get the script's directory path
@@ -25,18 +25,31 @@ ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame2"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def back_clicked(parent):
-    applicant_data.employment_type = employment_type_var.get()
-    applicant_data.job_pos = job_position_entry.get()
-    applicant_data.desired_salary = desired_salary_entry.get()
-    applicant_data.desired_start_date = desired_starting_entry.get_date()
-    applicant_data.application_date = application_date_entry.get_date()
+def back_clicked(parent, canvas):
+    ad.employment_type = employment_type_var.get()
+    ad.job_pos = job_position_entry.get()
+    ad.desired_salary = desired_salary_entry.get()
+    ad.desired_start_date = desired_starting_entry.get_date()
+    ad.application_date = application_date_entry.get_date()
+    
+    
+    employment_type_combobox.place_forget()
+    job_position_entry.place_forget()
+    desired_salary_entry.place_forget()
+    desired_starting_entry.place_forget()
+    application_date_entry.place_forget()
 
-    # parent.destroy()
+    # canvas.delete("all")
+    # for widget in canvas.winfo_children():
+    #     widget.destroy()
+
+    canvas.delete("all")
+    for widget in canvas.winfo_children():
+        widget.destroy()
     from __2_apply_personal_info import personal_main
     personal_main(parent)
 
-def next_clicked():
+def next_clicked(parent, canvas):
     emp_type = employment_type_var.get()
     job_pos = job_position_entry.get()
     des_sal = desired_salary_entry.get()
@@ -46,68 +59,80 @@ def next_clicked():
     if not (emp_type or job_pos or des_sal or des_start_date or appli_date) or emp_type == "Select Employment Type" or job_pos == d_job_position_entry or des_sal == d_desired_sal_entry or des_start_date == "" or appli_date == "":
             messagebox.showerror("Error", "Please fill out all fields.")
     else:
-        applicant_data.employment_type = emp_type
-        applicant_data.job_pos = job_pos
-        applicant_data.desired_salary = des_sal
-        applicant_data.desired_start_date = des_start_date
-        applicant_data.application_date = appli_date
+        ad.employment_type = emp_type
+        ad.job_pos = job_pos
+        ad.desired_salary = des_sal
+        ad.desired_start_date = des_start_date
+        ad.application_date = appli_date
 
-        parent.destroy()
+        canvas.delete("all")
+        for widget in canvas.winfo_children():
+            widget.destroy()
         from __4_apply_education import education_main
-        education_main()
+        education_main(parent)
 
 def display_values():
     # Employment Type
-    if applicant_data.employment_type != "":
-        employment_type_var.set(applicant_data.employment_type)
+    if ad.employment_type != "":
+        employment_type_var.set(ad.employment_type)
     # Job Position
-    if applicant_data.job_pos == d_job_position_entry:
+    if ad.job_pos == d_job_position_entry:
         pass
-    elif applicant_data.job_pos != "":
+    elif ad.job_pos != "":
         job_position_entry.delete(0, tk.END)
-        job_position_entry.insert(0, applicant_data.job_pos)
+        job_position_entry.insert(0, ad.job_pos)
         job_position_entry.config(fg="black")
 
     # Desired Salary
-    if applicant_data.desired_salary == d_desired_sal_entry:
+    if ad.desired_salary == d_desired_sal_entry:
         pass
-    elif applicant_data.desired_salary != "":
+    elif ad.desired_salary != "":
         desired_salary_entry.delete(0, tk.END)
-        desired_salary_entry.insert(0, applicant_data.desired_salary)
+        desired_salary_entry.insert(0, ad.desired_salary)
         desired_salary_entry.config(fg="black")
     
     # Desired Starting Date
-    if applicant_data.desired_start_date != "":
-        desired_starting_entry.set_date(applicant_data.desired_start_date)
+    if ad.desired_start_date != "":
+        desired_starting_entry.set_date(ad.desired_start_date)
     
     # Application Date
-    if applicant_data.application_date != "":
-        application_date_entry.set_date(applicant_data.application_date)
+    if ad.application_date != "":
+        application_date_entry.set_date(ad.application_date)
 
 def emp_main(parent):
     global d_job_position_entry
     global d_desired_sal_entry
+    global employment_type_var
+    global employment_type_combobox
+    global desired_salary_entry
+    global job_position_entry
+    global desired_starting_entry
+    global application_date_entry
+    
 
     d_job_position_entry = "Enter Job Position"
     d_desired_sal_entry = "Enter Desired Salary"
-   
+
+    # --------------------------------------------------------------------------------#
+    # ---------------------------------- GUI SETUP ---------------------------------- #
+    # --------------------------------------------------------------------------------#
     fontstyle = "Montserrat"
     
     canvas = Canvas(
         parent,
-        bg = "#CCD4D9",
+        bg = "#ccd4d9",
         height = 568,
         width = 1024,
         bd = 0,
         highlightthickness = 0,
-        relief = "sunken"
+        relief = "ridge"
     )
 
     canvas.place(x = 0, y = 0)
     image_image_1 = PhotoImage(
         file=relative_to_assets("image_1.png"))
 
-    global image_1, image_2, image_3, image_4, image_5, image_6, entry_image_1, entry_image_2, entry_image_3, entry_image_4, entry_image_5
+    
     image_1 = canvas.create_image(
         512.0,
         23.0,
@@ -245,15 +270,19 @@ def emp_main(parent):
     )
 
 
+    # --------------------------------------------------------------------------------#
+    # --------------------------------- ENTRY SETUP --------------------------------- #
+    # --------------------------------------------------------------------------------#
     # https://stackoverflow.com/questions/28938758/combobox-fontsize-in-tkinter
     # bigfont = ttk.FOnt(family="Helvetica",size=36)
     # window.option_add("*TCombobox*Listbox*Font", bigfont)
 
     # Create a Combobox for employment type selection
     employment_type_options = ["Full-time", "Part-time"]
-    global employment_type_var
+    
     employment_type_var = tk.StringVar()
     employment_type_combobox = ttk.Combobox(
+        parent,
         values=employment_type_options,
         textvariable=employment_type_var,
         font=fontstyle,
@@ -278,8 +307,9 @@ def emp_main(parent):
     #     height=38.0
     # )
 
-    global job_position_entry
+    
     job_position_entry = DefaultTextEntry(
+        parent,
         default_text=d_job_position_entry,
         bd=0,
         font=fontstyle,
@@ -295,8 +325,24 @@ def emp_main(parent):
     )
 
     
+    
+    desired_salary_entry = DefaultTextEntry(
+        parent,
+        default_text=d_desired_sal_entry,
+        bd=0,
+        font=fontstyle,
+        bg="#FFFFFF",
+        fg="#000716",
+        highlightthickness=0
+    )
+    desired_salary_entry.place(
+        x=159.0,
+        y=314.0,
+        width=336.0,
+        height=38.0
+    )
 
-    global desired_starting_entry
+    
     desired_starting_entry = DateEntry(
         parent,
         font=fontstyle,
@@ -320,9 +366,9 @@ def emp_main(parent):
     )
 
     
-
-    global application_date_entry
+    
     application_date_entry = DateEntry(
+        parent,
         font=fontstyle,
         fieldbackground='light green',
         background="#FFFFFF",
@@ -344,32 +390,18 @@ def emp_main(parent):
         height=38.0
     )
 
-    
-    global desired_salary_entry
-    desired_salary_entry = DefaultTextEntry(
-        default_text=d_desired_sal_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
-    )
-    desired_salary_entry.place(
-        x=159.0,
-        y=314.0,
-        width=336.0,
-        height=38.0
-    )
 
-    
-
+    # --------------------------------------------------------------------------------#
+    # ----------------------------------- BUTTONS ----------------------------------- #
+    # --------------------------------------------------------------------------------#
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
     button_1 = Button(
+        parent,
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: back_clicked(parent),
+        command=lambda: back_clicked(parent, canvas),
         relief="flat"
     )
     button_1.place(
@@ -382,10 +414,11 @@ def emp_main(parent):
     button_image_2 = PhotoImage(
         file=relative_to_assets("button_2.png"))
     button_2 = Button(
+        parent,
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=next_clicked,
+        command=lambda: next_clicked(parent, canvas),
         relief="flat"
     )
     button_2.place(

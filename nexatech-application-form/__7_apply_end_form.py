@@ -8,30 +8,49 @@ import sys
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from storage import applicant_data as ad, school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3, work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3, skill_data_1 as md1, skill_data_2 as md2, skill_data_3 as md3, skill_data_4 as md4, skill_data_5 as md5, skill_data_6 as md6
 
-def end_application_main():
-    # Get the script's directory path
-    SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
+# Get the script's directory path
+SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
-    # Set the relative path to the assets directory
-    ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame6"
+# Set the relative path to the assets directory
+ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame6"
 
-    def relative_to_assets(path: str) -> Path:
-        return ASSETS_PATH / Path(path)
+def relative_to_assets(path: str) -> Path:
+    return ASSETS_PATH / Path(path)
 
-    def return_home_clicked():
-        window.destroy()
-        from __1_apply_home_page import apply_home
-        apply_home()
+def return_home_clicked(parent):
+    # Empty the values in the applicant_data
+    ad.reset_values()
+
+    # Empty the values in the school_data
+    sd1.reset_values()
+    sd2.reset_values()
+    sd3.reset_values()
+
+    # Empty the values in the work_data
+    wd1.reset_values()
+    wd2.reset_values()
+    wd3.reset_values()
+
+    # Empth the values in the skill_data
+    md1.reset_values()
+    md2.reset_values()
+    md3.reset_values()
+    md4.reset_values()
+    md5.reset_values()
+    md6.reset_values()
     
-    window = Tk()
+    parent.destroy()
+    from __1_apply_home_page import apply_home
+    apply_home()
 
-    window.geometry("1024x568")
-    window.configure(bg = "#CCD4D9")
+
+def end_application_main(parent):
 
 
     canvas = Canvas(
-        window,
+        parent,
         bg = "#CCD4D9",
         height = 568,
         width = 1024,
@@ -63,7 +82,7 @@ def end_application_main():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=return_home_clicked,
+        command=lambda: return_home_clicked(parent),
         relief="flat"
     )
     button_1.place(
@@ -88,8 +107,6 @@ def end_application_main():
         308.0,
         image=image_image_4
     )
-    window.resizable(False, False)
-    window.mainloop()
 
-if __name__ == "__main__":
-    end_application_main()
+    parent.mainloop()
+

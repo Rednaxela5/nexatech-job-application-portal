@@ -14,121 +14,181 @@ from default_entry import DefaultTextEntry
 from storage import school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3
 from sql_connection import connection_database
 
-def education_main():
-    # Get the script's directory path
-    SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
+# Get the script's directory path
+SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
-    # Set the relative path to the assets directory
-    ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame3"
+# Set the relative path to the assets directory
+ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame3"
 
-    def relative_to_assets(path: str) -> Path:
-        return ASSETS_PATH / Path(path)
+def relative_to_assets(path: str) -> Path:
+    return ASSETS_PATH / Path(path)
 
 
-    def add_more_clicked():
-        confirmation_message = "Are you sure you want to add more entries?"
+def add_more_clicked():
+    confirmation_message = "Are you sure you want to add more entries?"
 
-        if sd1.cur_educ_list >= 3:
-            # If the limit of 3 inputs is reached, show an error message box
-            messagebox.showerror("Input Limit Exceeded", "You have reached the maximum limit of inputs (3).")
-      
-        else:
-            # Show the confirmation messagebox
-            confirm = messagebox.askquestion("Confirmation", confirmation_message)
-            if confirm == 'yes':
-                custom_input_checkbox.set(0)  # Uncheck the checkbox
-                custom_school_entry.place_forget()  # Hide the custom entry
-                school_name_entry.place(x=158.0, y=242.0, width=338.0, height=38.0)  # Place the combobox
-                if education_attainment_var.get() == "Junior High School":
-                    education_attainment_var.set("JHS")
-                elif education_attainment_var.get() == "Senior High School":
-                    education_attainment_var.set("SHS")
-                elif education_attainment_var.get() == "College":
-                    education_attainment_var.set("CO")
+    if sd1.cur_educ_list >= 3:
+        # If the limit of 3 inputs is reached, show an error message box
+        messagebox.showerror("Input Limit Exceeded", "You have reached the maximum limit of inputs (3).")
+    
+    else:
+        # Show the confirmation messagebox
+        confirm = messagebox.askquestion("Confirmation", confirmation_message)
+        if confirm == 'yes':
+            custom_input_checkbox.set(0)  # Uncheck the checkbox
+            custom_school_entry.place_forget()  # Hide the custom entry
+            school_name_entry.place(x=158.0, y=242.0, width=338.0, height=38.0)  # Place the combobox
+            if education_attainment_var.get() == "Junior High School":
+                education_attainment_var.set("JHS")
+            elif education_attainment_var.get() == "Senior High School":
+                education_attainment_var.set("SHS")
+            elif education_attainment_var.get() == "College":
+                education_attainment_var.set("CO")
 
-                if custom_input_checkbox.get() == 1:
-                    school_name = custom_school_entry.get()
-                else:
-                    school_name = school_name_var.get()
-                school_address = school_address_entry.get()
-                date_graduated = date_graduated_entry.get_date()
-                education_attainment = education_attainment_var.get()
-
-                if school_name == d_school_name_entry or school_address == d_school_address_entry or date_graduated == "" or education_attainment == "Select Education Attainment":
-                    messagebox.showerror("Error", "Please fill out all fields.")
-                else:
-                    if sd1.cur_educ_list == 1:
-                        sd1.cur_educ_list += 1
-                        sd1.school_name = school_name
-                        sd1.school_address = school_address
-                        sd1.date_graduated = date_graduated
-                        sd1.educ_attainment = education_attainment
-
-                        school_name_var.set("Select your school")
-                        custom_school_entry.delete(0, "end")
-                        school_address_entry.delete(0, "end")
-                        date_graduated_entry.delete(0, "end")
-                        education_attainment_var.set("Select Education Attainment")
-
-                        
-                        # For Debugging Purposes
-                        print("School Data 1")
-                        print(sd1.school_name)
-                        print(sd1.school_address)
-                        print(sd1.date_graduated)
-                        print(sd1.educ_attainment)
-
-                        
-                    elif sd1.cur_educ_list == 2:
-                        sd1.cur_educ_list += 1
-                        sd2.school_name = school_name
-                        sd2.school_address = school_address
-                        sd2.date_graduated = date_graduated
-                        sd2.educ_attainment = education_attainment
-
-                        school_name_var.set("Select your school")
-                        custom_school_entry.delete(0, "end")
-                        school_address_entry.delete(0, "end")
-                        date_graduated_entry.delete(0, "end")
-                        education_attainment_var.set("Select Education Attainment")
-                        
-                        # For Debugging Purposes
-                        print("School Data 2")
-                        print(sd2.school_name)
-                        print(sd2.school_address)
-                        print(sd2.date_graduated)
-                        print(sd2.educ_attainment)
-                    # elif sd1.cur_educ_list == 3:
-                    #     sd3.school_name = school_name
-                    #     sd3.school_address = school_address
-                    #     sd3.date_graduated = date_graduated
-                    #     sd3.educ_attainment = education_attainment
-
-                        # school_name_entry.delete(0, "end")
-                        # school_address_entry.delete(0, "end")
-                        # date_graduated_entry.delete(0, "end")
-                        # education_attainment_var.set("Select Education Attainment")
-
-                        # For Debugging Purposes
-                        # print(sd3.school_name)
-                        # print(sd3.school_address)
-                        # print(sd3.date_graduated)
-                        # print(sd3.educ_attainment)
-
-                        
+            if custom_input_checkbox.get() == 1:
+                school_name = custom_school_entry.get()
             else:
-                # Do nothing, the user clicked 'no'
-                pass
+                school_name = school_name_var.get()
+            school_address = school_address_entry.get()
+            date_graduated = date_graduated_entry.get_date()
+            education_attainment = education_attainment_var.get()
 
+            if school_name == d_school_name_entry or school_address == d_school_address_entry or date_graduated == "" or education_attainment == "Select Education Attainment":
+                messagebox.showerror("Error", "Please fill out all fields.")
+            else:
+                if sd1.cur_educ_list == 1:
+                    sd1.cur_educ_list += 1
+                    sd1.school_name = school_name
+                    sd1.school_address = school_address
+                    sd1.date_graduated = date_graduated
+                    sd1.educ_attainment = education_attainment
 
-    def back_clicked():
-        if custom_school_entry:
-            school_name = custom_school_entry
+                    school_name_var.set("Select your school")
+                    custom_school_entry.delete(0, "end")
+                    school_address_entry.delete(0, "end")
+                    date_graduated_entry.delete(0, "end")
+                    education_attainment_var.set("Select Education Attainment")
+
+                    
+                    # For Debugging Purposes
+                    print("School Data 1")
+                    print(sd1.school_name)
+                    print(sd1.school_address)
+                    print(sd1.date_graduated)
+                    print(sd1.educ_attainment)
+
+                    
+                elif sd1.cur_educ_list == 2:
+                    sd1.cur_educ_list += 1
+                    sd2.school_name = school_name
+                    sd2.school_address = school_address
+                    sd2.date_graduated = date_graduated
+                    sd2.educ_attainment = education_attainment
+
+                    school_name_var.set("Select your school")
+                    custom_school_entry.delete(0, "end")
+                    school_address_entry.delete(0, "end")
+                    date_graduated_entry.delete(0, "end")
+                    education_attainment_var.set("Select Education Attainment")
+                    
+                    # For Debugging Purposes
+                    print("School Data 2")
+                    print(sd2.school_name)
+                    print(sd2.school_address)
+                    print(sd2.date_graduated)
+                    print(sd2.educ_attainment)
+                # elif sd1.cur_educ_list == 3:
+                #     sd3.school_name = school_name
+                #     sd3.school_address = school_address
+                #     sd3.date_graduated = date_graduated
+                #     sd3.educ_attainment = education_attainment
+
+                    # school_name_entry.delete(0, "end")
+                    # school_address_entry.delete(0, "end")
+                    # date_graduated_entry.delete(0, "end")
+                    # education_attainment_var.set("Select Education Attainment")
+
+                    # For Debugging Purposes
+                    # print(sd3.school_name)
+                    # print(sd3.school_address)
+                    # print(sd3.date_graduated)
+                    # print(sd3.educ_attainment)
+
+                    
         else:
-            school_name = school_name_var.get()
-        school_address = school_address_entry.get()
-        date_graduated = date_graduated_entry.get_date()
-        education_attainment = education_attainment_var.get()
+            # Do nothing, the user clicked 'no'
+            pass
+
+
+def back_clicked(parent):
+    if custom_school_entry:
+        school_name = custom_school_entry
+    else:
+        school_name = school_name_var.get()
+    school_address = school_address_entry.get()
+    date_graduated = date_graduated_entry.get_date()
+    education_attainment = education_attainment_var.get()
+    if sd1.cur_educ_list == 1:
+        sd1.school_name = school_name
+        sd1.school_address = school_address
+        sd1.date_graduated = date_graduated
+        sd1.educ_attainment = education_attainment
+
+        # For Debugging Purposes
+        print("School Data 1")
+        print(sd1.school_name)
+        print(sd1.school_address)
+        print(sd1.date_graduated)
+        print(sd1.educ_attainment)
+    elif sd1.cur_educ_list == 2:
+        sd2.school_name = school_name
+        sd2.school_address = school_address
+        sd2.date_graduated = date_graduated
+        sd2.educ_attainment = education_attainment
+
+        # For Debugging Purposes
+        print("School Data 2")
+        print(sd2.school_name)
+        print(sd2.school_address)
+        print(sd2.date_graduated)
+        print(sd2.educ_attainment)
+    elif sd1.cur_educ_list == 3:
+        sd3.school_name = school_name
+        sd3.school_address = school_address
+        sd3.date_graduated = date_graduated
+        sd3.educ_attainment = education_attainment
+
+        # For Debugging Purposes
+        print("School Data 3")
+        print(sd3.school_name)
+        print(sd3.school_address)
+        print(sd3.date_graduated)
+        print(sd3.educ_attainment)
+
+   
+    from __3_apply_employment import emp_main
+    emp_main(parent)
+
+def next_clicked(parent):
+    if education_attainment_var.get() == "Junior High School":
+        education_attainment_var.set("JHS")
+    elif education_attainment_var.get() == "Senior High School":
+        education_attainment_var.set("SHS")
+    elif education_attainment_var.get() == "College":
+        education_attainment_var.set("CO")
+
+    if custom_input_checkbox.get() == 1:
+        school_name = custom_school_entry.get()
+    else:
+        school_name = school_name_var.get()
+    school_address = school_address_entry.get()
+    date_graduated = date_graduated_entry.get_date()
+    education_attainment = education_attainment_var.get()
+
+    if school_name == d_school_name_entry or school_address == d_school_address_entry or date_graduated == "" or education_attainment == "Select Education Attainment":
+        messagebox.showerror("Error", "Please fill out all fields.")
+    else:
+        
         if sd1.cur_educ_list == 1:
             sd1.school_name = school_name
             sd1.school_address = school_address
@@ -141,18 +201,20 @@ def education_main():
             print(sd1.school_address)
             print(sd1.date_graduated)
             print(sd1.educ_attainment)
+
         elif sd1.cur_educ_list == 2:
             sd2.school_name = school_name
             sd2.school_address = school_address
             sd2.date_graduated = date_graduated
             sd2.educ_attainment = education_attainment
-
+            
             # For Debugging Purposes
             print("School Data 2")
             print(sd2.school_name)
             print(sd2.school_address)
             print(sd2.date_graduated)
             print(sd2.educ_attainment)
+            
         elif sd1.cur_educ_list == 3:
             sd3.school_name = school_name
             sd3.school_address = school_address
@@ -165,245 +227,192 @@ def education_main():
             print(sd3.school_address)
             print(sd3.date_graduated)
             print(sd3.educ_attainment)
-
-        window.destroy()
-        from __3_apply_employment import employment_main
-        employment_main()
-    
-    def next_clicked():
-        if education_attainment_var.get() == "Junior High School":
-            education_attainment_var.set("JHS")
-        elif education_attainment_var.get() == "Senior High School":
-            education_attainment_var.set("SHS")
-        elif education_attainment_var.get() == "College":
-            education_attainment_var.set("CO")
-
-        if custom_input_checkbox.get() == 1:
-            school_name = custom_school_entry.get()
-        else:
-            school_name = school_name_var.get()
-        school_address = school_address_entry.get()
-        date_graduated = date_graduated_entry.get_date()
-        education_attainment = education_attainment_var.get()
-
-        if school_name == d_school_name_entry or school_address == d_school_address_entry or date_graduated == "" or education_attainment == "Select Education Attainment":
-            messagebox.showerror("Error", "Please fill out all fields.")
-        else:
-            
-            if sd1.cur_educ_list == 1:
-                sd1.school_name = school_name
-                sd1.school_address = school_address
-                sd1.date_graduated = date_graduated
-                sd1.educ_attainment = education_attainment
-
-                # For Debugging Purposes
-                print("School Data 1")
-                print(sd1.school_name)
-                print(sd1.school_address)
-                print(sd1.date_graduated)
-                print(sd1.educ_attainment)
-
-            elif sd1.cur_educ_list == 2:
-                sd2.school_name = school_name
-                sd2.school_address = school_address
-                sd2.date_graduated = date_graduated
-                sd2.educ_attainment = education_attainment
-                
-                # For Debugging Purposes
-                print("School Data 2")
-                print(sd2.school_name)
-                print(sd2.school_address)
-                print(sd2.date_graduated)
-                print(sd2.educ_attainment)
-                
-            elif sd1.cur_educ_list == 3:
-                sd3.school_name = school_name
-                sd3.school_address = school_address
-                sd3.date_graduated = date_graduated
-                sd3.educ_attainment = education_attainment
-
-                # For Debugging Purposes
-                print("School Data 3")
-                print(sd3.school_name)
-                print(sd3.school_address)
-                print(sd3.date_graduated)
-                print(sd3.educ_attainment)
-            
-            # connection_database()
-            window.destroy()
-            from __5_apply_work_exp import work_experience_main
-            work_experience_main()
-
-
-
-    def display_values():
-        # School Data 1
-        if sd1.educ_attainment == "JHS":
-            sd1.educ_attainment = "Junior High School"
-        elif sd1.educ_attainment == "SHS":
-            sd1.educ_attainment = "Senior High School"
-        elif sd1.educ_attainment == "CO":
-            sd1.educ_attainment = "College"
         
-        # Schoool Data 2
-        if sd2.educ_attainment == "JHS":
-            sd2.educ_attainment = "Junior High School"
-        elif sd2.educ_attainment == "SHS":
-            sd2.educ_attainment = "Senior High School"
-        elif sd2.educ_attainment == "CO":
-            sd2.educ_attainment = "College"
+        # connection_database()
 
-        # School Data 3
-        if sd3.educ_attainment == "JHS":
-            sd3.educ_attainment = "Junior High School"
-        elif sd3.educ_attainment == "SHS":
-            sd3.educ_attainment = "Senior High School"
-        elif sd3.educ_attainment == "CO":
-            sd3.educ_attainment = "College"
+        from __5_apply_work_exp import work_experience_main
+        work_experience_main(parent)
 
-        if sd1.cur_educ_list == 1:  # Check if there are any entries in the list
-            # For Debugging Purposes
-            print("School Data 1")
-            print(sd1.school_name)
-            print(sd1.school_address)
-            print(sd1.date_graduated)
-            print(sd1.educ_attainment)
 
-            
-            # School Name
-            if sd1.school_name == d_school_name_entry or sd1.school_name == d_custom_school_entry:
-                pass
-            elif sd1.school_name != "":
-                school_name_var.set(sd1.school_name)
 
-            # School Address
-            if sd1.school_address == d_school_address_entry:
-                pass
-            elif sd1.school_address != "":
-                school_address_entry.delete(0, tk.END)
-                school_address_entry.insert(0, sd1.school_address)
-                school_address_entry.config(fg="black")
-
-            # Date Graduated
-            if sd1.date_graduated != "":
-                date_graduated_entry.set_date(sd1.date_graduated)
-
-            # Educational Attainment
-            if sd1.educ_attainment != "":
-                education_attainment_var.set(sd1.educ_attainment)
-
-        if sd1.cur_educ_list == 2:
-
-            # For Debugging Purposes
-            print("School Data 2")
-            print(sd2.school_name)
-            print(sd2.school_address)
-            print(sd2.date_graduated)
-            print(sd2.educ_attainment)
-            # School Name
-            if sd2.school_name == d_school_name_entry or sd2.school_name == d_custom_school_entry:
-                pass
-            elif sd2.school_name != "":
-                school_name_var.set(sd2.school_name)
-                custom_school_entry.insert(0, sd2.school_name)
-
-            # School Address
-            if sd2.school_address == d_school_address_entry:
-                pass
-            elif sd2.school_address != "":
-                school_address_entry.delete(0, tk.END)
-                school_address_entry.insert(0, sd2.school_address)
-                school_address_entry.config(fg="black")
-
-            # Date Graduated
-            if sd2.date_graduated != "":
-                date_graduated_entry.set_date(sd2.date_graduated)
-
-            # Educational Attainment
-            if sd2.educ_attainment != "":
-                education_attainment_var.set(sd2.educ_attainment)
-
-        if sd1.cur_educ_list == 3:
-
-            # For Debugging Purposes
-            print("School Data 3")
-            print(sd3.school_name)
-            print(sd3.school_address)
-            print(sd3.date_graduated)
-            print(sd3.educ_attainment)
-            # School Name
-            if sd3.school_name == d_school_name_entry or sd3.school_name == d_custom_school_entry:
-                pass
-            elif sd3.school_name != "":
-                school_name_var.set(sd3.school_name)
-
-            # School Address
-            if sd3.school_address == d_school_address_entry:
-                pass
-            elif sd3.school_address != "":
-                school_address_entry.delete(0, tk.END)
-                school_address_entry.insert(0, sd3.school_address)
-                school_address_entry.config(fg="black")
-
-            # Date Graduated
-            if sd3.date_graduated != "":
-                date_graduated_entry.set_date(sd3.date_graduated)
-
-            # Educational Attainment
-            if sd3.educ_attainment != "":
-                education_attainment_var.set(sd3.educ_attainment)
-
-    # # Function to update the school address entry
-    # def update_school_address(event):
-    #     selected_school = school_name_var.get()
-    #     school_address_entry.delete(0, tk.END)
-    #     school_address_entry.insert(0, school_addresses.get(selected_school, "Enter address"))
+def display_values():
+    # School Data 1
+    if sd1.educ_attainment == "JHS":
+        sd1.educ_attainment = "Junior High School"
+    elif sd1.educ_attainment == "SHS":
+        sd1.educ_attainment = "Senior High School"
+    elif sd1.educ_attainment == "CO":
+        sd1.educ_attainment = "College"
     
-    
-    def update_school_address(event):
-        def on_entry_click(event):
-            if school_address_entry.get() == "Enter address":
-                school_address_entry.delete(0, tk.END)
-                school_address_entry.config(fg='black')
+    # Schoool Data 2
+    if sd2.educ_attainment == "JHS":
+        sd2.educ_attainment = "Junior High School"
+    elif sd2.educ_attainment == "SHS":
+        sd2.educ_attainment = "Senior High School"
+    elif sd2.educ_attainment == "CO":
+        sd2.educ_attainment = "College"
 
-        def on_focus_out(event):
-            if not school_address_entry.get():
-                school_address_entry.insert(0, "Enter address")
-                school_address_entry.config(fg='gray')
-            elif school_address_entry.get() != "Enter address" or school_address_entry.get() == "":
-                school_address_entry.config(fg='black')
-        selected_school = school_name_var.get()
-        school_address_entry.delete(0, tk.END)
-        school_address_entry.insert(0, school_addresses.get(selected_school, "Enter address"))
+    # School Data 3
+    if sd3.educ_attainment == "JHS":
+        sd3.educ_attainment = "Junior High School"
+    elif sd3.educ_attainment == "SHS":
+        sd3.educ_attainment = "Senior High School"
+    elif sd3.educ_attainment == "CO":
+        sd3.educ_attainment = "College"
 
-        school_address_entry.bind("<FocusIn>", on_entry_click)
-        school_address_entry.bind("<FocusOut>", on_focus_out)
+    if sd1.cur_educ_list == 1:  # Check if there are any entries in the list
+        # For Debugging Purposes
+        print("School Data 1")
+        print(sd1.school_name)
+        print(sd1.school_address)
+        print(sd1.date_graduated)
+        print(sd1.educ_attainment)
 
-    def toggle_custom_input():
-        if custom_input_checkbox.get():
+
+        # School Name
+        if sd1.school_name == d_school_name_entry or sd1.school_name == d_custom_school_entry:
+            pass
+        elif sd1.school_name != "":
+            school_name_var.set(sd1.school_name)
+
+        # School Address
+        if sd1.school_address == d_school_address_entry:
+            pass
+        elif sd1.school_address != "":
             school_address_entry.delete(0, tk.END)
-            school_name_entry.place_forget()  # Hide the combobox
-            custom_school_entry.place(x=158.0, y=242.0, width=336.0, height=38.0)  # Place the custom entry
-        else:
-            custom_school_entry.place_forget()  # Hide the custom entry
-            school_name_entry.place(x=158.0, y=242.0, width=338.0, height=38.0)  # Place the combobox
+            school_address_entry.insert(0, sd1.school_address)
+            school_address_entry.config(fg="black")
+
+        # Date Graduated
+        if sd1.date_graduated != "":
+            date_graduated_entry.set_date(sd1.date_graduated)
+
+        # Educational Attainment
+        if sd1.educ_attainment != "":
+            education_attainment_var.set(sd1.educ_attainment)
+
+    if sd1.cur_educ_list == 2:
+
+        # For Debugging Purposes
+        print("School Data 2")
+        print(sd2.school_name)
+        print(sd2.school_address)
+        print(sd2.date_graduated)
+        print(sd2.educ_attainment)
+        # School Name
+        if sd2.school_name == d_school_name_entry or sd2.school_name == d_custom_school_entry:
+            pass
+        elif sd2.school_name != "":
+            school_name_var.set(sd2.school_name)
+            custom_school_entry.insert(0, sd2.school_name)
+
+        # School Address
+        if sd2.school_address == d_school_address_entry:
+            pass
+        elif sd2.school_address != "":
+            school_address_entry.delete(0, tk.END)
+            school_address_entry.insert(0, sd2.school_address)
+            school_address_entry.config(fg="black")
+
+        # Date Graduated
+        if sd2.date_graduated != "":
+            date_graduated_entry.set_date(sd2.date_graduated)
+
+        # Educational Attainment
+        if sd2.educ_attainment != "":
+            education_attainment_var.set(sd2.educ_attainment)
+
+    if sd1.cur_educ_list == 3:
+
+        # For Debugging Purposes
+        print("School Data 3")
+        print(sd3.school_name)
+        print(sd3.school_address)
+        print(sd3.date_graduated)
+        print(sd3.educ_attainment)
+        # School Name
+        if sd3.school_name == d_school_name_entry or sd3.school_name == d_custom_school_entry:
+            pass
+        elif sd3.school_name != "":
+            school_name_var.set(sd3.school_name)
+
+        # School Address
+        if sd3.school_address == d_school_address_entry:
+            pass
+        elif sd3.school_address != "":
+            school_address_entry.delete(0, tk.END)
+            school_address_entry.insert(0, sd3.school_address)
+            school_address_entry.config(fg="black")
+
+        # Date Graduated
+        if sd3.date_graduated != "":
+            date_graduated_entry.set_date(sd3.date_graduated)
+
+        # Educational Attainment
+        if sd3.educ_attainment != "":
+            education_attainment_var.set(sd3.educ_attainment)
+
+# # Function to update the school address entry
+# def update_school_address(event):
+#     selected_school = school_name_var.get()
+#     school_address_entry.delete(0, tk.END)
+#     school_address_entry.insert(0, school_addresses.get(selected_school, "Enter address"))
+
+
+def update_school_address(event):
+    def on_entry_click(event):
+        if school_address_entry.get() == "Enter address":
+            school_address_entry.delete(0, tk.END)
+            school_address_entry.config(fg='black')
+
+    def on_focus_out(event):
+        if not school_address_entry.get():
+            school_address_entry.insert(0, "Enter address")
+            school_address_entry.config(fg='gray')
+        elif school_address_entry.get() != "Enter address" or school_address_entry.get() == "":
+            school_address_entry.config(fg='black')
+    selected_school = school_name_var.get()
+    school_address_entry.delete(0, tk.END)
+    school_address_entry.insert(0, school_addresses.get(selected_school, "Enter address"))
+
+    school_address_entry.bind("<FocusIn>", on_entry_click)
+    school_address_entry.bind("<FocusOut>", on_focus_out)
+
+def toggle_custom_input():
+    if custom_input_checkbox.get():
+        school_address_entry.delete(0, tk.END)
+        school_name_entry.place_forget()  # Hide the combobox
+        custom_school_entry.place(x=158.0, y=242.0, width=336.0, height=38.0)  # Place the custom entry
+    else:
+        custom_school_entry.place_forget()  # Hide the custom entry
+        school_name_entry.place(x=158.0, y=242.0, width=338.0, height=38.0)  # Place the combobox
   
 
-   
-
+def education_main(parent):
+    # Global Variables
+    global school_name_entry
+    global custom_school_entry
+    global school_address_entry
+    global date_graduated_entry
+    global education_attainment_var
+    global custom_input_checkbox
+    global school_name_var
+    global school_addresses
+    
+    global d_school_address_entry
+    global d_school_name_entry
+    global d_custom_school_entry
     # --------------------------------------------------------------------------------#
     # ---------------------------------- GUI SETUP ---------------------------------- #
     # --------------------------------------------------------------------------------#
     d_school_name_entry = "Select your school"
     d_custom_school_entry = "Enter School Name"
     d_school_address_entry = "Enter School Address"
-    window = Tk()
-    window.geometry("1024x568")
-    window.configure(bg = "#CCD4D9")
+   
     fontstyle = "Montserrat"
 
     canvas = Canvas(
-        window,
+        parent,
         bg = "#CCD4D9",
         height = 568,
         width = 1024,
@@ -461,38 +470,6 @@ def education_main():
         image=image_image_6
     )
 
-    entry_image_1 = PhotoImage(
-        file=relative_to_assets("entry_1.png"))
-    entry_bg_1 = canvas.create_image(
-        696.0,
-        261.0,
-        image=entry_image_1
-    )
-
-    entry_image_2 = PhotoImage(
-        file=relative_to_assets("entry_2.png"))
-    entry_bg_2 = canvas.create_image(
-        696.0,
-        347.0,
-        image=entry_image_2
-    )
-
-    entry_image_3 = PhotoImage(
-        file=relative_to_assets("entry_3.png"))
-    entry_bg_3 = canvas.create_image(
-        327.0,
-        261.0,
-        image=entry_image_3
-    )
-
-    entry_image_4 = PhotoImage(
-        file=relative_to_assets("entry_4.png"))
-    entry_bg_4 = canvas.create_image(
-        327.0,
-        347.0,
-        image=entry_image_4
-    )
-
     image_image_7 = PhotoImage(
         file=relative_to_assets("image_7.png"))
     image_7 = canvas.create_image(
@@ -533,12 +510,47 @@ def education_main():
         image=image_image_11
     )
 
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        696.0,
+        261.0,
+        image=entry_image_1
+    )
+
+    entry_image_2 = PhotoImage(
+        file=relative_to_assets("entry_2.png"))
+    entry_bg_2 = canvas.create_image(
+        696.0,
+        347.0,
+        image=entry_image_2
+    )
+
+    entry_image_3 = PhotoImage(
+        file=relative_to_assets("entry_3.png"))
+    entry_bg_3 = canvas.create_image(
+        327.0,
+        261.0,
+        image=entry_image_3
+    )
+
+    entry_image_4 = PhotoImage(
+        file=relative_to_assets("entry_4.png"))
+    entry_bg_4 = canvas.create_image(
+        327.0,
+        347.0,
+        image=entry_image_4
+    )
+
+    
+
     # --------------------------------------------------------------------------------#
     # --------------------------------- ENTRY SETUP --------------------------------- #
     # --------------------------------------------------------------------------------#
                             # "Ateneo de Manila University",
                            
-                            # "Far Eastern University",
+                            # "Far Eastern Univers
+                            # ity",
                             # "Polytechnic University of the Philippines",
                             # "Polytechnic University of the Philippines-San Juan",
                             # "Polytechnic University of the Philippines-Parañaque",
@@ -925,7 +937,7 @@ def education_main():
     school_name_var.set("Select your school")
 
     school_name_entry = ttk.Combobox(
-        window,
+        parent,
         textvariable=school_name_var,
         values=school_name_options,
         font= ("Montserrat", 12),
@@ -942,7 +954,7 @@ def education_main():
 
     custom_input_checkbox = tk.BooleanVar()
     not_listed_checkbox = tk.Checkbutton(
-        window,
+        parent,
         text="School not listed?",
         font=("Montserrat", 10),
         bg="#ccd4d9",
@@ -970,374 +982,373 @@ def education_main():
     custom_school_entry.place_forget()
 
     school_addresses = {
-                            "University of the Philippines Diliman": "Diliman, Quezon City",
-                            "De La Salle University Manila": "Malate, Manila",
-                            "Ateneo de Manila University": "Katipunan Ave, Quezon City",
-                            "University of Santo Tomas": "Sampaloc, Manila",
-                            "Mindanao State University Iligan Institute of Technology": "Iligan City, Lanao del Norte",
-                            "University of San Carlos": "Cebu City",
-                            "Mapua Institute of Technology": "Intramuros, Manila",
-                            "Visayas State University": "Baybay City, Leyte",
-                            "Mindanao State University Marawi City": "Marawi City, Lanao del Sur",
-                            "Central Mindanao University": "Musuan, Bukidnon",
-                            "Cebu Technological University": "Cebu City",
-                            "Central Luzon State University": "Science City of Muñoz, Nueva Ecija",
-                            "Far Eastern University Philippines": "Sampaloc, Manila",
-                            "University of the Philippines": "Ermita, Manila",
-                            "Batangas State University": "Batangas City, Batangas",
-                            "University of Southern Mindanao": "Kabacan, Cotabato",
-                            "West Visayas State University": "La Paz, Iloilo City",
-                            "Silliman University": "Dumaguete City, Negros Oriental",
-                            "University of the Philippines Visayas": "Iloilo City, Iloilo",
-                            "Polytechnic University of the Philippines": "Sta. Mesa, Manila",
-                            "Centro Escolar University Manila Mendiola": "San Miguel, Manila",
-                            "Adamson University": "Ermita, Manila",
-                            "Technological University of the Philippines": "Ermita, Manila",
-                            "University of the East": "Sampaloc, Manila",
-                            "National University Philippines": "Sampaloc, Manila",
-                            "Ateneo de Davao University": "Davao City",
-                            "University of Science and Technology of Southern Philippines USTP": "Cagayan de Oro City",
-                            "Pangasinan State University": "Lingayen, Pangasinan",
-                            "University of San Jose Recoletos": "Cebu City",
-                            "Western Mindanao State University": "Zamboanga City",
-                            "Isabela State University": "Cauayan City, Isabela",
-                            "Asian Institute of Management": "Makati City",
-                            "Cavite State University": "Indang, Cavite",
-                            "Jose Rizal University": "Mandaluyong City",
-                            "Holy Angel University": "Angeles City, Pampanga",
-                            "Fatima University": "Valenzuela City",
-                            "Angeles University Foundation": "Angeles City, Pampanga",
-                            "University of the Philippines Mindanao": "Mintal, Davao City",
-                            "Benguet State University": "La Trinidad, Benguet",
-                            "Bulacan State University": "Malolos City, Bulacan",
-                            "Saint Louis University Baguio City": "Baguio City",
-                            "Caraga State University": "Butuan City",
-                            "Lyceum of the Philippines University": "Intramuros, Manila",
-                            "Cebu Normal University": "Cebu City",
-                            "Nueva Ecija University of Science and Technology": "Cabanatuan City, Nueva Ecija",
-                            "Xavier University Ateneo de Cagayan": "Cagayan de Oro City",
-                            "Asia Pacific College": "Makati City",
-                            "Cagayan State University": "Tuguegarao City, Cagayan",
-                            "University of the Philippines Cebu": "Cebu City",
-                            "Emilio Aguinaldo College": "Ermita, Manila",
-                            "Don Mariano Marcos Memorial State University": "San Fernando City, La Union",
-                            "University of Mindanao": "Davao City",
-                            "Saint Mary’s University of Bayombong": "Bayombong, Nueva Vizcaya",
-                            "Adventist University of the Philippines": "Silang, Cavite",
-                            "Cebu Institute of Technology": "Cebu City",
-                            "Samar State University": "Catbalogan City, Samar",
-                            "Bicol University": "Legazpi City, Albay",
-                            "Mariano Marcos State University": "Batac City, Ilocos Norte",
-                            "University of Asia and the Pacific": "Pasig City",
-                            "Bataan Peninsula State University": "Balanga City, Bataan",
-                            "University of the Philippines Baguio": "Baguio City",
-                            "Manila Central University": "Caloocan City",
-                            "Mindanao State University General Santos": "General Santos City",
-                            "University of Southeastern Philippines": "Davao City",
-                            "Philippine Normal University": "Manila City",
-                            "Ateneo de Zamboanga University": "Zamboanga City",
-                            "San Beda University": "Mendiola, Manila",
-                            "Leyte Normal University": "Tacloban City, Leyte",
-                            "University of the Philippines Manila": "Ermita, Manila",
-                            "Lyceum of the Philippines University Batangas": "Batangas City, Batangas",
-                            "Central Philippine University": "Jaro, Iloilo City",
-                            "Tarlac State University":"Tarlac City, Tarlac",
-                            "Far Eastern University East Asia College": "Sampaloc, Manila",
-                            "University of the Cordilleras (Baguio Colleges Foundation)": "Baguio City",
-                            "Universidad de Zamboanga": "Zamboanga City",
-                            "Occidental Mindoro State College": "San Jose, Occidental Mindoro",
-                            "Malayan Colleges Laguna": "Cabuyao, Laguna",
-                            "Eastern Visayas State University": "Tacloban City, Leyte",
-                            "Sacred Heart College Lucena City": "Lucena City, Quezon",
-                            "System Technology Institute": "Cubao, Quezon City",
-                            "Technological Institute of the Philippines": "Cubao, Quezon City",
-                            "De La Salle University Dasmariñas": "Dasmariñas City, Cavite",
-                            "De La Salle Health Sciences Institute": "Dasmariñas City, Cavite",
-                            "Far Eastern University Institute of Medicine": "Sampaloc, Manila",
-                            "University of the Immaculate Conception": "Davao City",
-                            "Adventist International Institute of Advanced Studies": "Silang, Cavite",
-                            "Arellano University": "Sampaloc, Manila",
-                            "University of Batangas": "Batangas City, Batangas",
-                            "University of San Agustin": "Iloilo City",
-                            "Southern Luzon State University (Polytechnic College)": "Lucban, Quezon",
-                            "De La Salle Lipa": "Lipa City, Batangas",
-                            "Rizal Technological University": "Mandaluyong City",
-                            "MSC Institute of Technology": "Cainta, Rizal",
-                            "Aklan State University": "Banga, Aklan",
-                            "Philippine Christian University": "Manila City",
-                            "De La Salle College of Saint Benilde": "Malate, Manila",
-                            "University of Bohol": "Tagbilaran City, Bohol",
-                            "Miriam College": "Quezon City",
-                            "De La Salle Araneta University:": "Malabon City",
-                            "University of Eastern Philippines:": "Catarman, Northern Samar",
-                            "San Sebastian College Recoletos de Cavite": "Cavite City, Cavite",
-                            "University of Perpetual Help System Dalta": "Las Piñas City",
-                            "St Scholastica’s College": "Malate, Manila",
-                            "Bicol Christian College of Medicine AMEC BCCM": "Legazpi City, Albay",
-                            "Romblon State University": "Odiongan, Romblon",
-                            "University of Saint Louis Tuguegarao": "Tuguegarao City, Cagayan",
-                            "University of the City of Manila": "Intramuros, Manila",
-                            "University of Baguio": "Baguio City",
-                            "University of Saint La Salle Bacolod": "Bacolod City, Negros Occidental",
-                            "Southern Leyte State University": "Sogod, Southern Leyte",
-                            "Surigao State College of Technology": "Surigao City",
-                            "University of Negros Occidental Recoletos": "Bacolod City",
-                            "Philippine Women’s University": "Malate, Manila",
-                            "Ateneo de Naga University": "Naga City, Camarines Sur",
-                            "AMA Computer College Tuguegarao": "Tuguegarao City",
-                            "Palawan State University": "Puerto Princesa",
-                            "Liceo de Cagayan University": "Cagayan de Oro City",
-                            "National Defense College of the Philippines": "Quezon City",
-                            "University of Northern Philippines": "Vigan City, Ilocos Sur",
-                            "Central Bicol State University of Agriculture": "Pili, Camarines Sur",
-                            "Nueva Vizcaya State University": "Bayombong, Nueva Vizcaya",
-                            "AMA Computer University": "Quezon City, Metro Manila",
-                            "University of Cebu": "Cebu City, Cebu",
-                            "University of the East Ramon Magsaysay": "Quezon City, Metro Manila",
-                            "Ifugao State University": "Nayon, Lamut, Ifugao",
-                            "Laguna State Polytechnic University": "Santa Cruz, Laguna",
-                            "Cebu Doctors’ University": "Mandaue City, Cebu",
-                            "Bukidnon State University": "Malaybalay City, Bukidnon",
-                            "Trinity University of Asia (Trinity College of Quezon City)": "Quezon City, Metro Manila",
-                            "Information and Communications Technology Academy": "Bacolod City, Negros Occidental",
-                            "Holy Name University": "Tagbilaran City, Bohol",
-                            "New Era University": "Quezon City, Metro Manila",
-                            "University of Nueva Caceres": "Naga City, Camarines Sur",
-                            "Eulogio Amang Rodríguez Institute of Science and Technology": "Manila City, Metro Manila",
-                            "Northwestern University Laoag City": "Laoag City, Ilocos Norte",
-                            "University of Rizal System": "Morong, Rizal",
-                            "Saint Paul University Philippines": "Tuguegarao City, Cagayan",
-                            "University of the Assumption": "San Fernando City, Pampanga",
-                            "University of Luzon": "Dagupan City, Pangasinan",
-                            "Philippine Military Academy": "Baguio City, Benguet",
-                            "Kalayaan College": "Quezon City, Metro Manila",
-                            "University of Perpetual Help System Laguna": "Biñan City, Laguna",
-                            "John B Lacson Foundation Maritime University": "Iloilo City, Iloilo",
-                            "Eastern Samar State University": "Borongan City, Eastern Samar",
-                            "University of the Visayas": "Cebu City, Cebu",
-                            "Bohol Island State University (Central Visayas State College of Agriculture)": "Tagbilaran City, Bohol",
-                            "Southwestern University Cebu Philippines": "Cebu City, Cebu",
-                            "Camarines Sur Polytechnic Colleges": "Naga City, Camarines Sur",
-                            "Foundation University": "Dumaguete City, Negros Oriental",
-                            "Saint Paul University Manila": "Manila City, Metro Manila",
-                            "Davao del Norte State College": "Panabo City, Davao del Norte",
-                            "San Sebastian College Manila": "Manila City, Metro Manila",
-                            "Negros Oriental State University (Central Visayas Polytechnic College)": "Dumaguete City, Negros Oriental",
-                            "Salazar Colleges of Science and Institute of Technology": "Zamboanga City, Zamboanga del Sur",
-                            "Asian Institute of Journalism and Communication": "Quezon City, Metro Manila",
-                            "Biliran Province State University": "Naval, Biliran",
-                            "San Carlos College": "San Carlos City, Pangasinan",
-                            "University of Makati": "Makati City, Metro Manila",
-                            "Informatics Computer Institute": "Quezon City, Metro Manila",
-                            "Aldersgate College": "Solano, Nueva Vizcaya",
-                            "Misamis University": "Ozamiz City, Misamis Occidental",
-                            "Chiang Kai Shek College": "Manila City, Metro Manila",
-                            "Mindanao State University at Naawan": "Naawan, Misamis Oriental",
-                            "Manuel S Enverga University": "Lucena City, Quezon",
-                            "Philippine Merchant Marine Academy": "San Narciso, Zambales",
-                            "National Teachers College Philippines": "Manila City, Metro Manila",
-                            "Capitol University": "Cagayan de Oro City, Misamis Oriental",
-                            "Holy Cross of Davao College": "Davao City, Davao del Sur",
-                            "Lyceum Northwestern University": "Dagupan City, Pangasinan",
-                            "La Consolacion College Bacolod": "Bacolod City, Negros Occidental",
-                            "La Salle University Ozamiz": "Ozamiz City, Misamis Occidental",
-                            "Wesleyan University Philippines": "Cabanatuan City, Nueva Ecija",
-                            "Universidad de Santa Isabel": "Naga City, Camarines Sur",
-                            "Saint Joseph Institute of Technology": "Butuan City, Agusan del Norte",
-                            "Jose Rizal Memorial State University": "Dapitan City, Zamboanga del Norte",
-                            "Colegio de San Juan de Letran": "Manila City, Metro Manila",
-                            "Davao Medical School Foundation": "Davao City, Davao del Sur",
-                            "Maritime Academy of Asia and the Pacific Kamaya Point": "Mariveles, Bataan",
-                            "Notre Dame of Marbel University": "Koronadal City, South Cotabato",
-                            "Central Colleges of the Philippines": "Quezon City, Metro Manila",
-                            "Surigao del Sur State University": "Tandag City, Surigao del Sur",
-                            "Western Philippines University": "Aborlan, Palawan",
-                            "Philippine School of Business Administration": "Quezon City, Metro Manila",
-                            "Feati University": "Manila City, Metro Manila",
-                            "Virgen Milagrosa University Foundation": "San Carlos City, Pangasinan",
-                            "Urdaneta City University": "Urdaneta City, Pangasinan",
-                            "University of Cebu": "Cebu City, Cebu",
-                            "Quirino State University": "Diffun, Quirino",
-                            "Jose Maria College": "Davao City, Davao del Sur",
-                            "Cebu Institute of Medicine": "Cebu City, Cebu",
-                            "Notre Dame of Dadiangas University": "General Santos City, South Cotabato",
-                            "Asian Institute of Maritime Studies": "Pasay City, Metro Manila",
-                            "Tarlac Agricultural University": "Camarines Norte",
-                            "St. Paul University Quezon City": "Quezon City, Metro Manila",
-                            "University of Sto Tomas Legazpi Bicol Dominican University": "Legazpi City, Albay",
-                            "Iloilo Science and Technology University (Western Visayas College of Science & Technology)": "Iloilo City, Iloilo",
-                            "Davao Doctors College": "Davao City, Davao del Sur",
-                            "Divine Word College of Legazpi": "Legazpi City, Albay",
-                            "Cotabato Foundation College of Science and Technology": "Datu Odin Sinsuat, Maguindanao",
-                            "Saint Paul University Pasig": "Pasig City, Metro Manila",
-                            "Philippine National Police Academy": "Silang, Cavite",
-                            "Asian College of Technology": "Cebu City, Cebu",
-                            "First Asia Institute of Technology and Humanities": "Batangas",
-                            "Partido State University": "Camarines Sur",
-                            "Father Saturnino Urios University": "Butuan City, Agusan del Norte",
-                            "National College of Business and Arts NCBA": "Quezon City, Metro Manila",
-                            "Camarines Norte State College": "Daet, Camarines Norte",
-                            "Abe International Business College": "Quezon City, Metro Manila",
-                            "Riverside College": "Bacolod City, Negros Occidental",
-                            "Saint Michael’s College of Laguna": "Laguna",
-                            "Mountain View College Philippines": "Bukidnon",
-                            "Ilocos Sur Polytechnic State College": "Ilocos Sur",
-                            "Filamer Christian University": "Roxas City, Capiz",
-                            "Colegio San Agustin Bacolod": "Bacolod City, Negros Occidental",
-                            "University of Manila": "Manila City, Metro Manila",
-                            "Saint Louis College": "San Fernando City, La Union",
-                            "College of Development Communication": "Los Baños, Laguna",
-                            "Saint Paul University Dumaguete": "Dumaguete City, Negros Oriental",
-                            "St Paul University Iloilo": "Iloilo City, Iloilo",
-                            "Asian Theological Seminary Philippines": "Quezon City, Metro Manila",
-                            "Sorsogon State College": "Sorsogon City, Sorsogon",
-                            "College of the Holy Spirit": "Manila City, Metro Manila",
-                            "St Paul University Surigao": "Surigao City, Surigao del Norte",
-                            "Far Eastern University Cavite": "Silang, Cavite",
-                            "Central Philippine Adventist College": "Murcia, Negros Occidental",
-                            "La Consolacion University Philippines": "Malolos City, Bulacan",
-                            "PATTS College of Aeronautics": "Pasay City, Metro Manila",
-                            "ICCT Colleges": "San Mateo, Rizal",
-                            "University of Iloilo": "Iloilo City, Iloilo",
-                            "Sultan Kudarat State University": "Tacurong City, Sultan Kudarat",
-                            "Baguio Central University": "Baguio City, Benguet",
-                            "Capiz State University": "Roxas City, Capiz",
-                            "Southwestern University PHINMA": "Cebu City, Cebu",
-                            "Don Honorio Ventura State University DHVSU": "Bacolor, Pampanga",
-                            "Guimaras State College": "Jordan, Guimaras",
-                            "Zamboanga State College of Marine Sciences and Technology": "Zamboanga City, Zamboanga del Sur",
-                            "Asian Social Institute Manila": "Manila City, Metro Manila",
-                            "St Joseph’s College Quezon City": "Quezon City, Metro Manila",
-                            "Mindanao State University": "Marawi City, Lanao del Sur",
-                            "Pasig Catholic College": "Pasig City, Metro Manila",
-                            "Pampanga State Agricultural University": "Magalang, Pampanga",
-                            "Brokenshire College": "Davao City, Davao del Sur",
-                            "Center for Industrial Technology and Enterprise": "San Isidro, Nueva Ecija",
-                            "Saint Francis of Assisi College Cavite": "Dasmariñas, Cavite",
-                            "Aurora State College of Technology": "Baler, Aurora",
-                            "Colegio de Dagupan": "Dagupan City, Pangasinan",
-                            "Tarlac Agricultural University": "Camarines Norte",
-                            "Lorma Colleges MacArthur": "Carlatan, San Fernando City, La Union",
-                            "Manila Business College": "Quezon City, Metro Manila",
-                            "Northwest Samar State University": "Calbayog City, Samar",
-                            "International Graduate School of Leadership (International School of Theology Asia)": "Quezon City, Metro Manila",
-                            "Iloilo Doctors’ College": "Iloilo City, Iloilo",
-                            "University of Antique (Polytechnic State College of Antique)": "Sibalom, Antique",
-                            "Calayan Educational Foundation": "Lucena City, Quezon",
-                            "Southeast Asia Interdisciplinary Development Institute": "Quezon City, Metro Manila",
-                            "Technological Research for Advanced Computer Education College": "San Juan, Metro Manila",
-                            "University of Pangasinan": "Dagupan City, Pangasinan",
-                            "Philippine College of Criminology": "Manila City, Metro Manila",
-                            "Saint Luke’s College of Medicine": "Quezon City, Metro Manila",
-                            "Carlos Hilado Memorial State College": "Talisay City, Negros Occidental",
-                            "BIT International College": "Tacloban City, Leyte",
-                            "Notre Dame University Cotabato": "Cotabato City, Maguindanao",
-                            "Saint Jude College": "Manila City, Metro Manila",
-                            "Southville SISFU": "Las Piñas City, Metro Manila",
-                            "University of Cagayan Valley": "Tuguegarao City, Cagayan",
-                            "Iligan Computer Institute": "Iligan City, Lanao del Norte",
-                            "Bicol State College of Applied Sciences and Technology": "Naga City, Camarines Sur",
-                            "Palompon Institute of Technology": "Palompon, Leyte",
-                            "Bulacan Agricultural State College": "San Ildefonso, Bulacan",
-                            "National College of Science and Technology": "Dasmariñas, Cavite",
-                            "Naga College Foundation": "Naga City, Camarines Sur",
-                            "St Paul College of Ilocos Sur": "Bantay, Ilocos Sur",
-                            "Northern Luzon Adventist College": "Artacho, Sison, Pangasinan",
-                            "University of Saint Anthony Iriga City": "Iriga City, Camarines Sur",
-                            "NYK-TDG Maritime Academy": "Canlubang, Calamba City, Laguna",
-                            "PanPacific University North Philippines": "Urdaneta City, Pangasinan",
-                            "St Augustine School of Nursing": "Quezon City, Metro Manila",
-                            "Alliance Graduate School": "Quezon City, Metro Manila",
-                            "St Louis College Valenzuela": "Valenzuela City, Metro Manila",
-                            "Southern Philippines Agri Business and Marine and Aquatic School of Technology": "Malita, Davao Occidental",
-                            "Araullo University": "Cabanatuan City, Nueva Ecija",
-                            "MHAM College of Medicine": "Cebu City, Cebu",
-                            "Northern Negros State College of Science & Technology": "Sagay City, Negros Occidental",
-                            "Bestlink College of the Philippines": "Quezon City, Metro Manila",
-                            "University of La Salette": "Santiago City, Isabela",
-                            "Western Institute of Technology": "Iloilo City, Iloilo",
-                            "University of Northeastern Philippines": "Iriga City, Camarines Sur",
-                            "Holy Trinity University Philippines": "Puerto Princesa City, Palawan",
-                            "Iligan Medical Center College": "Iligan City, Lanao del Norte",
-                            "Don Bosco College": "Canlubang, Calamba City, Laguna",
-                            "Cebu Aeronautical Technical School (Computer Arts and Technological College Legazpi City)": "Legazpi City, Albay",
-                            "University of Caloocan City": "Caloocan City, Metro Manila",
-                            "Columban College": "Olongapo City, Zambales",
-                            "Siena College of Taytay": "Taytay, Rizal",
-                            "Catanduanes State University": "Virac, Catanduanes",
-                            "San Pedro College of Business Administration": "San Pedro City, Laguna",
-                            "Samson College of Science and Technology": "Calamba City, Laguna",
-                            "President Ramon Magsaysay State University": "Iba, Zambales",
-                            "Dipolog Medical Center College Foundation": "Dipolog City, Zamboanga del Norte",
-                            "Comteq Computer and Business College": "Iligan City, Lanao del Norte",
+                                                        "Abe International Business College": "Quezon City, Metro Manila",
                             "Abra State Institute of Science and Technology": "Lagangilang, Abra",
-                            "Agusan Del Sur College": "San Francisco, Agusan del Sur",
-                            "Colegio de Sta Catalina de Alejandria": "Pamplona, Camarines Sur",
-                            "Saint Joseph College Maasin": "Maasin City, Southern Leyte",
-                            "Notre Dame of Kidapawan College": "Kidapawan City, Cotabato",
-                            "PLT College": "Butuan City, Agusan del Norte",
-                            "Guagua National Colleges Pampanga": "Guagua, Pampanga",
-                            "Je Mondejar Computer College": "Tagbilaran City, Bohol",
-                            "Republic Central Colleges": "Quezon City, Metro Manila",
-                            "St Marys College": "Tagum City, Davao del Norte",
-                            "Don Honorio Ventura Technological State University": "Bacolor, Pampanga",
-                            "Mindanao State University Tawi-Tawi College of Technology and Oceanography": "Bongao, Tawi-Tawi",
-                            "Northeastern college": "Santiago City, Isabela",
-                            "San Pablo Colleges San Pablo City Laguna": "San Pablo City, Laguna",
-                            "Universidad Aldersgate": "Solano, Nueva Vizcaya",
-                            "Baguio College of Technology": "Baguio City, Benguet",
-                            "The Lewis College": "Sorsogon City, Sorsogon",
-                            "Mater Dei College Bohol": "Tubigon, Bohol",
-                            "Basilan State College": "Isabela City, Basilan",
-                            "Saint Ferdinand College": "Urdaneta City, Pangasinan",
-                            "Siquijor State College": "Siquijor, Siquijor",
-                            "DMMA College of Southern Philippines": "Davao City, Davao del Sur",
-                            "Rogationist College": "Tagaytay City, Cavite",
-                            "Southern City Colleges": "Zamboanga City, Zamboanga del Sur",
-                            "Tanchuling College": "Tagum City, Davao del Norte",
-                            "Lipa City Colleges": "Lipa City, Batangas",
-                            "CAP College Foundation": "Dasmariñas, Cavite",
-                            "Our Lady of the Pillar College Cauayan": "Cauayan City, Isabela",
-                            "La Patria College": "Batac City, Ilocos Norte",
-                            "Computer Arts and Technology CAT College Polangui": "Polangui, Albay",
-                            "Davao del Sur State College": "Digos City, Davao del Sur",
-                            "Mountain Province State Polytechnic College": "Bontoc, Mountain Province",
-                            "Inspire Sports Academy": "Calamba City, Laguna",
-                            "Philippine College of Ministry": "Quezon City, Metro Manila",
-                            "Calayan Educational Foundation": "Lucena City, Quezon",
-                            "College of Technological Sciences Cebu": "Cebu City, Cebu",
-                            "ACTS Computer College Sta Cruz": "Sta. Cruz, Laguna",
-                            "San Isidro College": "Malaybalay City, Bukidnon",
-                            "Manuel L Quezon University": "Quiapo, Manila City, Metro Manila",
-                            "St Vincent’s College": "Dipolog City, Zamboanga del Norte",
-                            "San Antonio de Padua College": "Roxas City, Capiz",
-                            "Batanes State College": "Basco, Batanes",
-                            "Binangonan Catholic College": "Binangonan, Rizal",
-                            "St Nicolas College of Business and Technology": "San Nicolas, Ilocos Norte",
-                            "Southway College of Technology": "San Fernando City, La Union",
-                            "Metro Dumaguete College": "Dumaguete City, Negros Oriental",
-                            "Fernandez College of Arts and Technology": "Baliuag, Bulacan",
-                            "F L Vargas College": "Pamplona, Cagayan",
-                            "Benedicto College": "Mandaue City, Cebu",
-                            "City College of Angeles": "Angeles City, Pampanga",
-                            "Western Leyte College of Ormoc City": "Ormoc City, Leyte",
-                            "Colegio de San Pedro": "San Pedro City, Laguna",
-                            "St Cecilia’s College Cebu": "Cebu City, Cebu",
-                            "Microcity College of Business and Technology": "San Fernando City, La Union",
                             "ACLC College of Butuan": "Butuan City, Agusan del Norte",
-                            "Negros College": "Kabankalan City, Negros Occidental",
-                            "Marian College": "Tagum City, Davao del Norte",
-                            "Mindoro State University": "Calapan City, Oriental Mindoro",
-                            "Norzagaray College": "Norzagaray, Bulacan",
-                            "Holy Child Colleges of Butuan": "Butuan City, Agusan del Norte",
-                            "Systems Plus Computer College Quezon City": "Quezon City, Metro Manila",
-                            "Zamboanga Peninsula Polytechnic State University": "Dipolog City, Zamboanga del Norte",
-                            "Ilocos Sur Community College": "Candon City, Ilocos Sur",
-                            "Gingoog City Colleges": "Gingoog City, Misamis Oriental",
+                            "ACTS Computer College Sta Cruz": "Sta. Cruz, Laguna",
+                            "Adamson University": "Ermita, Manila",
+                            "Adventist International Institute of Advanced Studies": "Silang, Cavite",
+                            "Adventist University of the Philippines": "Silang, Cavite",
+                            "Agusan Del Sur College": "San Francisco, Agusan del Sur",
+                            "Aklan State University": "Banga, Aklan",
+                            "Aldersgate College": "Solano, Nueva Vizcaya",
+                            "Alliance Graduate School": "Quezon City, Metro Manila",
+                            "AMA Computer College Tuguegarao": "Tuguegarao City",
+                            "AMA Computer University": "Quezon City, Metro Manila",
+                            "Angeles University Foundation": "Angeles City, Pampanga",
+                            "Araullo University": "Cabanatuan City, Nueva Ecija",
+                            "Arellano University": "Sampaloc, Manila",
+                            "Asia Pacific College": "Makati City",
+                            "Asian College of Technology": "Cebu City, Cebu",
+                            "Asian Institute of Journalism and Communication": "Quezon City, Metro Manila",
+                            "Asian Institute of Management": "Makati City",
+                            "Asian Institute of Maritime Studies": "Pasay City, Metro Manila",
+                            "Asian Social Institute Manila": "Manila City, Metro Manila",
+                            "Asian Theological Seminary Philippines": "Quezon City, Metro Manila",
+                            "Ateneo de Davao University": "Davao City",
+                            "Ateneo de Manila University": "Katipunan Ave, Quezon City",
+                            "Ateneo de Naga University": "Naga City, Camarines Sur",
+                            "Ateneo de Zamboanga University": "Zamboanga City",
+                            "Aurora State College of Technology": "Baler, Aurora",
+                            "Baguio Central University": "Baguio City, Benguet",
+                            "Baguio College of Technology": "Baguio City, Benguet",
+                            "Basilan State College": "Isabela City, Basilan",
+                            "Bataan Peninsula State University": "Balanga City, Bataan",
+                            "Batanes State College": "Basco, Batanes",
+                            "Batangas State University": "Batangas City, Batangas",
+                            "Benedicto College": "Mandaue City, Cebu",
+                            "Benguet State University": "La Trinidad, Benguet",
+                            "Bestlink College of the Philippines": "Quezon City, Metro Manila",
+                            "Bicol Christian College of Medicine AMEC BCCM": "Legazpi City, Albay",
+                            "Bicol State College of Applied Sciences and Technology": "Naga City, Camarines Sur",
+                            "Bicol University": "Legazpi City, Albay",
+                            "Biliran Province State University": "Naval, Biliran",
+                            "Binangonan Catholic College": "Binangonan, Rizal",
+                            "BIT International College": "Tacloban City, Leyte",
+                            "Bohol Island State University (Central Visayas State College of Agriculture)": "Tagbilaran City, Bohol",
+                            "Brokenshire College": "Davao City, Davao del Sur",
+                            "Bukidnon State University": "Malaybalay City, Bukidnon",
+                            "Bulacan Agricultural State College": "San Ildefonso, Bulacan",
+                            "Bulacan State University": "Malolos City, Bulacan",
+                            "Cagayan State University": "Tuguegarao City, Cagayan",
+                            "Calayan Educational Foundation": "Lucena City, Quezon",
+                            "Calayan Educational Foundation": "Lucena City, Quezon",
+                            "Camarines Norte State College": "Daet, Camarines Norte",
+                            "Camarines Sur Polytechnic Colleges": "Naga City, Camarines Sur",
+                            "CAP College Foundation": "Dasmariñas, Cavite",
+                            "Capitol University": "Cagayan de Oro City, Misamis Oriental",
+                            "Capiz State University": "Roxas City, Capiz",
+                            "Caraga State University": "Butuan City",
+                            "Carlos Hilado Memorial State College": "Talisay City, Negros Occidental",
+                            "Catanduanes State University": "Virac, Catanduanes",
+                            "Cavite State University": "Indang, Cavite",
+                            "Cebu Aeronautical Technical School (Computer Arts and Technological College Legazpi City)": "Legazpi City, Albay",
+                            "Cebu Doctors’ University": "Mandaue City, Cebu",
+                            "Cebu Institute of Medicine": "Cebu City, Cebu",
+                            "Cebu Institute of Technology": "Cebu City",
+                            "Cebu Normal University": "Cebu City",
+                            "Cebu Technological University": "Cebu City",
+                            "Center for Industrial Technology and Enterprise": "San Isidro, Nueva Ecija",
+                            "Central Bicol State University of Agriculture": "Pili, Camarines Sur",
+                            "Central Colleges of the Philippines": "Quezon City, Metro Manila",
+                            "Central Luzon State University": "Science City of Muñoz, Nueva Ecija",
+                            "Central Mindanao University": "Musuan, Bukidnon",
+                            "Central Philippine Adventist College": "Murcia, Negros Occidental",
+                            "Central Philippine University": "Jaro, Iloilo City",
+                            "Centro Escolar University Manila Mendiola": "San Miguel, Manila",
+                            "Chiang Kai Shek College": "Manila City, Metro Manila",
+                            "City College of Angeles": "Angeles City, Pampanga",
+                            "Colegio de Dagupan": "Dagupan City, Pangasinan",
+                            "Colegio de San Juan de Letran": "Manila City, Metro Manila",
+                            "Colegio de San Pedro": "San Pedro City, Laguna",
+                            "Colegio de Sta Catalina de Alejandria": "Pamplona, Camarines Sur",
+                            "Colegio San Agustin Bacolod": "Bacolod City, Negros Occidental",
+                            "College of Development Communication": "Los Baños, Laguna",
+                            "College of Technological Sciences Cebu": "Cebu City, Cebu",
+                            "College of the Holy Spirit": "Manila City, Metro Manila",
+                            "Columban College": "Olongapo City, Zambales",
+                            "Computer Arts and Technology CAT College Polangui": "Polangui, Albay",
+                            "Comteq Computer and Business College": "Iligan City, Lanao del Norte",
+                            "Cotabato Foundation College of Science and Technology": "Datu Odin Sinsuat, Maguindanao",
+                            "Davao del Norte State College": "Panabo City, Davao del Norte",
+                            "Davao del Sur State College": "Digos City, Davao del Sur",
+                            "Davao Doctors College": "Davao City, Davao del Sur",
+                            "Davao Medical School Foundation": "Davao City, Davao del Sur",
+                            "De La Salle Araneta University:": "Malabon City",
+                            "De La Salle College of Saint Benilde": "Malate, Manila",
+                            "De La Salle Health Sciences Institute": "Dasmariñas City, Cavite",
+                            "De La Salle Lipa": "Lipa City, Batangas",
+                            "De La Salle University Dasmariñas": "Dasmariñas City, Cavite",
+                            "De La Salle University Manila": "Malate, Manila",
+                            "Dipolog Medical Center College Foundation": "Dipolog City, Zamboanga del Norte",
+                            "Divine Word College of Legazpi": "Legazpi City, Albay",
+                            "DMMA College of Southern Philippines": "Davao City, Davao del Sur",
+                            "Don Bosco College": "Canlubang, Calamba City, Laguna",
+                            "Don Honorio Ventura State University DHVSU": "Bacolor, Pampanga",
+                            "Don Honorio Ventura Technological State University": "Bacolor, Pampanga",
+                            "Don Mariano Marcos Memorial State University": "San Fernando City, La Union",
                             "Dr Aurelio Mendoza Memorial College": "Ozamiz City, Misamis Occidental",
+                            "Eastern Samar State University": "Borongan City, Eastern Samar",
+                            "Eastern Visayas State University": "Tacloban City, Leyte",
+                            "Emilio Aguinaldo College": "Ermita, Manila",
+                            "Eulogio Amang Rodríguez Institute of Science and Technology": "Manila City, Metro Manila",
+                            "F L Vargas College": "Pamplona, Cagayan",
+                            "Far Eastern University Cavite": "Silang, Cavite",
+                            "Far Eastern University East Asia College": "Sampaloc, Manila",
+                            "Far Eastern University Institute of Medicine": "Sampaloc, Manila",
+                            "Far Eastern University Philippines": "Sampaloc, Manila",
+                            "Father Saturnino Urios University": "Butuan City, Agusan del Norte",
+                            "Fatima University": "Valenzuela City",
+                            "Feati University": "Manila City, Metro Manila",
+                            "Fernandez College of Arts and Technology": "Baliuag, Bulacan",
+                            "Filamer Christian University": "Roxas City, Capiz",
+                            "First Asia Institute of Technology and Humanities": "Batangas",
+                            "Foundation University": "Dumaguete City, Negros Oriental",
+                            "Gingoog City Colleges": "Gingoog City, Misamis Oriental",
+                            "Guagua National Colleges Pampanga": "Guagua, Pampanga",
+                            "Guimaras State College": "Jordan, Guimaras",
+                            "Holy Angel University": "Angeles City, Pampanga",
+                            "Holy Child Colleges of Butuan": "Butuan City, Agusan del Norte",
+                            "Holy Cross of Davao College": "Davao City, Davao del Sur",
+                            "Holy Name University": "Tagbilaran City, Bohol",
+                            "Holy Trinity University Philippines": "Puerto Princesa City, Palawan",
+                            "ICCT Colleges": "San Mateo, Rizal",
+                            "Ifugao State University": "Nayon, Lamut, Ifugao",
+                            "Iligan Computer Institute": "Iligan City, Lanao del Norte",
+                            "Iligan Medical Center College": "Iligan City, Lanao del Norte",
+                            "Ilocos Sur Community College": "Candon City, Ilocos Sur",
+                            "Ilocos Sur Polytechnic State College": "Ilocos Sur",
+                            "Iloilo Doctors’ College": "Iloilo City, Iloilo",
+                            "Iloilo Science and Technology University (Western Visayas College of Science & Technology)": "Iloilo City, Iloilo",
+                            "Informatics Computer Institute": "Quezon City, Metro Manila",
+                            "Information and Communications Technology Academy": "Bacolod City, Negros Occidental",
+                            "Inspire Sports Academy": "Calamba City, Laguna",
+                            "International Graduate School of Leadership (International School of Theology Asia)": "Quezon City, Metro Manila",
+                            "Isabela State University": "Cauayan City, Isabela",
+                            "Je Mondejar Computer College": "Tagbilaran City, Bohol",
+                            "John B Lacson Foundation Maritime University": "Iloilo City, Iloilo",
+                            "Jose Maria College": "Davao City, Davao del Sur",
+                            "Jose Rizal Memorial State University": "Dapitan City, Zamboanga del Norte",
+                            "Jose Rizal University": "Mandaluyong City",
+                            "Kalayaan College": "Quezon City, Metro Manila",
+                            "La Consolacion College Bacolod": "Bacolod City, Negros Occidental",
+                            "La Consolacion University Philippines": "Malolos City, Bulacan",
+                            "La Patria College": "Batac City, Ilocos Norte",
+                            "La Salle University Ozamiz": "Ozamiz City, Misamis Occidental",
+                            "Laguna State Polytechnic University": "Santa Cruz, Laguna",
+                            "Leyte Normal University": "Tacloban City, Leyte",
+                            "Liceo de Cagayan University": "Cagayan de Oro City",
+                            "Lipa City Colleges": "Lipa City, Batangas",
+                            "Lorma Colleges MacArthur": "Carlatan, San Fernando City, La Union",
+                            "Lyceum Northwestern University": "Dagupan City, Pangasinan",
+                            "Lyceum of the Philippines University Batangas": "Batangas City, Batangas",
+                            "Lyceum of the Philippines University": "Intramuros, Manila",
+                            "Malayan Colleges Laguna": "Cabuyao, Laguna",
+                            "Manila Business College": "Quezon City, Metro Manila",
+                            "Manila Central University": "Caloocan City",
+                            "Manuel L Quezon University": "Quiapo, Manila City, Metro Manila",
+                            "Manuel S Enverga University": "Lucena City, Quezon",
+                            "Mapua Institute of Technology": "Intramuros, Manila",
+                            "Marian College": "Tagum City, Davao del Norte",
+                            "Mariano Marcos State University": "Batac City, Ilocos Norte",
+                            "Maritime Academy of Asia and the Pacific Kamaya Point": "Mariveles, Bataan",
+                            "Mater Dei College Bohol": "Tubigon, Bohol",
+                            "Metro Dumaguete College": "Dumaguete City, Negros Oriental",
+                            "MHAM College of Medicine": "Cebu City, Cebu",
+                            "Microcity College of Business and Technology": "San Fernando City, La Union",
+                            "Mindanao State University at Naawan": "Naawan, Misamis Oriental",
+                            "Mindanao State University General Santos": "General Santos City",
+                            "Mindanao State University Iligan Institute of Technology": "Iligan City, Lanao del Norte",
+                            "Mindanao State University Marawi City": "Marawi City, Lanao del Sur",
+                            "Mindanao State University Tawi-Tawi College of Technology and Oceanography": "Bongao, Tawi-Tawi",
+                            "Mindanao State University": "Marawi City, Lanao del Sur",
+                            "Mindoro State University": "Calapan City, Oriental Mindoro",
+                            "Miriam College": "Quezon City",
+                            "Misamis University": "Ozamiz City, Misamis Occidental",
+                            "Mountain Province State Polytechnic College": "Bontoc, Mountain Province",
+                            "Mountain View College Philippines": "Bukidnon",
+                            "MSC Institute of Technology": "Cainta, Rizal",
+                            "Naga College Foundation": "Naga City, Camarines Sur",
+                            "National College of Business and Arts NCBA": "Quezon City, Metro Manila",
+                            "National College of Science and Technology": "Dasmariñas, Cavite",
+                            "National Defense College of the Philippines": "Quezon City",
+                            "National Teachers College Philippines": "Manila City, Metro Manila",
+                            "National University Philippines": "Sampaloc, Manila",
+                            "Negros College": "Kabankalan City, Negros Occidental",
+                            "Negros Oriental State University (Central Visayas Polytechnic College)": "Dumaguete City, Negros Oriental",
+                            "New Era University": "Quezon City, Metro Manila",
+                            "Northeastern college": "Santiago City, Isabela",
+                            "Northern Luzon Adventist College": "Artacho, Sison, Pangasinan",
+                            "Northern Negros State College of Science & Technology": "Sagay City, Negros Occidental",
+                            "Northwest Samar State University": "Calbayog City, Samar",
+                            "Northwestern University Laoag City": "Laoag City, Ilocos Norte",
+                            "Norzagaray College": "Norzagaray, Bulacan",
+                            "Notre Dame of Dadiangas University": "General Santos City, South Cotabato",
+                            "Notre Dame of Kidapawan College": "Kidapawan City, Cotabato",
+                            "Notre Dame of Marbel University": "Koronadal City, South Cotabato",
+                            "Notre Dame University Cotabato": "Cotabato City, Maguindanao",
+                            "Nueva Ecija University of Science and Technology": "Cabanatuan City, Nueva Ecija",
+                            "Nueva Vizcaya State University": "Bayombong, Nueva Vizcaya",
+                            "NYK-TDG Maritime Academy": "Canlubang, Calamba City, Laguna",
+                            "Occidental Mindoro State College": "San Jose, Occidental Mindoro",
+                            "Our Lady of the Pillar College Cauayan": "Cauayan City, Isabela",
+                            "Palawan State University": "Puerto Princesa",
+                            "Palompon Institute of Technology": "Palompon, Leyte",
+                            "Pampanga State Agricultural University": "Magalang, Pampanga",
+                            "Pangasinan State University": "Lingayen, Pangasinan",
+                            "PanPacific University North Philippines": "Urdaneta City, Pangasinan",
+                            "Partido State University": "Camarines Sur",
+                            "Pasig Catholic College": "Pasig City, Metro Manila",
+                            "PATTS College of Aeronautics": "Pasay City, Metro Manila",
+                            "Philippine Christian University": "Manila City",
+                            "Philippine College of Criminology": "Manila City, Metro Manila",
+                            "Philippine College of Ministry": "Quezon City, Metro Manila",
+                            "Philippine Merchant Marine Academy": "San Narciso, Zambales",
+                            "Philippine Military Academy": "Baguio City, Benguet",
+                            "Philippine National Police Academy": "Silang, Cavite",
+                            "Philippine Normal University": "Manila City",
+                            "Philippine School of Business Administration": "Quezon City, Metro Manila",
+                            "Philippine Women’s University": "Malate, Manila",
+                            "PLT College": "Butuan City, Agusan del Norte",
+                            "Polytechnic University of the Philippines": "Sta. Mesa, Manila",
+                            "President Ramon Magsaysay State University": "Iba, Zambales",
+                            "Quirino State University": "Diffun, Quirino",
+                            "Republic Central Colleges": "Quezon City, Metro Manila",
+                            "Riverside College": "Bacolod City, Negros Occidental",
+                            "Rizal Technological University": "Mandaluyong City",
+                            "Rogationist College": "Tagaytay City, Cavite",
+                            "Romblon State University": "Odiongan, Romblon",
+                            "Sacred Heart College Lucena City": "Lucena City, Quezon",
+                            "Saint Ferdinand College": "Urdaneta City, Pangasinan",
+                            "Saint Francis of Assisi College Cavite": "Dasmariñas, Cavite",
+                            "Saint Joseph College Maasin": "Maasin City, Southern Leyte",
+                            "Saint Joseph Institute of Technology": "Butuan City, Agusan del Norte",
+                            "Saint Jude College": "Manila City, Metro Manila",
+                            "Saint Louis College": "San Fernando City, La Union",
+                            "Saint Louis University Baguio City": "Baguio City",
+                            "Saint Luke’s College of Medicine": "Quezon City, Metro Manila",
+                            "Saint Mary’s University of Bayombong": "Bayombong, Nueva Vizcaya",
+                            "Saint Michael’s College of Laguna": "Laguna",
+                            "Saint Paul University Dumaguete": "Dumaguete City, Negros Oriental",
+                            "Saint Paul University Manila": "Manila City, Metro Manila",
+                            "Saint Paul University Pasig": "Pasig City, Metro Manila",
+                            "Saint Paul University Philippines": "Tuguegarao City, Cagayan",
+                            "Salazar Colleges of Science and Institute of Technology": "Zamboanga City, Zamboanga del Sur",
+                            "Samar State University": "Catbalogan City, Samar",
+                            "Samson College of Science and Technology": "Calamba City, Laguna",
+                            "San Antonio de Padua College": "Roxas City, Capiz",
+                            "San Beda University": "Mendiola, Manila",
+                            "San Carlos College": "San Carlos City, Pangasinan",
+                            "San Isidro College": "Malaybalay City, Bukidnon",
+                            "San Pablo Colleges San Pablo City Laguna": "San Pablo City, Laguna",
+                            "San Pedro College of Business Administration": "San Pedro City, Laguna",
+                            "San Sebastian College Manila": "Manila City, Metro Manila",
+                            "San Sebastian College Recoletos de Cavite": "Cavite City, Cavite",
+                            "Siena College of Taytay": "Taytay, Rizal",
+                            "Silliman University": "Dumaguete City, Negros Oriental",
+                            "Siquijor State College": "Siquijor, Siquijor",
+                            "Sorsogon State College": "Sorsogon City, Sorsogon",
+                            "Southeast Asia Interdisciplinary Development Institute": "Quezon City, Metro Manila",
+                            "Southern City Colleges": "Zamboanga City, Zamboanga del Sur",
+                            "Southern Leyte State University": "Sogod, Southern Leyte",
+                            "Southern Luzon State University (Polytechnic College)": "Lucban, Quezon",
+                            "Southern Philippines Agri Business and Marine and Aquatic School of Technology": "Malita, Davao Occidental",
+                            "Southville SISFU": "Las Piñas City, Metro Manila",
+                            "Southway College of Technology": "San Fernando City, La Union",
+                            "Southwestern University Cebu Philippines": "Cebu City, Cebu",
+                            "Southwestern University PHINMA": "Cebu City, Cebu",
+                            "St Augustine School of Nursing": "Quezon City, Metro Manila",
+                            "St Cecilia’s College Cebu": "Cebu City, Cebu",
+                            "St Joseph’s College Quezon City": "Quezon City, Metro Manila",
+                            "St Louis College Valenzuela": "Valenzuela City, Metro Manila",
+                            "St Marys College": "Tagum City, Davao del Norte",
+                            "St Nicolas College of Business and Technology": "San Nicolas, Ilocos Norte",
+                            "St Paul College of Ilocos Sur": "Bantay, Ilocos Sur",
+                            "St Paul University Iloilo": "Iloilo City, Iloilo",
+                            "St Paul University Surigao": "Surigao City, Surigao del Norte",
+                            "St Scholastica’s College": "Malate, Manila",
+                            "St Vincent’s College": "Dipolog City, Zamboanga del Norte",
+                            "St. Paul University Quezon City": "Quezon City, Metro Manila",
+                            "Sultan Kudarat State University": "Tacurong City, Sultan Kudarat",
+                            "Surigao del Sur State University": "Tandag City, Surigao del Sur",
+                            "Surigao State College of Technology": "Surigao City",
+                            "System Technology Institute": "Cubao, Quezon City",
+                            "Systems Plus Computer College Quezon City": "Quezon City, Metro Manila",
+                            "Tanchuling College": "Tagum City, Davao del Norte",
+                            "Tarlac Agricultural University": "Camarines Norte",
+                            "Tarlac Agricultural University": "Camarines Norte",
+                            "Tarlac State University":"Tarlac City, Tarlac",
+                            "Technological Institute of the Philippines": "Cubao, Quezon City",
+                            "Technological Research for Advanced Computer Education College": "San Juan, Metro Manila",
+                            "Technological University of the Philippines": "Ermita, Manila",
+                            "The Lewis College": "Sorsogon City, Sorsogon",
+                            "Trinity University of Asia (Trinity College of Quezon City)": "Quezon City, Metro Manila",
+                            "Universidad Aldersgate": "Solano, Nueva Vizcaya",
+                            "Universidad de Santa Isabel": "Naga City, Camarines Sur",
+                            "Universidad de Zamboanga": "Zamboanga City",
+                            "University of Antique (Polytechnic State College of Antique)": "Sibalom, Antique",
+                            "University of Asia and the Pacific": "Pasig City",
+                            "University of Baguio": "Baguio City",
+                            "University of Batangas": "Batangas City, Batangas",
+                            "University of Bohol": "Tagbilaran City, Bohol",
+                            "University of Cagayan Valley": "Tuguegarao City, Cagayan",
+                            "University of Caloocan City": "Caloocan City, Metro Manila",
+                            "University of Cebu": "Cebu City, Cebu",
+                            "University of Cebu": "Cebu City, Cebu",
+                            "University of Eastern Philippines:": "Catarman, Northern Samar",
+                            "University of Iloilo": "Iloilo City, Iloilo",
+                            "University of La Salette": "Santiago City, Isabela",
+                            "University of Luzon": "Dagupan City, Pangasinan",
+                            "University of Makati": "Makati City, Metro Manila",
+                            "University of Manila": "Manila City, Metro Manila",
+                            "University of Mindanao": "Davao City",
+                            "University of Negros Occidental Recoletos": "Bacolod City",
+                            "University of Northeastern Philippines": "Iriga City, Camarines Sur",
+                            "University of Northern Philippines": "Vigan City, Ilocos Sur",
+                            "University of Nueva Caceres": "Naga City, Camarines Sur",
+                            "University of Pangasinan": "Dagupan City, Pangasinan",
+                            "University of Perpetual Help System Dalta": "Las Piñas City",
+                            "University of Perpetual Help System Laguna": "Biñan City, Laguna",
+                            "University of Rizal System": "Morong, Rizal",
+                            "University of Saint Anthony Iriga City": "Iriga City, Camarines Sur",
+                            "University of Saint La Salle Bacolod": "Bacolod City, Negros Occidental",
+                            "University of Saint Louis Tuguegarao": "Tuguegarao City, Cagayan",
+                            "University of San Agustin": "Iloilo City",
+                            "University of San Carlos": "Cebu City",
+                            "University of San Jose Recoletos": "Cebu City",
+                            "University of Santo Tomas": "Sampaloc, Manila",
+                            "University of Science and Technology of Southern Philippines USTP": "Cagayan de Oro City",
+                            "University of Southeastern Philippines": "Davao City",
+                            "University of Southern Mindanao": "Kabacan, Cotabato",
+                            "University of Sto Tomas Legazpi Bicol Dominican University": "Legazpi City, Albay",
+                            "University of the Assumption": "San Fernando City, Pampanga",
+                            "University of the City of Manila": "Intramuros, Manila",
+                            "University of the Cordilleras (Baguio Colleges Foundation)": "Baguio City",
+                            "University of the East Ramon Magsaysay": "Quezon City, Metro Manila",
+                            "University of the East": "Sampaloc, Manila",
+                            "University of the Immaculate Conception": "Davao City",
+                            "University of the Philippines Diliman": "Diliman, Quezon City",
+                            "University of the Philippines Baguio": "Baguio City",
+                            "University of the Philippines Cebu": "Cebu City",
+                            "University of the Philippines Manila": "Ermita, Manila",
+                            "University of the Philippines Mindanao": "Mintal, Davao City",
+                            "University of the Philippines Visayas": "Iloilo City, Iloilo",
+                            "University of the Philippines": "Ermita, Manila",
+                            "University of the Visayas": "Cebu City, Cebu",
+                            "Urdaneta City University": "Urdaneta City, Pangasinan",
+                            "Virgen Milagrosa University Foundation": "San Carlos City, Pangasinan",
+                            "Visayas State University": "Baybay City, Leyte",
+                            "Wesleyan University Philippines": "Cabanatuan City, Nueva Ecija",
+                            "West Visayas State University": "La Paz, Iloilo City",
+                            "Western Institute of Technology": "Iloilo City, Iloilo",
+                            "Western Leyte College of Ormoc City": "Ormoc City, Leyte",
+                            "Western Mindanao State University": "Zamboanga City",
+                            "Western Philippines University": "Aborlan, Palawan",
+                            "Xavier University Ateneo de Cagayan": "Cagayan de Oro City",
+                            "Zamboanga Peninsula Polytechnic State University": "Dipolog City, Zamboanga del Norte",
+                            "Zamboanga State College of Marine Sciences and Technology": "Zamboanga City, Zamboanga del Sur",
 
-
-                           
+              
     }
     # school_addresses = {
     #     "Ateneo de Manila University": "Katipunan Ave, Quezon City",
@@ -1380,7 +1391,7 @@ def education_main():
     education_attainment_var.set("Select Education Attainment")
 
     education_attainment_entry = ttk.Combobox(
-        window,
+        parent,
         textvariable=education_attainment_var,
         values=education_attainment_options,
         font=fontstyle,
@@ -1398,7 +1409,7 @@ def education_main():
     
     # Date Graduated
     date_graduated_entry = DateEntry(
-        window,
+        parent,
         font=fontstyle,
         background="#FFFFFF",
         foreground="#000716",
@@ -1448,7 +1459,7 @@ def education_main():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=back_clicked,
+        command=lambda: back_clicked(parent),
         relief="flat"
     )
     button_2.place(
@@ -1465,7 +1476,7 @@ def education_main():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=next_clicked,
+        command=lambda: next_clicked(parent),
         relief="flat"
     )
     button_3.place(
@@ -1476,11 +1487,7 @@ def education_main():
     )
     display_values()
     
-    
-    window.resizable(False, False)
-    window.mainloop()
+    parent.mainloop()
 
 
-if __name__ == "__main__":
-    education_main()
     
