@@ -11,6 +11,7 @@ import os
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
 from _2_main_menu import selection_main
 from default_entry import DefaultTextEntry
+from config import USERNAME, PASSWORD
 
 def login_menu():
     USERNAME = "admin"

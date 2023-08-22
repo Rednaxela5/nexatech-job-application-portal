@@ -12,6 +12,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Toplevel
 import tkinter as tk
 from tkinter import ttk
 import mysql.connector
+from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
 from mysql.connector import Error
 
 def easy_5_main():
@@ -35,12 +36,6 @@ def easy_5_main():
         medium_main()
 
     def display_easy_5_clicked():
-        # Assigning the database details to variables
-        host = 'localhost'
-        user = 'root'
-        password = 'P@ssw0rd2023!'
-        database = 'nexatech'
-
         # Display the mysql codes in the box
         canvas.create_text(
             50.0,
@@ -53,10 +48,10 @@ def easy_5_main():
             font=("Montserrat", 35 * -1)
         )
         try:
-            connection = mysql.connector.connect(host=host,
-                                                    user=user,
-                                                    password=password,
-                                                    database=database)
+            connection = mysql.connector.connect(host=MYSQL_HOST,
+                                                    user=MYSQL_USER,
+                                                    password=MYSQL_PASSWORD,
+                                                    database=MYSQL_DATABASE)
             cursor = connection.cursor()
             # Execute the MySQL query
             query = "SELECT COUNT(*) AS 'Living in Manila' FROM applicant_details WHERE province LIKE '%Manila%';"

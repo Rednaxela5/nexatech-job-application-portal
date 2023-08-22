@@ -8,101 +8,86 @@ import sys
 import os
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Toplevel
 import tkinter as tk
 from tkinter import ttk
 import mysql.connector
+from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
+from mysql.connector import Error
 
-def easy_1_main():
+def easy_3_main():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
     # Set the relative path to the assets directory
-    ASSETS_PATH = SCRIPT_DIR / "assets" / "frame3"
+    ASSETS_PATH = SCRIPT_DIR / "assets" / "frame5"
 
     def relative_to_assets(path: str) -> Path:
         return ASSETS_PATH / Path(path)
-
-    def back_clicked():
-        window.destroy()
-        from _3_0_easy_window import easy_main
-        easy_main()
 
     def easy_2_clicked():
         window.destroy()
         from _3_2_easyprob import easy_2_main
         easy_2_main()
 
-    def display_easy_1_clicked():
+    def easy_4_clicked():
+        window.destroy()
+        from _3_4_easyprob import easy_4_main
+        easy_4_main()
+
+    def display_easy_3_clicked():
+
+        # Display the mysql codes in the box
         canvas.create_text(
-            460.0,
+            50.0,
             348.0,
-            anchor="c",
-            text="""            SELECT applicantNo, name, SSS_ID, emailAddress, 
-            desiredSalary 
-            FROM aplicant_details 
-            ORDER BY desiredSalary ASC;""",
+            anchor="w",
+            text="""            SELECT applicantNo, name
+            FROM applicant_details
+            WHERE employmentType = 'Part-time';""",
             fill="#0F2634",
             font=("Montserrat", 35 * -1)
         )
-        def display_results(results):
-            # Remove the previous contents of the image area
-            for widget in canvas.winfo_children():
-                widget.destroy()
-            
-            result_window = tk.Toplevel(window)
-            result_window.title("Query Results")
-            result_window.geometry("994x326")
-            result_window.resizable(width=True, height=True)
-            style = ttk.Style()
-            style.configure("Treeview.Heading", font=("Gotham", 11, "bold"))
-            style.configure("Treeview", font=("Gotham", 9))
-            tree = ttk.Treeview(result_window)
-            tree["columns"] = ("applicantNo", "name", "SSS_ID", "emailAddress", "desiredSalary")
-            tree.column("#0", width=0, stretch=tk.NO)
-            tree.heading("applicantNo", text="Applicant No.", anchor="w")
-            tree.heading("name", text="Name", anchor="w")
-            tree.heading("SSS_ID", text="SSS ID", anchor="w")
-            tree.heading("emailAddress", text="Email Address", anchor="w")
-            tree.heading("desiredSalary", text="Desired Salary", anchor="w")
-          
-            for i, row in enumerate(results):
-                tree.insert("", "end", text=str(i+1), values=row)
-
-            tree.pack(expand=True, fill=tk.BOTH)
-        
-        
-        # Replace these with your actual database credentials
-        host = 'localhost'
-        user = 'root'
-        password = 'P@ssw0rd2023!'
-        database = 'nexatech'
-
         try:
-            # Connect to the database
-            connection = mysql.connector.connect(
-                host=host,
-                user=user,
-                password=password,
-                database=database
-            )
+            connection = mysql.connector.connect(host=MYSQL_HOST,
+                                                    user=MYSQL_USER,
+                                                    password=MYSQL_PASSWORD,
+                                                    database=MYSQL_DATABASE)
             cursor = connection.cursor()
-
-            # Execute the query
-            query = "SELECT applicantNo, name, SSS_ID, emailAddress, desiredSalary FROM applicant_details ORDER BY desiredSalary ASC;"
+            # Execute the MySQL query
+            query = "SELECT applicantNo, name FROM applicant_details WHERE employmentType = 'Part-time';"
             cursor.execute(query)
-            results = cursor.fetchall()
 
-            # Display the results in a new window
-            display_results(results)
+            # Fetch all the rows from the result
+            rows = cursor.fetchall()
 
             # Close the cursor and connection
             cursor.close()
             connection.close()
 
-        except mysql.connector.Error as e:
-                print(f"Error connecting to the database: {e}")
+            # Display the results in a separate toplevel window
+            result_window = Toplevel(window)
+            result_window.title("Query Results")
 
+            #Change the style of font in the treeview
+            style = ttk.Style()
+            style.configure("Treeview.Heading", font=("Gotham", 11, "bold"))
+            style.configure("Treeview", font=("Gotham", 9))
+
+            # Create a Treeview widget to display the data in tabular format
+            tree = ttk.Treeview(result_window, columns=("Applicant No.", "Name"), show="headings")
+            tree.heading("Applicant No.", text="Applicant No.", anchor="w")
+            tree.heading("Name", text="Name", anchor="w")
+
+            # Insert the data into the treeview
+            for row in rows:
+                tree.insert("", "end", values=row)
+            tree.pack()
+        except Error as e:
+            print(f"Error connecting to the database: {e}")
+
+
+    # Main window        
     window = Tk()
 
     window.geometry("1024x568")
@@ -135,13 +120,13 @@ def easy_1_main():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=back_clicked,
+        command=easy_4_clicked,
         relief="flat"
     )
     button_1.place(
-        x=15.0,
+        x=873.0,
         y=64.0,
-        width=113.0,
+        width=136.0,
         height=44.0
     )
 
@@ -155,7 +140,7 @@ def easy_1_main():
         relief="flat"
     )
     button_2.place(
-        x=873.0,
+        x=14.0,
         y=64.0,
         width=136.0,
         height=44.0
@@ -167,7 +152,7 @@ def easy_1_main():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=display_easy_1_clicked,
+        command=display_easy_3_clicked,
         relief="flat"
     )
     button_3.place(
@@ -180,7 +165,7 @@ def easy_1_main():
     image_image_2 = PhotoImage(
         file=relative_to_assets("image_2.png"))
     image_2 = canvas.create_image(
-        500.0,
+        504.0,
         86.0,
         image=image_image_2
     )
@@ -202,4 +187,5 @@ def easy_1_main():
     )
     window.resizable(False, False)
     window.mainloop()
-# easy_1_main()
+
+# easy_3_main()

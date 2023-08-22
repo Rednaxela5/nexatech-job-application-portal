@@ -12,55 +12,55 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Toplevel
 import tkinter as tk
 from tkinter import ttk
 import mysql.connector
+from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
 from mysql.connector import Error
 
-def medium_3_main():
+def hard_3_main():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
     # Set the relative path to the assets directory
-    ASSETS_PATH = SCRIPT_DIR / "assets" / "frame10"
+    ASSETS_PATH = SCRIPT_DIR / "assets" / "frame15"
 
     def relative_to_assets(path: str) -> Path:
         return ASSETS_PATH / Path(path)
 
-    def medium_2_clicked():
+    def hard_2_clicked():
         window.destroy()
-        from _4_2_mediumprob import medium_2_main
-        medium_2_main()
+        from _5_2_hardprob import hard_2_main
+        hard_2_main()
     
-    def medium_4_clicked():
+    def hard_4_clicked():
         window.destroy()
-        from _4_4_mediumprob import medium_4_main
-        medium_4_main()
+        from _5_4_hardprob import hard_4_main
+        hard_4_main()
 
-    def display_medium_3_clicked():
-        # Assigning the database details to variables
-        host = 'localhost'
-        user = 'root'
-        password = 'P@ssw0rd2023!'
-        database = 'nexatech'
-
+    def display_hard_3_clicked():
         # Display the mysql codes in the box
         canvas.create_text(
-            50.0,
+            5.0,
             348.0,
             anchor="w",
-            text="""            SELECT skillCode, skillName, COUNT(*)
-            FROM major_skill
-            GROUP BY skillCode, skillName;""",
+            text="""            SELECT A.applicantNo,
+            TIMESTAMPDIFF(YEAR, A.dateOfBirth, CURDATE()) AS Age,
+            COUNT(DISTINCT S.school_ID) AS SchoolCount,
+            COUNT(DISTINCT E.employmentHistory_ID) AS EmploymentHistoryCount
+            FROM applicant_details AS A
+            JOIN school AS S ON A.applicantNo = S.applicantNo
+            JOIN work_experience AS E ON S.applicantNo = E.applicantNo
+            WHERE TIMESTAMPDIFF(YEAR, A.dateOfBirth, CURDATE()) >= 40
+            GROUP BY A.applicantNo;""",
             fill="#0F2634",
-            font=("Montserrat", 35 * -1)
+            font=("Montserrat", 22 * -1)
         )
-
         try:
-            connection = mysql.connector.connect(host=host,
-                                                    user=user,
-                                                    password=password,
-                                                    database=database)
+            connection = mysql.connector.connect(host=MYSQL_HOST,
+                                                    user=MYSQL_USER,
+                                                    password=MYSQL_PASSWORD,
+                                                    database=MYSQL_DATABASE)
             cursor = connection.cursor()
             # Execute the MySQL query
-            query = "SELECT skillCode, skillName, COUNT(*) FROM major_skill GROUP BY skillCode, skillName;"
+            query = "SELECT A.applicantNo,TIMESTAMPDIFF(YEAR, A.dateOfBirth, CURDATE()) AS Age,COUNT(DISTINCT S.school_ID) AS SchoolCount,COUNT(DISTINCT E.employmentHistory_ID) AS EmploymentHistoryCount FROM applicant_details AS A JOIN school AS S ON A.applicantNo = S.applicantNo JOIN work_experience AS E ON S.applicantNo = E.applicantNo WHERE TIMESTAMPDIFF(YEAR, A.dateOfBirth, CURDATE()) >= 40 GROUP BY A.applicantNo;"
             cursor.execute(query)
 
             # Fetch all the rows from the result
@@ -80,10 +80,11 @@ def medium_3_main():
             style.configure("Treeview", font=("Gotham", 9))
 
             # Create a Treeview widget to display the data in tabular format
-            tree = ttk.Treeview(result_window, columns=("skillCode", "skillName", "count(*)"), show="headings")
-            tree.heading("skillCode", text="Skill Code", anchor="w")
-            tree.heading("skillName", text="Skill Name", anchor="w")
-            tree.heading("count(*)", text="Number", anchor="w")
+            tree = ttk.Treeview(result_window, columns=("applicantNo", "age", "SchoolCount", "EmploymentHistoryCount"), show="headings")
+            tree.heading("applicantNo", text="applicantNo", anchor="w")
+            tree.heading("age", text="age", anchor="w")
+            tree.heading("SchoolCount", text="SchoolCount", anchor="w")
+            tree.heading("EmploymentHistoryCount", text="EmploymentHistoryCount", anchor="w")
 
             # Insert the data into the treeview
             for row in rows:
@@ -91,6 +92,7 @@ def medium_3_main():
             tree.pack()
         except Error as e:
             print(f"Error connecting to the database: {e}")
+
 
     window = Tk()
 
@@ -123,7 +125,7 @@ def medium_3_main():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=display_medium_3_clicked,
+        command=display_hard_3_clicked,
         relief="flat"
     )
     button_1.place(
@@ -163,14 +165,14 @@ def medium_3_main():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=medium_4_clicked,
+        command=hard_4_clicked,
         relief="flat"
     )
     button_2.place(
-        x=851.0,
-        y=61.0,
-        width=157.0,
-        height=44.0
+        x=879.0,
+        y=65.0,
+        width=129.0,
+        height=42.0
     )
 
     button_image_3 = PhotoImage(
@@ -179,16 +181,16 @@ def medium_3_main():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=medium_2_clicked,
+        command=hard_2_clicked,
         relief="flat"
     )
     button_3.place(
         x=14.0,
-        y=61.0,
-        width=157.0,
-        height=44.0
+        y=65.0,
+        width=129.0,
+        height=42.0
     )
     window.resizable(False, False)
     window.mainloop()
 
-# medium_3_main()
+# hard_3_main()

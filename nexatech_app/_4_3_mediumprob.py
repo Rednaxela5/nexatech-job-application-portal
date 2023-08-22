@@ -12,58 +12,50 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Toplevel
 import tkinter as tk
 from tkinter import ttk
 import mysql.connector
+from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
 from mysql.connector import Error
 
-def hard_5_main():
+def medium_3_main():
     # Get the script's directory path
     SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
 
     # Set the relative path to the assets directory
-    ASSETS_PATH = SCRIPT_DIR / "assets" / "frame17"
+    ASSETS_PATH = SCRIPT_DIR / "assets" / "frame10"
 
     def relative_to_assets(path: str) -> Path:
         return ASSETS_PATH / Path(path)
 
-    def hard_4_clicked():
+    def medium_2_clicked():
         window.destroy()
-        from _5_4_hardprob import hard_4_main
-        hard_4_main()
+        from _4_2_mediumprob import medium_2_main
+        medium_2_main()
     
-    def menu_clicked():
+    def medium_4_clicked():
         window.destroy()
-        from _2_main_menu import selection_main
-        selection_main()
+        from _4_4_mediumprob import medium_4_main
+        medium_4_main()
 
-    def display_hard_5_clicked():
-        # Assigning the database details to variables
-        host = 'localhost'
-        user = 'root'
-        password = 'P@ssw0rd2023!'
-        database = 'nexatech'
-
+    def display_medium_3_clicked():
         # Display the mysql codes in the box
         canvas.create_text(
-            125.0,
+            50.0,
             348.0,
             anchor="w",
-            text="""            SELECT S.schoolName,COUNT(*) AS 'Skilled Networker'
-            FROM school AS S
-            JOIN major_skill AS M ON S.applicantNo = M.applicantNo
-            WHERE skillName = 'Maintenance' AND schoolName IN 
-            ('Polytechnic University of the Philippines', 
-            'University of the Philippines Diliman')
-            GROUP BY S.schoolName;""",
+            text="""            SELECT skillCode, skillName, COUNT(*)
+            FROM major_skill
+            GROUP BY skillCode, skillName;""",
             fill="#0F2634",
-            font=("Montserrat", 24 * -1)
+            font=("Montserrat", 35 * -1)
         )
+
         try:
-            connection = mysql.connector.connect(host=host,
-                                                    user=user,
-                                                    password=password,
-                                                    database=database)
+            connection = mysql.connector.connect(host=MYSQL_HOST,
+                                                    user=MYSQL_USER,
+                                                    password=MYSQL_PASSWORD,
+                                                    database=MYSQL_DATABASE)
             cursor = connection.cursor()
             # Execute the MySQL query
-            query = "SELECT S.schoolName,COUNT(*) AS 'Applicant' FROM school AS S JOIN major_skill AS M ON S.applicantNo = M.applicantNo WHERE skillName = 'Maintenance' AND schoolName IN ('Polytechnic University of the Philippines', 'University of the Philippines Diliman') GROUP BY S.schoolName;"
+            query = "SELECT skillCode, skillName, COUNT(*) FROM major_skill GROUP BY skillCode, skillName;"
             cursor.execute(query)
 
             # Fetch all the rows from the result
@@ -83,10 +75,11 @@ def hard_5_main():
             style.configure("Treeview", font=("Gotham", 9))
 
             # Create a Treeview widget to display the data in tabular format
-            tree = ttk.Treeview(result_window, columns=("schoolName", "count(*)"), show="headings")
-            tree.heading("schoolName", text="School Name", anchor="w")
-            tree.heading("count(*)", text="Applicant", anchor="w")                                           
-            
+            tree = ttk.Treeview(result_window, columns=("skillCode", "skillName", "count(*)"), show="headings")
+            tree.heading("skillCode", text="Skill Code", anchor="w")
+            tree.heading("skillName", text="Skill Name", anchor="w")
+            tree.heading("count(*)", text="Number", anchor="w")
+
             # Insert the data into the treeview
             for row in rows:
                 tree.insert("", "end", values=row)
@@ -125,7 +118,7 @@ def hard_5_main():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=display_hard_5_clicked,
+        command=display_medium_3_clicked,
         relief="flat"
     )
     button_1.place(
@@ -138,7 +131,7 @@ def hard_5_main():
     image_image_2 = PhotoImage(
         file=relative_to_assets("image_2.png"))
     image_2 = canvas.create_image(
-        519.0,
+        516.0,
         85.0,
         image=image_image_2
     )
@@ -165,14 +158,14 @@ def hard_5_main():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=hard_4_clicked,
+        command=medium_4_clicked,
         relief="flat"
     )
     button_2.place(
-        x=14.0,
-        y=65.0,
-        width=129.0,
-        height=42.0
+        x=851.0,
+        y=61.0,
+        width=157.0,
+        height=44.0
     )
 
     button_image_3 = PhotoImage(
@@ -181,16 +174,16 @@ def hard_5_main():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=menu_clicked,
+        command=medium_2_clicked,
         relief="flat"
     )
     button_3.place(
-        x=895.0,
-        y=65.0,
-        width=113.0,
-        height=42.0
+        x=14.0,
+        y=61.0,
+        width=157.0,
+        height=44.0
     )
     window.resizable(False, False)
     window.mainloop()
 
-# hard_5_main()
+# medium_3_main()
