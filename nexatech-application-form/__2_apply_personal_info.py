@@ -75,6 +75,23 @@ def next_clicked(parent):
     
     if not (name or birthdate or sss_id or address or city or province or zipcode or phoneNumber or emailaddress) or name == d_fullname_entry or birthdate == "" or sss_id == d_sssID_entry or address == d_address_entry or city == d_city_entry or province == d_province_entry or zipcode == d_zipcode_entry or phoneNumber == d_phone_number_entry or emailaddress == d_email_address_entry:
         messagebox.showerror("Error", "Please fill out all fields.")
+    elif len(name) < 3:
+        messagebox.showerror("Error", "Enter valid name.")
+    elif not sss_id.isdigit() or len(sss_id) != 10:
+        messagebox.showerror("Error", "SSS ID should be a 10-digit number.")
+    elif address == d_address_entry or not address.strip() or len(address) < 5:
+        messagebox.showerror("Error", "Please provide a valid address.")
+    elif city == d_city_entry or not city.strip():
+        messagebox.showerror("Error", "Please provide a valid city.")
+    elif province == d_province_entry or not province.strip():
+        messagebox.showerror("Error", "Please provide a valid province.")
+    elif not zipcode.isdigit() or len(zipcode) != 4:
+        messagebox.showerror("Error", "Zip code should be a 4-digit number.")
+    elif not phoneNumber.isdigit() or len(phoneNumber) > 11:
+        messagebox.showerror("Error", "Phone number should be a valid number with up to 11 digits.")
+    elif "@" not in emailaddress:
+        messagebox.showerror("Error", "Please provide a valid email address.")
+        
     else:
 
         ad.name = fullname_entry.get()

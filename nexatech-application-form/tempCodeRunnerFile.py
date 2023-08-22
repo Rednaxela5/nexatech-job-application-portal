@@ -1,2 +1,2 @@
 
-        # Open the main application window
+        return ASSETS_PATH / Path(path)
