@@ -1,11 +1,7 @@
 import mysql.connector
 from storage import applicant_data as ad, school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3, work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3
 from storage import skill_data_1 as sn1, skill_data_2 as sn2, skill_data_3 as sn3, skill_data_4 as sn4, skill_data_5 as sn5, skill_data_6 as sn6
-
-MYSQL_HOST = 'localhost'
-MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'P@ssw0rd2023!'
-MYSQL_DATABASE = 'nexatech'
+from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
 
 def connect_to_mysql():
     try:
