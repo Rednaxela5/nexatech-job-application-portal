@@ -365,4 +365,8 @@ VALUES
 	('SID00363', 'Xavier University Ateneo de Cagayan', 'Cagayan de Oro City'),
 	('SID00364', 'Zamboanga Peninsula Polytechnic State University', 'Dipolog City, Zamboanga del Norte'),
 	('SID00365', 'Zamboanga State College of Marine Sciences and Technology', 'Zamboanga City, Zamboanga del Sur')
+
+    
 ;
+
+-- make this ignore
