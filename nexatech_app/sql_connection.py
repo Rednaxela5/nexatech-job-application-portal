@@ -1,6 +1,7 @@
 import mysql.connector
-from storage import applicant_data as ad, school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3, work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3
+from storage import applicant_data as ad, school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3
 from storage import skill_data_1 as sn1, skill_data_2 as sn2, skill_data_3 as sn3, skill_data_4 as sn4, skill_data_5 as sn5, skill_data_6 as sn6
+from storage import work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3, work_data_4 as wd4, work_data_5 as wd5, work_data_6 as wd6, work_data_7 as wd7, work_data_8 as wd8, work_data_9 as wd9, work_data_10 as wd10
 from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
 
 def connect_to_mysql():
@@ -173,7 +174,7 @@ def insert_school_details_3():
             conn.close()
 
 
-def insert_work_experience_1():
+def insert_work_experience(prev_company, work_date_started, work_date_ended, work_position, reason_for_leaving):
     conn = connect_to_mysql()
     if conn is not None:
         try:
@@ -194,7 +195,7 @@ def insert_work_experience_1():
             work_experience_id = "EH" + str(next_work_dump_id).zfill(5)
 
             query = "INSERT INTO work_experience (w_dump_id, applicantNo, employmentHistory_ID, companyName, workStarted, workEnded, workPosition, reasonForLeaving) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            values = (None, ad.applicantNo, work_experience_id, wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+            values = (None, ad.applicantNo, work_experience_id, prev_company, work_date_started, work_date_ended, work_position, reason_for_leaving)
             cursor.execute(query, values)
             conn.commit()
             print("Work experience details inserted successfully.")
@@ -203,69 +204,6 @@ def insert_work_experience_1():
         finally:
             cursor.close()
             conn.close()
-    
-def insert_work_experience_2():
-    conn = connect_to_mysql()
-    if conn is not None:
-        try:
-            cursor = conn.cursor()
-
-            # Assuming that work_experience_id is auto-generated as "EH" followed by 5 digits
-            query = "SELECT MAX(w_dump_id) FROM work_experience"
-            cursor.execute(query)
-            result = cursor.fetchone()
-            max_dump_id = result[0]
-
-            if max_dump_id:
-                next_work_dump_id = max_dump_id + 1
-            else:
-                next_work_dump_id = 1
-
-            # Using string formatting to add leading zeros to make it 5 digits
-            work_experience_id = "EH" + str(next_work_dump_id).zfill(5)
-
-            query = "INSERT INTO work_experience (w_dump_id, applicantNo, employmentHistory_ID, companyName, workStarted, workEnded, workPosition, reasonForLeaving) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            values = (None, ad.applicantNo, work_experience_id, wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
-            cursor.execute(query, values)
-            conn.commit()
-            print("Work experience details inserted successfully.")
-        except mysql.connector.Error as err:
-            print("Error inserting work experience details:", err)
-        finally:
-            cursor.close()
-            conn.close()
-    
-def insert_work_experience_3():
-    conn = connect_to_mysql()
-    if conn is not None:
-        try:
-            cursor = conn.cursor()
-
-            # Assuming that work_experience_id is auto-generated as "EH" followed by 5 digits
-            query = "SELECT MAX(w_dump_id) FROM work_experience"
-            cursor.execute(query)
-            result = cursor.fetchone()
-            max_dump_id = result[0]
-
-            if max_dump_id:
-                next_work_dump_id = max_dump_id + 1
-            else:
-                next_work_dump_id = 1
-
-            # Using string formatting to add leading zeros to make it 5 digits
-            work_experience_id = "EH" + str(next_work_dump_id).zfill(5)
-
-            query = "INSERT INTO work_experience (w_dump_id, applicantNo, employmentHistory_ID, companyName, workStarted, workEnded, workPosition, reasonForLeaving) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            values = (None, ad.applicantNo, work_experience_id, wd3.prev_company, wd3.work_date_started, wd3.work_date_ended, wd3.work_position, wd3.reason_for_leaving)
-            cursor.execute(query, values)
-            conn.commit()
-            print("Work experience details inserted successfully.")
-        except mysql.connector.Error as err:
-            print("Error inserting work experience details:", err)
-        finally:
-            cursor.close()
-            conn.close()
-    
 
 def insert_major_skill(skill_name):
     skill_name_var = skill_name
@@ -327,17 +265,73 @@ def connection_database():
         insert_school_details_1()
         insert_school_details_2()
         insert_school_details_3()
-   
-    if wd1.cur_work_exp == 1:
-        insert_work_experience_1()
-    elif wd1.cur_work_exp == 2:
-        insert_work_experience_1()
-        insert_work_experience_2()
-    elif wd1.cur_work_exp == 3:
-        insert_work_experience_1()
-        insert_work_experience_2()
-        insert_work_experience_3()
 
+    if wd1.cur_work_exp == 1:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+    elif wd1.cur_work_exp == 2:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+        insert_work_experience(wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
+    elif wd1.cur_work_exp == 3:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+        insert_work_experience(wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
+        insert_work_experience(wd3.prev_company, wd3.work_date_started, wd3.work_date_ended, wd3.work_position, wd3.reason_for_leaving)
+    elif wd1.cur_work_exp == 4:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+        insert_work_experience(wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
+        insert_work_experience(wd3.prev_company, wd3.work_date_started, wd3.work_date_ended, wd3.work_position, wd3.reason_for_leaving)
+        insert_work_experience(wd4.prev_company, wd4.work_date_started, wd4.work_date_ended, wd4.work_position, wd4.reason_for_leaving)
+    elif wd1.cur_work_exp == 5:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+        insert_work_experience(wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
+        insert_work_experience(wd3.prev_company, wd3.work_date_started, wd3.work_date_ended, wd3.work_position, wd3.reason_for_leaving)
+        insert_work_experience(wd4.prev_company, wd4.work_date_started, wd4.work_date_ended, wd4.work_position, wd4.reason_for_leaving)
+        insert_work_experience(wd5.prev_company, wd5.work_date_started, wd5.work_date_ended, wd5.work_position, wd5.reason_for_leaving)
+    elif wd1.cur_work_exp == 6:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+        insert_work_experience(wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
+        insert_work_experience(wd3.prev_company, wd3.work_date_started, wd3.work_date_ended, wd3.work_position, wd3.reason_for_leaving)
+        insert_work_experience(wd4.prev_company, wd4.work_date_started, wd4.work_date_ended, wd4.work_position, wd4.reason_for_leaving)
+        insert_work_experience(wd5.prev_company, wd5.work_date_started, wd5.work_date_ended, wd5.work_position, wd5.reason_for_leaving)
+        insert_work_experience(wd6.prev_company, wd6.work_date_started, wd6.work_date_ended, wd6.work_position, wd6.reason_for_leaving)
+    elif wd1.cur_work_exp == 7:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+        insert_work_experience(wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
+        insert_work_experience(wd3.prev_company, wd3.work_date_started, wd3.work_date_ended, wd3.work_position, wd3.reason_for_leaving)
+        insert_work_experience(wd4.prev_company, wd4.work_date_started, wd4.work_date_ended, wd4.work_position, wd4.reason_for_leaving)
+        insert_work_experience(wd5.prev_company, wd5.work_date_started, wd5.work_date_ended, wd5.work_position, wd5.reason_for_leaving)
+        insert_work_experience(wd6.prev_company, wd6.work_date_started, wd6.work_date_ended, wd6.work_position, wd6.reason_for_leaving)
+        insert_work_experience(wd7.prev_company, wd7.work_date_started, wd7.work_date_ended, wd7.work_position, wd7.reason_for_leaving)
+    elif wd1.cur_work_exp == 8:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+        insert_work_experience(wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
+        insert_work_experience(wd3.prev_company, wd3.work_date_started, wd3.work_date_ended, wd3.work_position, wd3.reason_for_leaving)
+        insert_work_experience(wd4.prev_company, wd4.work_date_started, wd4.work_date_ended, wd4.work_position, wd4.reason_for_leaving)
+        insert_work_experience(wd5.prev_company, wd5.work_date_started, wd5.work_date_ended, wd5.work_position, wd5.reason_for_leaving)
+        insert_work_experience(wd6.prev_company, wd6.work_date_started, wd6.work_date_ended, wd6.work_position, wd6.reason_for_leaving)
+        insert_work_experience(wd7.prev_company, wd7.work_date_started, wd7.work_date_ended, wd7.work_position, wd7.reason_for_leaving)
+        insert_work_experience(wd8.prev_company, wd8.work_date_started, wd8.work_date_ended, wd8.work_position, wd8.reason_for_leaving)
+    elif wd1.cur_work_exp == 9:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+        insert_work_experience(wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
+        insert_work_experience(wd3.prev_company, wd3.work_date_started, wd3.work_date_ended, wd3.work_position, wd3.reason_for_leaving)
+        insert_work_experience(wd4.prev_company, wd4.work_date_started, wd4.work_date_ended, wd4.work_position, wd4.reason_for_leaving)
+        insert_work_experience(wd5.prev_company, wd5.work_date_started, wd5.work_date_ended, wd5.work_position, wd5.reason_for_leaving)
+        insert_work_experience(wd6.prev_company, wd6.work_date_started, wd6.work_date_ended, wd6.work_position, wd6.reason_for_leaving)
+        insert_work_experience(wd7.prev_company, wd7.work_date_started, wd7.work_date_ended, wd7.work_position, wd7.reason_for_leaving)
+        insert_work_experience(wd8.prev_company, wd8.work_date_started, wd8.work_date_ended, wd8.work_position, wd8.reason_for_leaving)
+        insert_work_experience(wd9.prev_company, wd9.work_date_started, wd9.work_date_ended, wd9.work_position, wd9.reason_for_leaving)
+    elif wd1.cur_work_exp == 10:
+        insert_work_experience(wd1.prev_company, wd1.work_date_started, wd1.work_date_ended, wd1.work_position, wd1.reason_for_leaving)
+        insert_work_experience(wd2.prev_company, wd2.work_date_started, wd2.work_date_ended, wd2.work_position, wd2.reason_for_leaving)
+        insert_work_experience(wd3.prev_company, wd3.work_date_started, wd3.work_date_ended, wd3.work_position, wd3.reason_for_leaving)
+        insert_work_experience(wd4.prev_company, wd4.work_date_started, wd4.work_date_ended, wd4.work_position, wd4.reason_for_leaving)
+        insert_work_experience(wd5.prev_company, wd5.work_date_started, wd5.work_date_ended, wd5.work_position, wd5.reason_for_leaving)
+        insert_work_experience(wd6.prev_company, wd6.work_date_started, wd6.work_date_ended, wd6.work_position, wd6.reason_for_leaving)
+        insert_work_experience(wd7.prev_company, wd7.work_date_started, wd7.work_date_ended, wd7.work_position, wd7.reason_for_leaving)
+        insert_work_experience(wd8.prev_company, wd8.work_date_started, wd8.work_date_ended, wd8.work_position, wd8.reason_for_leaving)
+        insert_work_experience(wd9.prev_company, wd9.work_date_started, wd9.work_date_ended, wd9.work_position, wd9.reason_for_leaving)
+        insert_work_experience(wd10.prev_company, wd10.work_date_started, wd10.work_date_ended, wd10.work_position, wd10.reason_for_leaving)
+    
     # Insert major skills (you can call this function multiple times for different skills)
     if sn1.cur_major_skills == 3:
         insert_major_skill(sn1.skill_name)

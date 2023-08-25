@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import Tk, Canvas, Button, PhotoImage, Entry, ttk, messagebox
 from tkcalendar import DateEntry
 from default_entry import DefaultTextEntry
-from storage import work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3
+from storage import work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3, work_data_4 as wd4, work_data_5 as wd5, work_data_6 as wd6, work_data_7 as wd7, work_data_8 as wd8, work_data_9 as wd9, work_data_10 as wd10
 
 
 # Get the script's directory path
@@ -32,6 +32,13 @@ def back_clicked(parent):
         wd1.work_date_ended = work_date_ended
         wd1.reason_for_leaving = reason_for_leaving
 
+        # For Debugging Purposes
+        print("Previous Company: ", wd1.prev_company)
+        print("Work Position: ", wd1.work_position)
+        print("Work Date Started: ", wd1.work_date_started)
+        print("Work Date Ended: ", wd1.work_date_ended)
+        print("Reason for Leaving: ", wd1.reason_for_leaving)
+
     elif wd1.cur_work_exp == 2:
         wd2.prev_company = prev_company
         wd2.work_position = work_position
@@ -39,12 +46,124 @@ def back_clicked(parent):
         wd2.work_date_ended = work_date_ended
         wd2.reason_for_leaving = reason_for_leaving
 
+        # For Debugging Purposes
+        print("Previous Company: ", wd2.prev_company)
+        print("Work Position: ", wd2.work_position)
+        print("Work Date Started: ", wd2.work_date_started)
+        print("Work Date Ended: ", wd2.work_date_ended)
+        print("Reason for Leaving: ", wd2.reason_for_leaving)
+
     elif wd1.cur_work_exp == 3:
         wd3.prev_company = prev_company
         wd3.work_position = work_position
         wd3.work_date_started = work_date_started
         wd3.work_date_ended = work_date_ended
         wd3.reason_for_leaving = reason_for_leaving
+
+        # For Debugging Purposes
+        print("Previous Company: ", wd3.prev_company)
+        print("Work Position: ", wd3.work_position)
+        print("Work Date Started: ", wd3.work_date_started)
+        print("Work Date Ended: ", wd3.work_date_ended)
+        print("Reason for Leaving: ", wd3.reason_for_leaving)
+
+    elif wd1.cur_work_exp == 4:
+        wd4.prev_company = prev_company
+        wd4.work_position = work_position
+        wd4.work_date_started = work_date_started
+        wd4.work_date_ended = work_date_ended
+        wd4.reason_for_leaving = reason_for_leaving
+
+        # For Debugging Purposes
+        print("Previous Company: ", wd4.prev_company)
+        print("Work Position: ", wd4.work_position)
+        print("Work Date Started: ", wd4.work_date_started)
+        print("Work Date Ended: ", wd4.work_date_ended)
+        print("Reason for Leaving: ", wd4.reason_for_leaving)
+
+    elif wd1.cur_work_exp == 5:
+        wd5.prev_company = prev_company
+        wd5.work_position = work_position
+        wd5.work_date_started = work_date_started
+        wd5.work_date_ended = work_date_ended
+        wd5.reason_for_leaving = reason_for_leaving
+
+        # For Debugging Purposes
+        print("Previous Company: ", wd5.prev_company)
+        print("Work Position: ", wd5.work_position)
+        print("Work Date Started: ", wd5.work_date_started)
+        print("Work Date Ended: ", wd5.work_date_ended)
+        print("Reason for Leaving: ", wd5.reason_for_leaving)
+
+    elif wd1.cur_work_exp == 6:
+        wd6.prev_company = prev_company
+        wd6.work_position = work_position
+        wd6.work_date_started = work_date_started
+        wd6.work_date_ended = work_date_ended
+        wd6.reason_for_leaving = reason_for_leaving
+
+        # For Debugging Purposes
+        print("Previous Company: ", wd6.prev_company)
+        print("Work Position: ", wd6.work_position)
+        print("Work Date Started: ", wd6.work_date_started)
+        print("Work Date Ended: ", wd6.work_date_ended)
+        print("Reason for Leaving: ", wd6.reason_for_leaving)
+
+    elif wd1.cur_work_exp == 7:
+        wd7.prev_company = prev_company
+        wd7.work_position = work_position
+        wd7.work_date_started = work_date_started
+        wd7.work_date_ended = work_date_ended
+        wd7.reason_for_leaving = reason_for_leaving
+
+        # For Debugging Purposes
+        print("Previous Company: ", wd7.prev_company)
+        print("Work Position: ", wd7.work_position)
+        print("Work Date Started: ", wd7.work_date_started)
+        print("Work Date Ended: ", wd7.work_date_ended)
+        print("Reason for Leaving: ", wd7.reason_for_leaving)
+
+    elif wd1.cur_work_exp == 8:
+        wd8.prev_company = prev_company
+        wd8.work_position = work_position
+        wd8.work_date_started = work_date_started
+        wd8.work_date_ended = work_date_ended
+        wd8.reason_for_leaving = reason_for_leaving
+
+        # For Debugging Purposes
+        print("Previous Company: ", wd8.prev_company)
+        print("Work Position: ", wd8.work_position)
+        print("Work Date Started: ", wd8.work_date_started)
+        print("Work Date Ended: ", wd8.work_date_ended)
+        print("Reason for Leaving: ", wd8.reason_for_leaving)
+
+    elif wd1.cur_work_exp == 9:
+        wd9.prev_company = prev_company
+        wd9.work_position = work_position
+        wd9.work_date_started = work_date_started
+        wd9.work_date_ended = work_date_ended
+        wd9.reason_for_leaving = reason_for_leaving
+
+        # For Debugging Purposes
+        print("Previous Company: ", wd9.prev_company)
+        print("Work Position: ", wd9.work_position)
+        print("Work Date Started: ", wd9.work_date_started)
+        print("Work Date Ended: ", wd9.work_date_ended)
+        print("Reason for Leaving: ", wd9.reason_for_leaving)
+
+    elif wd1.cur_work_exp == 10:
+        wd10.prev_company = prev_company
+        wd10.work_position = work_position
+        wd10.work_date_started = work_date_started
+        wd10.work_date_ended = work_date_ended
+        wd10.reason_for_leaving = reason_for_leaving
+
+        # For Debugging Purposes
+        print("Previous Company: ", wd10.prev_company)
+        print("Work Position: ", wd10.work_position)
+        print("Work Date Started: ", wd10.work_date_started)
+        print("Work Date Ended: ", wd10.work_date_ended)
+        print("Reason for Leaving: ", wd10.reason_for_leaving)
 
     from __4_apply_education import education_main
     education_main(parent)
@@ -66,12 +185,26 @@ def next_clicked(parent):
             wd1.work_date_ended = work_date_ended
             wd1.reason_for_leaving = reason_for_leaving
 
+            # For Debugging Purposes
+            print("Previous Company: " , wd1.prev_company)
+            print("Work Position: " , wd1.work_position)
+            print("Work Date Started: " , wd1.work_date_started)
+            print("Work Date Ended: " , wd1.work_date_ended)
+            print("Reason for Leaving: " , wd1.reason_for_leaving)
+
         elif wd1.cur_work_exp == 2:
             wd2.prev_company = prev_company
             wd2.work_position = work_position
             wd2.work_date_started = work_date_started
             wd2.work_date_ended = work_date_ended
             wd2.reason_for_leaving = reason_for_leaving
+
+            # For Debugging Purposes
+            print("Previous Company: ", wd2.prev_company)
+            print("Work Position: ", wd2.work_position)
+            print("Work Date Started: ", wd2.work_date_started)
+            print("Work Date Ended: ", wd2.work_date_ended)
+            print("Reason for Leaving: ", wd2.reason_for_leaving)
 
         elif wd1.cur_work_exp == 3:
             wd3.prev_company = prev_company
@@ -80,6 +213,112 @@ def next_clicked(parent):
             wd3.work_date_ended = work_date_ended
             wd3.reason_for_leaving = reason_for_leaving
 
+            # For Debugging Purposes
+            print("Previous Company: ", wd3.prev_company)
+            print("Work Position: ", wd3.work_position)
+            print("Work Date Started: ", wd3.work_date_started)
+            print("Work Date Ended: ", wd3.work_date_ended)
+            print("Reason for Leaving: ", wd3.reason_for_leaving)
+
+
+        elif wd1.cur_work_exp == 4:
+            wd4.prev_company = prev_company
+            wd4.work_position = work_position
+            wd4.work_date_started = work_date_started
+            wd4.work_date_ended = work_date_ended
+            wd4.reason_for_leaving = reason_for_leaving
+
+            # For Debugging Purposes
+            print("Previous Company: ", wd4.prev_company)
+            print("Work Position: ", wd4.work_position)
+            print("Work Date Started: ", wd4.work_date_started)
+            print("Work Date Ended: ", wd4.work_date_ended)
+            print("Reason for Leaving: ", wd4.reason_for_leaving)
+
+        elif wd1.cur_work_exp == 5:
+            wd5.prev_company = prev_company
+            wd5.work_position = work_position
+            wd5.work_date_started = work_date_started
+            wd5.work_date_ended = work_date_ended
+            wd5.reason_for_leaving = reason_for_leaving
+
+            # For Debugging Purposes
+            print("Previous Company: ", wd5.prev_company)
+            print("Work Position: ", wd5.work_position)
+            print("Work Date Started: ", wd5.work_date_started)
+            print("Work Date Ended: ", wd5.work_date_ended)
+            print("Reason for Leaving: ", wd5.reason_for_leaving)
+
+        
+        elif wd1.cur_work_exp == 6:
+            wd6.prev_company = prev_company
+            wd6.work_position = work_position
+            wd6.work_date_started = work_date_started
+            wd6.work_date_ended = work_date_ended
+            wd6.reason_for_leaving = reason_for_leaving
+
+            # For Debugging Purposes
+            print("Previous Company: ", wd6.prev_company)
+            print("Work Position: ", wd6.work_position)
+            print("Work Date Started: ", wd6.work_date_started)
+            print("Work Date Ended: ", wd6.work_date_ended)
+            print("Reason for Leaving: ", wd6.reason_for_leaving)
+
+        elif wd1.cur_work_exp == 7:
+            wd7.prev_company = prev_company
+            wd7.work_position = work_position
+            wd7.work_date_started = work_date_started
+            wd7.work_date_ended = work_date_ended
+            wd7.reason_for_leaving = reason_for_leaving
+
+            # For Debugging Purposes
+            print("Previous Company: ", wd7.prev_company)
+            print("Work Position: ", wd7.work_position)
+            print("Work Date Started: ", wd7.work_date_started)
+            print("Work Date Ended: ", wd7.work_date_ended)
+            print("Reason for Leaving: ", wd7.reason_for_leaving)
+
+        elif wd1.cur_work_exp == 8:
+            wd8.prev_company = prev_company
+            wd8.work_position = work_position
+            wd8.work_date_started = work_date_started
+            wd8.work_date_ended = work_date_ended
+            wd8.reason_for_leaving = reason_for_leaving
+
+            # For Debugging Purposes
+            print("Previous Company: ", wd8.prev_company)
+            print("Work Position: ", wd8.work_position)
+            print("Work Date Started: ", wd8.work_date_started)
+            print("Work Date Ended: ", wd8.work_date_ended)
+            print("Reason for Leaving: ", wd8.reason_for_leaving)
+            
+        elif wd1.cur_work_exp == 9:
+            wd9.prev_company = prev_company
+            wd9.work_position = work_position
+            wd9.work_date_started = work_date_started
+            wd9.work_date_ended = work_date_ended
+            wd9.reason_for_leaving = reason_for_leaving
+
+            # For Debugging Purposes
+            print("Previous Company: ", wd9.prev_company)
+            print("Work Position: ", wd9.work_position)
+            print("Work Date Started: ", wd9.work_date_started)
+            print("Work Date Ended: ", wd9.work_date_ended)
+            print("Reason for Leaving: ", wd9.reason_for_leaving)
+
+        elif wd1.cur_work_exp == 10:
+            wd10.prev_company = prev_company
+            wd10.work_position = work_position
+            wd10.work_date_started = work_date_started
+            wd10.work_date_ended = work_date_ended
+            wd10.reason_for_leaving = reason_for_leaving
+
+            # For Debugging Purposes
+            print("Previous Company: ", wd10.prev_company)
+            print("Work Position: ", wd10.work_position)
+            print("Work Date Started: ", wd10.work_date_started)
+            print("Work Date Ended: ", wd10.work_date_ended)
+            print("Reason for Leaving: ", wd10.reason_for_leaving)
 
         from __6_apply_major_skills import major_skill_main
         major_skill_main(parent)
@@ -182,10 +421,241 @@ def display_values():
             reason_for_leaving_entry.insert(0, wd3.reason_for_leaving)
             reason_for_leaving_entry.config(fg="black")
 
+    if wd1.cur_work_exp == 4:  # Check if there are any entries in the list
+        # Previous Company
+        if wd4.prev_company == d_prev_company_entry:
+            pass
+        elif wd4.prev_company != "":
+            prev_company_entry.delete(0, tk.END)
+            prev_company_entry.insert(0, wd4.prev_company)
+            prev_company_entry.config(fg="black")
+        
+        # Work Position
+        if wd4.work_position == d_work_position_entry:
+            pass
+        elif wd4.work_position != "":
+            work_position_entry.delete(0, tk.END)
+            work_position_entry.insert(0, wd4.work_position)
+            work_position_entry.config(fg="black")
+        
+        # Work Date Started
+        if wd4.work_date_started != "":
+            work_date_started_entry.set_date(wd4.work_date_started)
+        
+        # Work Date Ended
+        if wd4.work_date_started != "":
+            work_date_ended_entry.set_date(wd4.work_date_ended)
+
+        # Reason for Leaving
+        if wd4.reason_for_leaving == d_reason_for_leaving:
+            pass
+        elif wd4.reason_for_leaving != "":
+            reason_for_leaving_entry.delete(0, tk.END)
+            reason_for_leaving_entry.insert(0, wd4.reason_for_leaving)
+            reason_for_leaving_entry.config(fg="black")
+    
+    if wd1.cur_work_exp == 5:  # Check if there are any entries in the list
+        # Previous Company
+        if wd5.prev_company == d_prev_company_entry:
+            pass
+        elif wd5.prev_company != "":
+            prev_company_entry.delete(0, tk.END)
+            prev_company_entry.insert(0, wd5.prev_company)
+            prev_company_entry.config(fg="black")
+        
+        # Work Position
+        if wd5.work_position == d_work_position_entry:
+            pass
+        elif wd5.work_position != "":
+            work_position_entry.delete(0, tk.END)
+            work_position_entry.insert(0, wd5.work_position)
+            work_position_entry.config(fg="black")
+        
+        # Work Date Started
+        if wd5.work_date_started != "":
+            work_date_started_entry.set_date(wd5.work_date_started)
+        
+        # Work Date Ended
+        if wd5.work_date_started != "":
+            work_date_ended_entry.set_date(wd5.work_date_ended)
+        
+        # Reason for Leaving
+        if wd5.reason_for_leaving == d_reason_for_leaving:
+            pass
+        elif wd5.reason_for_leaving != "":
+            reason_for_leaving_entry.delete(0, tk.END)
+            reason_for_leaving_entry.insert(0, wd5.reason_for_leaving)
+            reason_for_leaving_entry.config(fg="black")
+        
+    if wd1.cur_work_exp == 6:  # Check if there are any entries in the list
+        # Previous Company
+        if wd6.prev_company == d_prev_company_entry:
+            pass
+        elif wd6.prev_company != "":
+            prev_company_entry.delete(0, tk.END)
+            prev_company_entry.insert(0, wd6.prev_company)
+            prev_company_entry.config(fg="black")
+        
+        # Work Position
+        if wd6.work_position == d_work_position_entry:
+            pass
+        elif wd6.work_position != "":
+            work_position_entry.delete(0, tk.END)
+            work_position_entry.insert(0, wd6.work_position)
+            work_position_entry.config(fg="black")
+        
+        # Work Date Started
+        if wd6.work_date_started != "":
+            work_date_started_entry.set_date(wd6.work_date_started)
+        
+        # Work Date Ended
+        if wd6.work_date_started != "":
+            work_date_ended_entry.set_date(wd6.work_date_ended)
+        
+        # Reason for Leaving
+        if wd6.reason_for_leaving == d_reason_for_leaving:
+            pass  
+        elif wd6.reason_for_leaving != "":
+            reason_for_leaving_entry.delete(0, tk.END)
+            reason_for_leaving_entry.insert(0, wd6.reason_for_leaving)
+            reason_for_leaving_entry.config(fg="black")
+    
+    if wd1.cur_work_exp == 7:  # Check if there are any entries in the list
+        # Previous Company
+        if wd7.prev_company == d_prev_company_entry:
+            pass
+        elif wd7.prev_company != "":
+            prev_company_entry.delete(0, tk.END)
+            prev_company_entry.insert(0, wd7.prev_company)
+            prev_company_entry.config(fg="black")
+        
+        # Work Position
+        if wd7.work_position == d_work_position_entry:
+            pass
+        elif wd7.work_position != "":
+            work_position_entry.delete(0, tk.END)
+            work_position_entry.insert(0, wd7.work_position)
+            work_position_entry.config(fg="black")
+        
+        # Work Date Started
+        if wd7.work_date_started != "":
+            work_date_started_entry.set_date(wd7.work_date_started)
+        
+        # Work Date Ended
+        if wd7.work_date_started != "":
+            work_date_ended_entry.set_date(wd7.work_date_ended)
+        
+        # Reason for Leaving
+        if wd7.reason_for_leaving == d_reason_for_leaving:
+            pass
+        elif wd7.reason_for_leaving != "":
+            reason_for_leaving_entry.delete(0, tk.END)
+            reason_for_leaving_entry.insert(0, wd7.reason_for_leaving)
+            reason_for_leaving_entry.config(fg="black")
+        
+    if wd1.cur_work_exp == 8:  # Check if there are any entries in the list
+        # Previous Company
+        if wd8.prev_company == d_prev_company_entry:
+            pass
+        elif wd8.prev_company != "":
+            prev_company_entry.delete(0, tk.END)
+            prev_company_entry.insert(0, wd8.prev_company)
+            prev_company_entry.config(fg="black")
+        
+        # Work Position
+        if wd8.work_position == d_work_position_entry:
+            pass
+        elif wd8.work_position != "":
+            work_position_entry.delete(0, tk.END)
+            work_position_entry.insert(0, wd8.work_position)
+            work_position_entry.config(fg="black")
+        
+        # Work Date Started
+        if wd8.work_date_started != "":
+            work_date_started_entry.set_date(wd8.work_date_started)
+        
+        # Work Date Ended
+        if wd8.work_date_started != "":
+            work_date_ended_entry.set_date(wd8.work_date_ended)
+        
+        # Reason for Leaving
+        if wd8.reason_for_leaving == d_reason_for_leaving:
+            pass
+        elif wd8.reason_for_leaving != "":
+            reason_for_leaving_entry.delete(0, tk.END)
+            reason_for_leaving_entry.insert(0, wd8.reason_for_leaving)
+            reason_for_leaving_entry.config(fg="black")
+    
+    if wd1.cur_work_exp == 9:  # Check if there are any entries in the list
+        # Previous Company
+        if wd9.prev_company == d_prev_company_entry:
+            pass
+        elif wd9.prev_company != "":
+            prev_company_entry.delete(0, tk.END)
+            prev_company_entry.insert(0, wd9.prev_company)
+            prev_company_entry.config(fg="black")
+        
+        # Work Position
+        if wd9.work_position == d_work_position_entry:
+            pass
+        elif wd9.work_position != "":
+            work_position_entry.delete(0, tk.END)
+            work_position_entry.insert(0, wd9.work_position)
+            work_position_entry.config(fg="black")
+        
+        # Work Date Started
+        if wd9.work_date_started != "":
+            work_date_started_entry.set_date(wd9.work_date_started)
+        
+        # Work Date Ended
+        if wd9.work_date_started != "":
+            work_date_ended_entry.set_date(wd9.work_date_ended)
+        
+        # Reason for Leaving
+        if wd9.reason_for_leaving == d_reason_for_leaving:
+            pass
+        elif wd9.reason_for_leaving != "":
+            reason_for_leaving_entry.delete(0, tk.END)
+            reason_for_leaving_entry.insert(0, wd9.reason_for_leaving)
+            reason_for_leaving_entry.config(fg="black")
+    
+    if wd1.cur_work_exp == 10: # Check if there are any entries in the list
+        # Previous Company
+        if wd10.prev_company == d_prev_company_entry:
+            pass
+        elif wd10.prev_company != "":
+            prev_company_entry.delete(0, tk.END)
+            prev_company_entry.insert(0, wd10.prev_company)
+            prev_company_entry.config(fg="black")
+        
+        # Work Position
+        if wd10.work_position == d_work_position_entry:
+            pass
+        elif wd10.work_position != "":
+            work_position_entry.delete(0, tk.END)
+            work_position_entry.insert(0, wd10.work_position)
+            work_position_entry.config(fg="black")
+
+        # Work Date Started
+        if wd10.work_date_started != "":
+            work_date_started_entry.set_date(wd10.work_date_started)
+        
+        # Work Date Ended
+        if wd10.work_date_started != "":
+            work_date_ended_entry.set_date(wd10.work_date_ended)
+        
+        # Reason for Leaving
+        if wd10.reason_for_leaving == d_reason_for_leaving:
+            pass
+        elif wd10.reason_for_leaving != "":
+            reason_for_leaving_entry.delete(0, tk.END)
+            reason_for_leaving_entry.insert(0, wd10.reason_for_leaving)
+            reason_for_leaving_entry.config(fg="black")
+
 def add_more_clicked():
     confirmation_message = "Are you sure you want to add more entries?"
 
-    if wd1.cur_work_exp >= 3:
+    if wd1.cur_work_exp >= 10:
         # If the limit of 3 inputs is reached, show an error message box
         messagebox.showerror("Input Limit Exceeded", "You have reached the maximum limit of inputs (3).")
     else:
@@ -227,19 +697,110 @@ def add_more_clicked():
                     work_date_ended_entry.delete(0, "end")
                     reason_for_leaving_entry.delete(0, "end")
 
-                # elif wd1.cur_work_exp == 3:
-                #     wd3.prev_company = prev_company
-                #     wd3.work_position = work_position
-                #     wd3.work_date_started = work_date_started
-                #     wd3.work_date_ended = work_date_ended
-                #     wd3.reason_for_leaving = reason_for_leaving
+                elif wd1.cur_work_exp == 3:
+                    wd3.prev_company = prev_company
+                    wd3.work_position = work_position
+                    wd3.work_date_started = work_date_started
+                    wd3.work_date_ended = work_date_ended
+                    wd3.reason_for_leaving = reason_for_leaving
+
+                    prev_company_entry.delete(0, "end")
+                    work_position_entry.delete(0, "end")
+                    work_date_started_entry.delete(0, "end")
+                    work_date_ended_entry.delete(0, "end")
+                    reason_for_leaving_entry.delete(0, "end")
+
+                elif wd1.cur_work_exp == 4:
+                    wd4.prev_company = prev_company
+                    wd4.work_position = work_position
+                    wd4.work_date_started = work_date_started
+                    wd4.work_date_ended = work_date_ended
+                    wd4.reason_for_leaving = reason_for_leaving
+
+                    prev_company_entry.delete(0, "end")
+                    work_position_entry.delete(0, "end")
+                    work_date_started_entry.delete(0, "end")
+                    work_date_ended_entry.delete(0, "end")
+                    reason_for_leaving_entry.delete(0, "end")
+
+                elif wd1.cur_work_exp == 5:
+                    wd5.prev_company = prev_company
+                    wd5.work_position = work_position
+                    wd5.work_date_started = work_date_started
+                    wd5.work_date_ended = work_date_ended
+                    wd5.reason_for_leaving = reason_for_leaving
+
+                    prev_company_entry.delete(0, "end")
+                    work_position_entry.delete(0, "end")
+                    work_date_started_entry.delete(0, "end")
+                    work_date_ended_entry.delete(0, "end")
+                    reason_for_leaving_entry.delete(0, "end")
+                
+                elif wd1.cur_work_exp == 6:
+                    wd6.prev_company = prev_company
+                    wd6.work_position = work_position
+                    wd6.work_date_started = work_date_started
+                    wd6.work_date_ended = work_date_ended
+                    wd6.reason_for_leaving = reason_for_leaving
+                    
+                    prev_company_entry.delete(0, "end")
+                    work_position_entry.delete(0, "end")
+                    work_date_started_entry.delete(0, "end")
+                    work_date_ended_entry.delete(0, "end")
+                    reason_for_leaving_entry.delete(0, "end")
+                
+                elif wd1.cur_work_exp == 7:
+                    wd7.prev_company = prev_company
+                    wd7.work_position = work_position
+                    wd7.work_date_started = work_date_started
+                    wd7.work_date_ended = work_date_ended
+                    wd7.reason_for_leaving = reason_for_leaving
+
+                    prev_company_entry.delete(0, "end")
+                    work_position_entry.delete(0, "end")
+                    work_date_started_entry.delete(0, "end")
+                    work_date_ended_entry.delete(0, "end")
+                    reason_for_leaving_entry.delete(0, "end")
+
+                elif wd1.cur_work_exp == 8:
+                    wd8.prev_company = prev_company
+                    wd8.work_position = work_position
+                    wd8.work_date_started = work_date_started
+                    wd8.work_date_ended = work_date_ended
+                    wd8.reason_for_leaving = reason_for_leaving
+                    
+                    prev_company_entry.delete(0, "end")
+                    work_position_entry.delete(0, "end")
+                    work_date_started_entry.delete(0, "end")
+                    work_date_ended_entry.delete(0, "end")
+                    reason_for_leaving_entry.delete(0, "end")
+                
+                elif wd1.cur_work_exp == 9:
+                    wd9.prev_company = prev_company
+                    wd9.work_position = work_position
+                    wd9.work_date_started = work_date_started
+                    wd9.work_date_ended = work_date_ended
+                    wd9.reason_for_leaving = reason_for_leaving
+
+                    prev_company_entry.delete(0, "end")
+                    work_position_entry.delete(0, "end")
+                    work_date_started_entry.delete(0, "end")
+                    work_date_ended_entry.delete(0, "end")
+                    reason_for_leaving_entry.delete(0, "end")
+                
+                # elif wd1.cur_work_exp == 10:
+                #     wd10.prev_company = prev_company
+                #     wd10.work_position = work_position
+                #     wd10.work_date_started = work_date_started
+                #     wd10.work_date_ended = work_date_ended
+                #     wd10.reason_for_leaving = reason_for_leaving
 
                 #     prev_company_entry.delete(0, "end")
                 #     work_position_entry.delete(0, "end")
                 #     work_date_started_entry.delete(0, "end")
                 #     work_date_ended_entry.delete(0, "end")
                 #     reason_for_leaving_entry.delete(0, "end")
-
+                
                 # Increment the counter only if the data is successfully added
                 wd1.cur_work_exp += 1
 

@@ -74,6 +74,13 @@ class work_experience():
 work_data_1 = work_experience()
 work_data_2 = work_experience()
 work_data_3 = work_experience()
+work_data_4 = work_experience()
+work_data_5 = work_experience()
+work_data_6 = work_experience()
+work_data_7 = work_experience()
+work_data_8 = work_experience()
+work_data_9 = work_experience()
+work_data_10 = work_experience()
 
 
 class major_skills():
