@@ -3,3 +3,4 @@ roadmap.txt
 nexatech-application-form/education_dump.py
 sql/dump.sql
 sql/school_db_data.sql
+nexatech_app/dump_school_data.py
