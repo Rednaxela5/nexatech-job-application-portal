@@ -205,6 +205,12 @@ def insert_work_experience(prev_company, work_date_started, work_date_ended, wor
             cursor.close()
             conn.close()
 
+def get_skill_code(skill_name, cursor):
+    query = "SELECT skillcode FROM skills_db WHERE skillName = %s"
+    values = (skill_name,)
+    cursor.execute(query, values)
+    result = cursor.fetchone()
+    return result[0]
 def insert_major_skill(skill_name):
     skill_name_var = skill_name
     conn = connect_to_mysql()
@@ -212,39 +218,14 @@ def insert_major_skill(skill_name):
         try:
             cursor = conn.cursor()
 
-            # # Check if the skillName already exists in the major_skill table
-            # query = "SELECT skillCode FROM major_skill WHERE skillName = %s"
-            # values = (skill_name_var,)
-            # cursor.execute(query, values)
-            # result = cursor.fetchone()
+            skill_code = get_skill_code(skill_name_var, cursor)
+            
 
-            # if result:
-            #     # Skill already exists, just return the skillCode
-            #     skill_code = result[0]
-            # else:
-
-            # Assuming that s_dump_code is auto-generated as "SC" followed by 5 digits
-            query = "SELECT MAX(s_dump_code) FROM major_skill"
-            cursor.execute(query)
-            result = cursor.fetchone()
-            max_dump_code = result[0]
-
-            if max_dump_code:
-                next_s_dump_code = max_dump_code + 1
-            else:
-                next_s_dump_code = 1
-
-            # Using string formatting to add leading zeros to make it 5 digits
-            skill_code = "SC" + str(next_s_dump_code).zfill(5)
-
-            # Insert the new skill into the major_skill table
-            query = "INSERT INTO major_skill (s_dump_code, applicantNo, skillCode, skillName) VALUES (%s, %s, %s, %s)"
-            values = (None, ad.applicantNo, skill_code, skill_name_var)
+            query = "INSERT INTO major_skill (applicantNo, skillCode) VALUES (%s, %s)"
+            values = (ad.applicantNo, skill_code)
             cursor.execute(query, values)
             conn.commit()
             print("Skill details inserted successfully.")
-
-            return skill_code
 
         except mysql.connector.Error as err:
             print("Error inserting skill details:", err)

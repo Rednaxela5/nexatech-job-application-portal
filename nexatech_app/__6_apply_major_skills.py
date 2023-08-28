@@ -2,13 +2,15 @@ from pathlib import Path
 import sys
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
+from tkinter import Tk, ttk, Canvas, Entry, Text, Button, PhotoImage, messagebox
 from default_entry import DefaultTextEntry
 import tkinter as tk
 from tkcalendar import DateEntry
 import datetime
+import mysql.connector
 from storage import applicant_data as ad, school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3, work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3
 from storage import skill_data_1 as sn1, skill_data_2 as sn2, skill_data_3 as sn3, skill_data_4 as sn4, skill_data_5 as sn5, skill_data_6 as sn6
+from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
 from sql_connection import connection_database
 
 # Get the script's directory path
@@ -20,13 +22,34 @@ ASSETS_PATH = SCRIPT_DIR / "assets" / "apply_frame5"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def connect_to_mysql():
+    try:
+        conn = mysql.connector.connect(
+            host=MYSQL_HOST,
+            user=MYSQL_USER,
+            password=MYSQL_PASSWORD,
+            database=MYSQL_DATABASE
+        )
+        return conn
+    except mysql.connector.Error as err:
+        print("Error connecting to MySQL:", err)
+        return None
+
+def fetch_skill_data():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("SELECT skillName FROM skills_db ORDER BY skillName ASC")
+    skill_data = cursor.fetchall()
+    cursor.close()
+    return skill_data
+
 def back_cliked(parent):
-    skill_name_1 = skill_1_entry.get()
-    skill_name_2 = skill_2_entry.get()
-    skill_name_3 = skill_3_entry.get()
-    skill_name_4 = skill_4_entry.get()
-    skill_name_5 = skill_5_entry.get()
-    skill_name_6 = skill_6_entry.get() 
+    skill_name_1 = skill_1_var.get()
+    skill_name_2 = skill_2_var.get()
+    skill_name_3 = skill_3_var.get()
+    skill_name_4 = skill_4_var.get()
+    skill_name_5 = skill_5_var.get()
+    skill_name_6 = skill_6_var.get()
     
     if skill_name_4 == d_skill_4_entry and skill_name_5 == d_skill_5_entry and skill_name_6 == d_skill_6_entry:
         sn1.skill_name = skill_name_1
@@ -104,18 +127,22 @@ def back_cliked(parent):
     work_experience_main(parent)
 
 def submit_clicked(parent):
-    skill_name_1 = skill_1_entry.get()
-    skill_name_2 = skill_2_entry.get()
-    skill_name_3 = skill_3_entry.get()
-    skill_name_4 = skill_4_entry.get()
-    skill_name_5 = skill_5_entry.get()
-    skill_name_6 = skill_6_entry.get()        
+    skill_name_1 = skill_1_var.get()
+    skill_name_2 = skill_2_var.get()
+    skill_name_3 = skill_3_var.get()
+    skill_name_4 = skill_4_var.get()
+    skill_name_5 = skill_5_var.get()
+    skill_name_6 = skill_6_var.get()
 
     confirmation_message = "Are you sure you want to submit?"
 
+    # Check for duplicate skills
+    skill_list = [skill_name_1, skill_name_2, skill_name_3, skill_name_4, skill_name_5, skill_name_6]
     
     if skill_name_1 == d_skill_1_entry or skill_name_2 == d_skill_2_entry or skill_name_3 == d_skill_3_entry:
-        messagebox.showerror("Error", "Please enter at least three major skills")
+        messagebox.showerror("Error", "Please select at least three major skills")
+    elif len(skill_list) != len(set(skill_list)):
+        messagebox.showerror("Error", "Duplicate skills found")
     else:
         confirm = messagebox.askyesno("Confirmation", confirmation_message)
         if confirm:
@@ -253,54 +280,41 @@ def display_values():
     if sn1.skill_name == d_skill_1_entry:
         pass
     elif sn1.skill_name != "":
-        skill_1_entry.delete(0, tk.END)
-        skill_1_entry.insert(0, sn1.skill_name)
-        skill_1_entry.config(fg='black')
+        skill_1_var.set(sn1.skill_name)
     
     if sn2.skill_name == d_skill_2_entry:
         pass
     elif sn2.skill_name != "":
-        skill_2_entry.delete(0, tk.END)
-        skill_2_entry.insert(0, sn2.skill_name)
-        skill_2_entry.config(fg='black')
+        skill_2_var.set(sn2.skill_name)
     
     if sn3.skill_name == d_skill_3_entry:
         pass
     elif sn3.skill_name != "":
-        skill_3_entry.delete(0, tk.END)
-        skill_3_entry.insert(0, sn3.skill_name)
-        skill_3_entry.config(fg='black')
+        skill_3_var.set(sn3.skill_name)
     
     if sn4.skill_name == d_skill_4_entry:
         pass
     elif sn4.skill_name != "":
-        skill_4_entry.delete(0, tk.END)
-        skill_4_entry.insert(0, sn4.skill_name)
-        skill_4_entry.config(fg='black')
-    
+        skill_4_var.set(sn4.skill_name)
+
     if sn5.skill_name == d_skill_5_entry:
         pass
     elif sn4.skill_name != "":
-        skill_5_entry.delete(0, tk.END)
-        skill_5_entry.insert(0, sn5.skill_name)
-        skill_5_entry.config(fg='black')
+        skill_5_var.set(sn5.skill_name)
 
     if sn6.skill_name == d_skill_6_entry:
         pass
     elif sn6.skill_name != "":
-        skill_6_entry.delete(0, tk.END)
-        skill_6_entry.insert(0, sn6.skill_name)
-        skill_6_entry.config(fg='black')
-
+        skill_6_var.set(sn6.skill_name)
 
 def major_skill_main(parent):   
     # Global Variables
-    global skill_1_entry
-    global skill_2_entry
-    global skill_3_entry
-    global skill_4_entry
-    global skill_5_entry
-    global skill_6_entry
+    global skill_1_var
+    global skill_2_var
+    global skill_3_var
+    global skill_4_var
+    global skill_5_var
+    global skill_6_var
 
     global d_skill_1_entry
     global d_skill_2_entry
@@ -309,17 +323,17 @@ def major_skill_main(parent):
     global d_skill_5_entry
     global d_skill_6_entry
 
-    d_skill_1_entry = "Enter Skill Name 1"
-    d_skill_2_entry = "Enter Skill Name 2"
-    d_skill_3_entry = "Enter Skill Name 3"
-    d_skill_4_entry = "Enter Skill Name 4"
-    d_skill_5_entry = "Enter Skill Name 5"
-    d_skill_6_entry = "Enter Skill Name 6"
+    d_skill_1_entry = "Select Skill Name 1"
+    d_skill_2_entry = "Select Skill Name 2"
+    d_skill_3_entry = "Select Skill Name 3"
+    d_skill_4_entry = "Select Skill Name 4"
+    d_skill_5_entry = "Select Skill Name 5"
+    d_skill_6_entry = "Select Skill Name 6"
 
     # --------------------------------------------------------------------------------#
     # ---------------------------------- GUI SETUP ---------------------------------- #
     # --------------------------------------------------------------------------------#
-    fontstyle = "Montserrat"
+    fontstyle = ("Montserrat", 12)
 
     canvas = Canvas(
         parent,
@@ -360,7 +374,7 @@ def major_skill_main(parent):
     image_image_4 = PhotoImage(
         file=relative_to_assets("image_4.png"))
     image_4 = canvas.create_image(
-        552.0,
+        551.0,
         147.0,
         image=image_image_4
     )
@@ -496,7 +510,7 @@ def major_skill_main(parent):
     entry_image_4 = PhotoImage(
         file=relative_to_assets("entry_4.png"))
     entry_bg_4 = canvas.create_image(
-        712.5,
+        717.5,
         261.5,
         image=entry_image_4
     )
@@ -518,96 +532,121 @@ def major_skill_main(parent):
     )
 
     # --------------------------------------------------------------------------------#
-    # --------------------------------- ENTRY SETUP --------------------------------- #
+    # --------------------------------- ENTRY SETUP ----------------------------------#
     # --------------------------------------------------------------------------------#
-    skill_1_entry = DefaultTextEntry(
-        default_text=d_skill_1_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
+    # skill_1_entry = DefaultTextEntry(
+    #     default_text=d_skill_1_entry,
+    #     bd=0,
+    #     font=fontstyle,
+    #     bg="#FFFFFF",
+    #     fg="#000716",
+    #     highlightthickness=0
+    # )
+
+    skills_data = fetch_skill_data()
+    skills_options = [skill[0] for skill in skills_data]
+
+    # Variable Declaration for skills input
+    skill_1_var = tk.StringVar()
+    skill_1_var.set(d_skill_1_entry)
+
+    skill_2_var = tk.StringVar()
+    skill_2_var.set(d_skill_2_entry)
+
+    skill_3_var = tk.StringVar()
+    skill_3_var.set(d_skill_3_entry)
+
+    skill_4_var = tk.StringVar()
+    skill_4_var.set(d_skill_4_entry)
+
+    skill_5_var = tk.StringVar()
+    skill_5_var.set(d_skill_5_entry)
+
+    skill_6_var = tk.StringVar()
+    skill_6_var.set(d_skill_6_entry)
+
+    skill_1_entry = ttk.Combobox(
+        parent,
+        textvariable=skill_1_var,
+        values=skills_options,
+        font= fontstyle,
+        state="readonly",
     )
     skill_1_entry.place(
-        x=135.0,
-        y=240.0,
-        width=345.0,
+        x=134.0,
+        y=241.0,
+        width=348.0,
         height=43.0
     )
 
-    skill_2_entry = DefaultTextEntry(
-        default_text=d_skill_2_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
+    skill_2_entry = ttk.Combobox(
+        parent,
+        textvariable=skill_2_var,
+        values=skills_options,
+        font= fontstyle,
+        state="readonly",
     )
     skill_2_entry.place(
-        x=135.0,
-        y=322.0,
-        width=345.0,
+        x=134.0,
+        y=324.0,
+        width=348.0,
         height=43.0
     )
 
-    skill_3_entry = DefaultTextEntry(
-        default_text=d_skill_3_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
+    skill_3_entry = ttk.Combobox(
+        parent,
+        textvariable=skill_3_var,
+        values=skills_options,
+        font= fontstyle,
+        state="readonly",
     )
     skill_3_entry.place(
-        x=135.0,
-        y=406.0,
-        width=345.0,
+        x=134.0,
+        y=408.0,
+        width=348.0,
         height=43.0
     )
 
-    skill_4_entry = DefaultTextEntry(
-        default_text=d_skill_4_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
+    skill_4_entry = ttk.Combobox(
+        parent,
+        textvariable=skill_4_var,
+        values=skills_options,
+        font= fontstyle,
+        state="readonly",
     )
     skill_4_entry.place(
-        x=540.0,
-        y=239.0,
-        width=345.0,
+        x=538.5,
+        y=241.0,
+        width=358.0,
         height=43.0
     )
 
-    skill_5_entry = DefaultTextEntry(
-        default_text=d_skill_5_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
+    skill_5_entry = ttk.Combobox(
+        parent,
+        textvariable=skill_5_var,
+        values=skills_options,
+        font= fontstyle,
+        state="readonly",
     )
     skill_5_entry.place(
-        x=540.0,
-        y=322.0,
-        width=354.0,
+        x=538.0,
+        y=324.0,
+        width=358.0,
         height=43.0
     )
 
     
-    skill_6_entry = DefaultTextEntry(
-        default_text=d_skill_6_entry,
-        bd=0,
-        font=fontstyle,
-        bg="#FFFFFF",
-        fg="#000716",
-        highlightthickness=0
+    skill_6_entry = ttk.Combobox(
+        parent,
+        textvariable=skill_6_var,
+        values=skills_options,
+        font= fontstyle,
+        state="readonly",
     )
     skill_6_entry.place(
-        x=540.0,
-        y=406.0,
-        width=354.0,
+        x=538.0,
+        y=408.0,
+        width=358.0,
         height=43.0
     )
 
@@ -649,3 +688,9 @@ def major_skill_main(parent):
 
     display_values()
     parent.mainloop()
+
+
+if __name__ == "__main__":
+    root = Tk()
+    root.geometry("1024x568")
+    major_skill_main(root)

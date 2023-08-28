@@ -1,10 +1,10 @@
 -- -- ------------------------------------------------------------------------------
 -- ---------------------------- CREATE DATABASE ------------------------------------
 -- ---------------------------------------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS nexatech;
+CREATE SCHEMA IF NOT EXISTS sample_2;
 
 -- Switch to the nexatech schema
-USE nexatech;
+USE sample_2;
 
 -- -- ------------------------------------------------------------------------------
 -- --------------------------- APPLICANT DETAILS -----------------------------------
@@ -452,48 +452,89 @@ VALUES
 	(6, 'SID00115', 'Far Eastern University', 'Sampaloc, Manila', '2018-04-19', 'CO'),
 	(7, 'SID00229', 'Polytechnic University of the Philippines', 'Sta. Mesa, Manila', '2023-05-29', 'CO');
 
+-- ------------------------------------------------------------------------------
+-- -------------------------- MAJOR SKILLS DB------------------------------------
+-- ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS skills_db (
+	skillcode VARCHAR(7) PRIMARY KEY NOT NULL,
+    skillName VARCHAR(100) NOT NULL
+);
+
+-- INSERT DATA INTO THE TABLE
+INSERT INTO skills_db (skillcode, skillName)
+VALUES
+	('SC00001', 'Adaptability'),
+	('SC00002', 'Agile'),
+	('SC00003', 'Analytical'),
+	('SC00004', 'Backend'),
+	('SC00005', 'Client-focused'),
+	('SC00006', 'Cloud Computing'),
+	('SC00007', 'Collaboration'),
+	('SC00008', 'Communication'),
+	('SC00009', 'Creativity'),
+	('SC00010', 'Critical Thinking'),
+	('SC00011', 'Customer Service'),
+	('SC00012', 'DevOps'),
+	('SC00013', 'Documentation'),
+	('SC00014', 'Languages and Frameworks'),
+	('SC00015', 'Leadership'),
+	('SC00016', 'Maintenance'),
+	('SC00017', 'Networking'),
+	('SC00018', 'Optimization'),
+	('SC00019', 'Problem Solving'),
+	('SC00020', 'Programming'),
+	('SC00021', 'Project Management'),
+	('SC00022', 'Quality Assurance'),
+	('SC00023', 'Security'),
+	('SC00024', 'Self-Motivation'),
+	('SC00025', 'Technical Support'),
+	('SC00026', 'Testing'),
+	('SC00027', 'Time Management'),
+	('SC00028', 'Troubleshooting'),
+	('SC00029', 'UX/UI Design'),
+	('SC00030', 'Version Control');
+
 -- -- ------------------------------------------------------------------------------
 -- ------------------------------- MAJOR SKILLS ------------------------------------
 -- ---------------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS major_skill (
-    s_dump_code INT AUTO_INCREMENT,
+	applicantNo INT NOT NULL,
     skillcode VARCHAR(7) NOT NULL,
-    applicantNo INT NOT NULL,
-    skillName VARCHAR(100) NOT NULL,
-    PRIMARY KEY (s_dump_code, skillcode, applicantNo),
-    FOREIGN KEY (applicantNo) REFERENCES applicant_details(applicantNo)
+    PRIMARY KEY (applicantNo, skillcode),
+    FOREIGN KEY (applicantNo) REFERENCES applicant_details(applicantNo),
+    FOREIGN KEY (skillcode) REFERENCES skills_db(skillcode)
 );
 
 -- INSERT DATA INTO THE TABLE
-INSERT INTO major_skill (skillcode, applicantNo, skillName)
+INSERT INTO major_skill (applicantNo, skillcode)
 VALUES
-('SC00001', 1, 'Technical Support'),
-('SC00002', 1, 'Troubleshooting'),
-('SC00003', 1, 'Networking'),
-('SC00003', 2, 'Networking'),
-('SC00004', 2, 'Project Management'),
-('SC00005', 2, 'Agile'),
-('SC00002', 3, 'Troubleshooting'),
-('SC00006', 3, 'Maintenance'),
-('SC00007', 3, 'Optimization'),
-('SC00001', 4, 'Technical Support'),
-('SC00002', 4, 'Troubleshooting'),
-('SC00006', 4, 'Maintenance'),
-('SC00008', 4, 'Security'),
-('SC00009', 4, 'Collaboration'),
-('SC00010', 4, 'Client-focused'),
-('SC00001', 5, 'Technical Support'),
-('SC00003', 5, 'Troubleshooting'),
-('SC00011', 5, 'Programming'),
-('SC00002', 6, 'Troubleshooting'),
-('SC00011', 6, 'Optimization'),
-('SC00012', 6, 'Backend'),
-('SC00013', 6, 'Testing'),
-('SC00002', 7, 'Troubleshooting'),
-('SC00005', 7, 'Agile'),
-('SC00009', 7, 'Collaboration'),
-('SC00014', 7, 'Analytical'),
-('SC00015', 7, 'Creativity');
+	(1, 'SC00025'),
+	(1, 'SC00028'),
+	(1, 'SC00017'),
+	(2, 'SC00017'),
+	(2, 'SC00021'),
+	(2, 'SC00002'),
+	(3, 'SC00028'),
+	(3, 'SC00016'),
+	(3, 'SC00018'),
+	(4, 'SC00025'),
+	(4, 'SC00028'),
+	(4, 'SC00016'),
+	(4, 'SC00023'),
+	(4, 'SC00007'),
+	(4, 'SC00005'),
+	(5, 'SC00025'),
+	(5, 'SC00028'),
+	(5, 'SC00020'),
+	(6, 'SC00028'),
+	(6, 'SC00018'),
+	(6, 'SC00004'),
+	(6, 'SC00026'),
+	(7, 'SC00028'),
+	(7, 'SC00002'),
+	(7, 'SC00007'),
+	(7, 'SC00003'),
+	(7, 'SC00009');
 
 
 -- ------------------------------------------------------------------------------
