@@ -83,7 +83,7 @@ Take a look at some screenshots showcasing the intuitive application form and po
             <br />
             <p align="center">Work Experience</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Major Skills.png" alt="Major Skills" />
+            <img src="assets/readme-assets/screenshots/Major-Skills.png" alt="Major Skills" />
             <br />
             <p align="center">Major Skills</p></td>
     </tr>
