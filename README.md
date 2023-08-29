@@ -15,7 +15,7 @@
     <a href="https://github.com/Rednaxela5/nexatech-job-application-portal/blob/main/documents/Group6_InfoMan.docx"><strong>Explore the docs »</strong></a>
     <br/>
     <br/>
-    <a href="https://github.com/Rednaxela5/nexatech-job-application-portal">View Demo</a>
+    <a href="https://youtu.be/PAMLD1N62vA">View Demo</a>
     .
     <a href="https://youtu.be/swB65igJ4C8">Installation Guide</a>
     .
