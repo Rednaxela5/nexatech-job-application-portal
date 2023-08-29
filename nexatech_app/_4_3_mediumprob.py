@@ -50,7 +50,7 @@ def medium_3_main():
                                                     database=MYSQL_DATABASE)
             cursor = connection.cursor()
             # Execute the MySQL query
-            query = "SELECT skillCode, skillName, COUNT(*) FROM major_skill GROUP BY skillCode, skillName;"
+            query = "SELECT skillCode COUNT(*) FROM major_skill GROUP BY skillCode;"
             cursor.execute(query)
 
             # Fetch all the rows from the result

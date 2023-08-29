@@ -17,6 +17,8 @@
     <br/>
     <a href="https://github.com/Rednaxela5/nexatech-job-application-portal">View Demo</a>
     .
+    <a href="https://youtu.be/swB65igJ4C8">Installation Guide</a>
+    .
     <a href="https://github.com/Rednaxela5/nexatech-job-application-portal/issues">Report Bug</a>
     .
     <a href="https://github.com/Rednaxela5/nexatech-job-application-portal/issues">Request Feature</a>
@@ -219,7 +221,7 @@ If you're looking to set up a local copy that runs seamlessly, just follow these
 If all the above are satisfied, you may proceed to the next section.
 
 ## Installation
-Follow these instructions to setup your own instance of the app:
+Follow these instructions to setup your own instance of the app. You can also follow the video tutorial [here](https://youtu.be/swB65igJ4C8).
 ### 1. Clone the repo
 You may follow this instruction: [cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
