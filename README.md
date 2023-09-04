@@ -27,13 +27,15 @@
 </p>
 <p align="center">
   <img alt="Downloads" src="https://img.shields.io/github/downloads/Rednaxela5/nexatech-job-application-portal/total">
-  <img alt="Contributors" src="https://img.shields.io/github/contributors/Rednaxela5/nexatech-job-application-portal?color=dark-green">
-  <img alt="Forks" src="https://img.shields.io/github/forks/Rednaxela5/nexatech-job-application-portal?style=social">
-  <img alt="Stargazers" src="https://img.shields.io/github/stars/Rednaxela5/nexatech-job-application-portal?style=social">
-  <img alt="Issues" src="https://img.shields.io/github/issues/Rednaxela5/nexatech-job-application-portal">
+  <img alt="Contributors" src="https://img.shields.io/github/contributors/Rednaxela5/nexatech-job-application-portal?color=green">
+  <img alt="Forks" src="https://img.shields.io/github/forks/Rednaxela5/nexatech-job-application-portal?color=359ca6">
+  <img alt="Stargazers" src="https://img.shields.io/github/stars/Rednaxela5/nexatech-job-application-portal?style=flat&color=359ca6">
+  <img alt="Issues" src="https://img.shields.io/github/issues/Rednaxela5/nexatech-job-application-portal?color=red">
   <img alt="License" src="https://img.shields.io/github/license/Rednaxela5/nexatech-job-application-portal">
 </p>
 </div>
+
+
 
 ## Table Of Contents
 
