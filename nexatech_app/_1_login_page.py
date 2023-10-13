@@ -45,7 +45,9 @@ def login_menu():
     window.geometry("1024x568")
     window.configure(bg = "#0F2634")
     window.title("Nexatech System Administration")
-    #window.iconbitmap(r"F:\Nexatech Application\test_run_4\build\assets\frame1\check_database.ico")
+    icon_img = PhotoImage(file=relative_to_assets("job_logo.png"))
+    window.iconphoto(False, icon_img)
+
 
 
     canvas = Canvas(

@@ -33,6 +33,8 @@ def apply_home():
         a_window.configure(bg = "#0F2634")
         a_window.title("Nexatech Job Application Form")
         a_window.resizable(False, False)
+        icon_img = PhotoImage(file=relative_to_assets("job_logo.png"))
+        a_window.iconphoto(False, icon_img)
         personal_main(a_window)
 
     # --------------------------------------------------------------------------------#
@@ -47,6 +49,8 @@ def apply_home():
     window.configure(bg = "#0F2634")
     window.title("Nexatech Job Portal")
 
+    icon_img = PhotoImage(file=relative_to_assets("job_logo.png"))
+    window.iconphoto(False, icon_img)
     
     canvas = Canvas(
         window,
