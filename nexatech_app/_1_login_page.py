@@ -4,7 +4,7 @@ import os
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
-from _2_main_menu import selection_main
+from _2_admin_dashboard import dashboard
 from default_entry import DefaultTextEntry
 from config import USERNAME, PASSWORD
 
@@ -28,7 +28,7 @@ def login_menu():
             window.destroy()
 
             # Open the main application window
-            selection_main()
+            dashboard()
         else:
             messagebox.showerror("Login Failed", "Invalid username or password")
 
