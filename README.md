@@ -193,7 +193,7 @@ Take a look at some screenshots showcasing the intuitive application form and po
     </tr>
     <tr>
         <td colspan="2">
-            <img src="assets/readme-assets/screenshots/Hard 5.png" alt="Hard 5" />
+            <img src="assets/readme-assets/screenshots/Hard 5.png" alt="Hard 5" style="border-radius:10px"/>
             <br />
             <p align="center">Hard 5</p></td>
     </tr>
