@@ -589,7 +589,7 @@ def education_main(parent):
         textvariable=school_name_var,
         values=school_name_options,
         font= ("Montserrat", 12),
-        state="readonly",
+        state="readonly"
     )
 
     school_name_entry.place(
@@ -726,6 +726,8 @@ def education_main(parent):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=lambda: back_clicked(parent),
         relief="flat"
     )
@@ -743,6 +745,8 @@ def education_main(parent):
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=lambda: next_clicked(parent),
         relief="flat"
     )

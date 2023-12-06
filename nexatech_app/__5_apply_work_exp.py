@@ -1081,6 +1081,8 @@ def work_experience_main(parent):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=lambda:next_clicked(parent),
         relief="flat"
     )
@@ -1097,6 +1099,8 @@ def work_experience_main(parent):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=add_more_clicked,
         relief="flat"
     )
@@ -1113,6 +1117,8 @@ def work_experience_main(parent):
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=lambda: back_clicked(parent),
         relief="flat"
     )

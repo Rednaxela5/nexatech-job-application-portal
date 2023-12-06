@@ -400,6 +400,8 @@ def emp_main(parent):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=lambda: back_clicked(parent, canvas),
         relief="flat"
     )
@@ -417,6 +419,8 @@ def emp_main(parent):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=lambda: next_clicked(parent, canvas),
         relief="flat"
     )

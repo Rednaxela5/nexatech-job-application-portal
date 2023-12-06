@@ -174,6 +174,8 @@ def login_menu():
         borderwidth=0,
         highlightthickness=0,
         command=return_home,
+        activebackground="#0f2634",
+        cursor='hand2',
         relief="flat"
     )
     button_1.place(
@@ -189,6 +191,8 @@ def login_menu():
         borderwidth=0,
         highlightthickness=0,
         command=login,
+        activebackground="#CCD3D8",
+        cursor='hand2',
         relief="flat"
     )
     button_2.place(

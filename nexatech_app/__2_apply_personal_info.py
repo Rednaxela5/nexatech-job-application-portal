@@ -645,6 +645,8 @@ def personal_main(parent):
         borderwidth=0,
         highlightthickness=0,
         command=lambda: return_home_clicked(parent),
+        activebackground="#ccd4d9",
+        cursor='hand2',
         relief="flat"
     )
     button_1.place(
@@ -661,6 +663,8 @@ def personal_main(parent):
         borderwidth=0,
         highlightthickness=0,
         command=lambda: next_clicked(parent),
+        activebackground="#ccd4d9",
+        cursor='hand2',
         relief="flat"
     )
     button_2.place(

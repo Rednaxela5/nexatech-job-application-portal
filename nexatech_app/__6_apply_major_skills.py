@@ -660,6 +660,8 @@ def major_skill_main(parent):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=lambda: submit_clicked(parent),
         relief="flat"
     )
@@ -676,6 +678,8 @@ def major_skill_main(parent):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=lambda: back_cliked(parent),
         relief="flat"
     )

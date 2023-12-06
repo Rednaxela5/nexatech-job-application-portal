@@ -7,7 +7,7 @@ from pathlib import Path
 import sys
 import os
 
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label, Frame
 
 
 def dashboard():
@@ -28,16 +28,79 @@ def dashboard():
         # Open the main application window
         from _1_login_page import login_menu
         login_menu()
+
+    # EXPERIMENTAL
+    # def keep_flat(event):       # on click,
+    #     if event.widget is button_6: # if the click came from the button
+    #         event.widget.config(relief='ridge') # enforce an option
+
+    def delete_pages():
+        for frame in main_frame.winfo_children():
+            frame.destroy()
+
+    def dashboard_clicked():
+        dashboard_frame = Frame(main_frame)
+
+
+        lb = Label(dashboard_frame, text="Dashboard\n\nPage: 1", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
+        lb.pack()
+        dashboard_frame.pack(pady=20)
+
+    def new_applicant_clicked():
+        new_applicant_frame = Frame(main_frame)
+
+
+        lb = Label(new_applicant_frame, text="New Applicant\n\nPage: 2", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
+        lb.pack()
+
+        new_applicant_frame.pack(pady=20)
+    
+    def applicant_clicked():
+        applicant_frame = Frame(main_frame)
+
+
+        lb = Label(applicant_frame, text="Applicants\n\nPage: 3", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
+        lb.pack()
+
+        applicant_frame.pack(pady=20)
+
+    def about_clicked():
+        about_frame = Frame(main_frame)
+
+
+        lb = Label(about_frame, text="About\n\nPage: 4", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
+        lb.pack()
+
+        about_frame.pack(pady=20)
+
+    def hide_indicators():
+        db_indicate.config(bg="#0f2634")
+        new_applicant_indicate.config(bg="#0f2634")
+        applicant_indicate.config(bg="#0f2634")
+        about_indicate.config(bg="#0f2634")
+
+    def indicate(lb, page):
+
+        hide_indicators()
+        lb.config(bg="#FFFFFF")
+        delete_pages()
+        page()
+    
+        
+
     # --------------------------------------------------------------------------------#
     # ---------------------------------- GUI SETUP ---------------------------------- #
     # --------------------------------------------------------------------------------#
-
+    
     window = Tk()
     window.title("Nexatech Job Portal")
     window.geometry("1024x568")
     window.configure(bg = "#0F2634")
 
-
+    
+   
+    
+    
     canvas = Canvas(
         window,
         bg = "#0F2634",
@@ -47,22 +110,53 @@ def dashboard():
         highlightthickness = 0,
         relief = "ridge"
     )
-
     canvas.place(x = 0, y = 0)
+
+    # Main Frame
     canvas.create_rectangle(
         208.0,
         0.0,
         1024.0,
         568.0,
-        fill="#CCD3D8",
+        fill="#CCD4D9",
         outline="")
 
-    image_image_1 = PhotoImage(
-        file=relative_to_assets("image_1.png"))
-    image_1 = canvas.create_image(
-        616.0,
-        33.0,
-        image=image_image_1
+    # Header Frame
+    canvas.create_rectangle(
+        208.0,
+        0.0,
+        1024.0,
+        67.0,
+        fill="#C0C5C8",
+        outline="")
+
+    # Option Frame
+    canvas.create_rectangle(
+        0.0,
+        0.0,
+        208.0,
+        568.0,
+        fill="#0F2634",
+        outline="")
+
+
+    canvas.create_text(
+        231.0,
+        20.0,
+        anchor="nw",
+        text="System Administration",
+        fill="#0F2634",
+        font=("Montserrat", "14", "bold")
+    )
+
+    # User Profile
+    canvas.create_text(
+        769.0,
+        20.0,
+        anchor="nw",
+        text="Alexander Porlares",
+        fill="#0F2634",
+        font=("Montserrat", "14", "bold")
     )
 
     image_image_2 = PhotoImage(
@@ -73,14 +167,12 @@ def dashboard():
         image=image_image_2
     )
 
-    image_image_3 = PhotoImage(
-        file=relative_to_assets("image_3.png"))
-    image_3 = canvas.create_image(
-        868.0,
-        34.0,
-        image=image_image_3
-    )
+    main_frame = Frame(window, bg="#ccd3d8")
+    main_frame.place(x=208, y=67, height=816, width=568)
+    main_frame.configure(height=816, width=501)
 
+    
+    
     # --------------------------------------------------------------------------------#
     # ----------------------------------- BUTTONS ----------------------------------- #
     # --------------------------------------------------------------------------------#
@@ -92,6 +184,8 @@ def dashboard():
         borderwidth=0,
         highlightthickness=0,
         command=lambda: print("button_1 clicked"),
+        activebackground="#c0c5c8",
+        cursor='hand2',
         relief="flat"
     )
     button_1.place(
@@ -124,6 +218,8 @@ def dashboard():
         borderwidth=0,
         highlightthickness=0,
         command=logout_clicked,
+        activebackground="#0F2634",
+        cursor='hand2',
         relief="flat"
     )
     button_2.place(
@@ -155,7 +251,9 @@ def dashboard():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_3 clicked"),
+        command=lambda: indicate(about_indicate, about_clicked),
+        activebackground="#0F2634",
+        cursor='hand2',
         relief="flat"
     )
     button_3.place(
@@ -180,6 +278,9 @@ def dashboard():
     button_3.bind('<Enter>', button_3_hover)
     button_3.bind('<Leave>', button_3_leave)
 
+    about_indicate = Label(window, text='', bg="#0F2634")
+    about_indicate.place(x=4.0, y=231, height=47.0, width=3)
+
 
     button_image_4 = PhotoImage(
         file=relative_to_assets("button_4.png"))
@@ -187,7 +288,9 @@ def dashboard():
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_4 clicked"),
+        command=lambda: indicate(applicant_indicate, applicant_clicked),
+        activebackground="#0F2634",
+        cursor='hand2',
         relief="flat"
     )
     button_4.place(
@@ -212,6 +315,8 @@ def dashboard():
     button_4.bind('<Enter>', button_4_hover)
     button_4.bind('<Leave>', button_4_leave)
 
+    applicant_indicate = Label(window, text='', bg="#0F2634")
+    applicant_indicate.place(x=4.0, y=184, height=47.0, width=3)
 
     button_image_5 = PhotoImage(
         file=relative_to_assets("button_5.png"))
@@ -219,7 +324,9 @@ def dashboard():
         image=button_image_5,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_5 clicked"),
+        command=lambda: indicate(new_applicant_indicate, new_applicant_clicked),
+        activebackground="#0F2634",
+        cursor='hand2',
         relief="flat"
     )
     button_5.place(
@@ -244,6 +351,8 @@ def dashboard():
     button_5.bind('<Enter>', button_5_hover)
     button_5.bind('<Leave>', button_5_leave)
 
+    new_applicant_indicate = Label(window, text='', bg="#0F2634")
+    new_applicant_indicate.place(x=4.0, y=137, height=47.0, width=3)
 
     button_image_6 = PhotoImage(
         file=relative_to_assets("button_6.png"))
@@ -251,7 +360,9 @@ def dashboard():
         image=button_image_6,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_6 clicked"),
+        command=lambda: indicate(db_indicate, dashboard_clicked),
+        activebackground="#0F2634",
+        cursor='hand2',
         relief="flat"
     )
     button_6.place(
@@ -275,6 +386,12 @@ def dashboard():
 
     button_6.bind('<Enter>', button_6_hover)
     button_6.bind('<Leave>', button_6_leave)
+
+    db_indicate = Label(window, text='', bg="#0F2634")
+    db_indicate.place(x=4.0, y=90, height=47.0, width=3)
+
+    # EXPERIMENTAL
+    # window.bind('<Button-1>', keep_flat) 
 
     window.resizable(False, False)
     window.mainloop()

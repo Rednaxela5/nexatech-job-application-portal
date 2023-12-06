@@ -138,6 +138,8 @@ def apply_home():
         borderwidth=0,
         highlightthickness=0,
         command=admin_control_clicked,
+        activebackground="#0F2634",
+        cursor='hand2',
         relief="flat"
     )
     button_1.place(
@@ -154,6 +156,8 @@ def apply_home():
         borderwidth=0,
         highlightthickness=0,
         command=apply_now_clicked,
+        activebackground="#0F2634",
+        cursor='hand2',
         relief="flat"
     )
     button_2.place(
