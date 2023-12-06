@@ -77,6 +77,8 @@ def end_application_main(parent):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
+        activebackground="#ccd4d9",
+        cursor='hand2',
         command=lambda: return_home_clicked(parent),
         relief="flat"
     )
