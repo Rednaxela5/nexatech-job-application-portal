@@ -14,267 +14,126 @@ OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\alexa\Documents\GitHub\nexatech-job-application-form\tkintersample\build\assets\frame0")
 
 
-def relative_to_assets(path: str) -> Path:
-    return ASSETS_PATH / Path(path)
+def dash_main():
+    def relative_to_assets(path: str) -> Path:
+        return ASSETS_PATH / Path(path)
 
 
-window = Tk()
+    window = Tk()
 
-window.geometry("1024x568")
-window.configure(bg = "#0F2634")
+    window.geometry("816x501")
+    window.configure(bg = "#CCD4D9")
 
 
-canvas = Canvas(
-    window,
-    bg = "#0F2634",
-    height = 568,
-    width = 1024,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
-
-canvas.place(x = 0, y = 0)
-canvas.create_rectangle(
-    208.0,
-    0.0,
-    1024.0,
-    568.0,
-    fill="#CCD3D8",
-    outline="")
-
-canvas.create_rectangle(
-    208.0,
-    0.0,
-    1024.0,
-    67.0,
-    fill="#C0C4C7",
-    outline="")
-
-canvas.create_rectangle(
-    0.0,
-    0.0,
-    208.0,
-    568.0,
-    fill="#0F2634",
-    outline="")
-
-canvas.create_text(
-    231.0,
-    20.0,
-    anchor="nw",
-    text="System Administration",
-    fill="#0F2634",
-    font=("Montserrat", "14", "bold")
-)
-
-canvas.create_text(
-    769.0,
-    20.0,
-    anchor="nw",
-    text="Alexander Porlares",
-    fill="#0F2634",
-    font=("Montserrat", "14", "bold")
-)
-
-image_image_1 = PhotoImage(
-    file=relative_to_assets("image_1.png"))
-image_1 = canvas.create_image(
-    101.0,
-    33.0,
-    image=image_image_1
-)
-
-button_image_1 = PhotoImage(
-    file=relative_to_assets("button_1.png"))
-button_1 = Button(
-    image=button_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="flat"
-)
-button_1.place(
-    x=963.0,
-    y=9.0,
-    width=48.0,
-    height=48.0
-)
-
-button_image_hover_1 = PhotoImage(
-    file=relative_to_assets("button_hover_1.png"))
-
-def button_1_hover(e):
-    button_1.config(
-        image=button_image_hover_1
-    )
-def button_1_leave(e):
-    button_1.config(
-        image=button_image_1
+    canvas = Canvas(
+        window,
+        bg = "#CCD4D9",
+        height = 501,
+        width = 816,
+        bd = 0,
+        highlightthickness = 0,
+        relief = "ridge"
     )
 
-button_1.bind('<Enter>', button_1_hover)
-button_1.bind('<Leave>', button_1_leave)
-
-
-button_image_2 = PhotoImage(
-    file=relative_to_assets("button_2.png"))
-button_2 = Button(
-    image=button_image_2,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
-    relief="flat"
-)
-button_2.place(
-    x=4.0,
-    y=516.0,
-    width=200.0,
-    height=47.0
-)
-
-button_image_hover_2 = PhotoImage(
-    file=relative_to_assets("button_hover_2.png"))
-
-def button_2_hover(e):
-    button_2.config(
-        image=button_image_hover_2
-    )
-def button_2_leave(e):
-    button_2.config(
-        image=button_image_2
+    canvas.place(x = 0, y = 0)
+    image_image_1 = PhotoImage(
+        file=relative_to_assets("image_1.png"))
+    image_1 = canvas.create_image(
+        86.0,
+        42.0,
+        image=image_image_1
     )
 
-button_2.bind('<Enter>', button_2_hover)
-button_2.bind('<Leave>', button_2_leave)
-
-
-button_image_3 = PhotoImage(
-    file=relative_to_assets("button_3.png"))
-button_3 = Button(
-    image=button_image_3,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
-    relief="flat"
-)
-button_3.place(
-    x=4.0,
-    y=231.0,
-    width=200.0,
-    height=47.0
-)
-
-button_image_hover_3 = PhotoImage(
-    file=relative_to_assets("button_hover_3.png"))
-
-def button_3_hover(e):
-    button_3.config(
-        image=button_image_hover_3
-    )
-def button_3_leave(e):
-    button_3.config(
-        image=button_image_3
+    image_image_2 = PhotoImage(
+        file=relative_to_assets("image_2.png"))
+    image_2 = canvas.create_image(
+        207.0,
+        341.0,
+        image=image_image_2
     )
 
-button_3.bind('<Enter>', button_3_hover)
-button_3.bind('<Leave>', button_3_leave)
-
-
-button_image_4 = PhotoImage(
-    file=relative_to_assets("button_4.png"))
-button_4 = Button(
-    image=button_image_4,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
-    relief="flat"
-)
-button_4.place(
-    x=4.0,
-    y=184.0,
-    width=200.0,
-    height=47.0
-)
-
-button_image_hover_4 = PhotoImage(
-    file=relative_to_assets("button_hover_4.png"))
-
-def button_4_hover(e):
-    button_4.config(
-        image=button_image_hover_4
-    )
-def button_4_leave(e):
-    button_4.config(
-        image=button_image_4
+    image_image_3 = PhotoImage(
+        file=relative_to_assets("image_3.png"))
+    image_3 = canvas.create_image(
+        599.0,
+        341.0,
+        image=image_image_3
     )
 
-button_4.bind('<Enter>', button_4_hover)
-button_4.bind('<Leave>', button_4_leave)
-
-
-button_image_5 = PhotoImage(
-    file=relative_to_assets("button_5.png"))
-button_5 = Button(
-    image=button_image_5,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_5 clicked"),
-    relief="flat"
-)
-button_5.place(
-    x=4.0,
-    y=137.0,
-    width=200.0,
-    height=47.0
-)
-
-button_image_hover_5 = PhotoImage(
-    file=relative_to_assets("button_hover_5.png"))
-
-def button_5_hover(e):
-    button_5.config(
-        image=button_image_hover_5
-    )
-def button_5_leave(e):
-    button_5.config(
-        image=button_image_5
+    image_image_4 = PhotoImage(
+        file=relative_to_assets("image_4.png"))
+    image_4 = canvas.create_image(
+        119.0,
+        115.0,
+        image=image_image_4
     )
 
-button_5.bind('<Enter>', button_5_hover)
-button_5.bind('<Leave>', button_5_leave)
-
-
-button_image_6 = PhotoImage(
-    file=relative_to_assets("button_6.png"))
-button_6 = Button(
-    image=button_image_6,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_6 clicked"),
-    relief="flat"
-)
-button_6.place(
-    x=4.0,
-    y=90.0,
-    width=200.0,
-    height=47.0
-)
-
-button_image_hover_6 = PhotoImage(
-    file=relative_to_assets("button_hover_6.png"))
-
-def button_6_hover(e):
-    button_6.config(
-        image=button_image_hover_6
-    )
-def button_6_leave(e):
-    button_6.config(
-        image=button_image_6
+    image_image_5 = PhotoImage(
+        file=relative_to_assets("image_5.png"))
+    image_5 = canvas.create_image(
+        300.0,
+        115.0,
+        image=image_image_5
     )
 
-button_6.bind('<Enter>', button_6_hover)
-button_6.bind('<Leave>', button_6_leave)
+    image_image_6 = PhotoImage(
+        file=relative_to_assets("image_6.png"))
+    image_6 = canvas.create_image(
+        467.0,
+        115.0,
+        image=image_image_6
+    )
 
-window.resizable(False, False)
-window.mainloop()
+    image_image_7 = PhotoImage(
+        file=relative_to_assets("image_7.png"))
+    image_7 = canvas.create_image(
+        672.0,
+        115.0,
+        image=image_image_7
+    )
+
+    image_image_8 = PhotoImage(
+        file=relative_to_assets("image_8.png"))
+    image_8 = canvas.create_image(
+        408.0,
+        187.99999999999983,
+        image=image_image_8
+    )
+
+    canvas.create_text(
+        124.0,
+        108.0,
+        anchor="nw",
+        text="120",
+        fill="#0F2634",
+        font=("Montserrat Bold", 40 * -1)
+    )
+
+    canvas.create_text(
+        307.0,
+        108.0,
+        anchor="nw",
+        text="58",
+        fill="#0F2634",
+        font=("Montserrat Bold", 40 * -1)
+    )
+
+    canvas.create_text(
+        476.0,
+        108.0,
+        anchor="nw",
+        text="62",
+        fill="#0F2634",
+        font=("Montserrat Bold", 40 * -1)
+    )
+
+    canvas.create_text(
+        585.0,
+        108.0,
+        anchor="nw",
+        text="₱ 62,300",
+        fill="#0F2634",
+        font=("Montserrat Bold", 40 * -1)
+    )
+    window.resizable(False, False)
+    window.mainloop()

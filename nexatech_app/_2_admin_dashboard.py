@@ -7,7 +7,9 @@ from pathlib import Path
 import sys
 import os
 
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label, Frame
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label, Frame, BOTH
+from PIL import Image, ImageTk
+
 
 
 def dashboard():
@@ -36,15 +38,17 @@ def dashboard():
 
     def delete_pages():
         for frame in main_frame.winfo_children():
-            frame.destroy()
+            frame.forget()
 
     def dashboard_clicked():
         dashboard_frame = Frame(main_frame)
+        dashboard_frame.pack(pady=20)
+
 
 
         lb = Label(dashboard_frame, text="Dashboard\n\nPage: 1", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
         lb.pack()
-        dashboard_frame.pack(pady=20)
+
 
     def new_applicant_clicked():
         new_applicant_frame = Frame(main_frame)
@@ -61,6 +65,12 @@ def dashboard():
 
         lb = Label(applicant_frame, text="Applicants\n\nPage: 3", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
         lb.pack()
+
+        book_title = Label(applicant_frame, text="Book Title")
+        book_title.pack()
+
+        book_entry = Entry(applicant_frame)
+        book_entry.pack()
 
         applicant_frame.pack(pady=20)
 
@@ -97,6 +107,9 @@ def dashboard():
     window.geometry("1024x568")
     window.configure(bg = "#0F2634")
 
+    icon_img = PhotoImage(file=relative_to_assets("job_logo.png"))
+    window.iconphoto(False, icon_img)
+
     
    
     
@@ -111,6 +124,15 @@ def dashboard():
         relief = "ridge"
     )
     canvas.place(x = 0, y = 0)
+
+    #sample
+    Total_Applicants = PhotoImage(
+        file=relative_to_assets("Dashboard_Title.png"))
+    dashboard = canvas.create_image(
+        1.0,
+        100.0,
+        image=Total_Applicants
+    )
 
     # Main Frame
     canvas.create_rectangle(
@@ -166,7 +188,6 @@ def dashboard():
         33.0,
         image=image_image_2
     )
-
     main_frame = Frame(window, bg="#ccd3d8")
     main_frame.place(x=208, y=67, height=816, width=568)
     main_frame.configure(height=816, width=501)
@@ -393,7 +414,8 @@ def dashboard():
     # EXPERIMENTAL
     # window.bind('<Button-1>', keep_flat) 
 
-    window.resizable(False, False)
+    indicate(db_indicate, dashboard_clicked)
+    # window.resizable(False, False)
     window.mainloop()
 
 

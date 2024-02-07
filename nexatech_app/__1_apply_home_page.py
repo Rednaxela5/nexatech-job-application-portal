@@ -99,25 +99,26 @@ def apply_home():
         file=relative_to_assets("image_5.png"))
     image_5 = canvas.create_image(
         512.0,
-        505.0,
+        540.0,
         image=image_image_5
     )
 
-    image_image_6 = PhotoImage(
-        file=relative_to_assets("image_6.png"))
-    image_6 = canvas.create_image(
-        512.0,
-        526.0,
-        image=image_image_6
-    )
+    # Removed the following lines to remove the text for in partial fulfilment of the project requirements
+    # image_image_6 = PhotoImage(
+    #     file=relative_to_assets("image_6.png"))
+    # image_6 = canvas.create_image(
+    #     512.0,
+    #     526.0,
+    #     image=image_image_6
+    # )
 
-    image_image_7 = PhotoImage(
-        file=relative_to_assets("image_7.png"))
-    image_7 = canvas.create_image(
-        512.0,
-        546.0,
-        image=image_image_7
-    )
+    # image_image_7 = PhotoImage(
+    #     file=relative_to_assets("image_7.png"))
+    # image_7 = canvas.create_image(
+    #     512.0,
+    #     546.0,
+    #     image=image_image_7
+    # )
 
     image_image_8 = PhotoImage(
         file=relative_to_assets("image_8.png"))

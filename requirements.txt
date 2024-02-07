@@ -3,3 +3,4 @@ tkcalendar
 mysql-connector-python
 matplotlib
 pandas
+pillow

@@ -1,2 +1,2 @@
 
-        dashboard_frame = Frame(main_frame)
+    window = Tk()
