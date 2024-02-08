@@ -2,6 +2,9 @@ from pathlib import Path
 import sys
 import os
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar, Label, Frame, ttk, messagebox
+from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
+import mysql.connector
+import config as db_controller
 
 # Get the script's directory path
 SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
@@ -12,7 +15,6 @@ ASSETS_PATH = SCRIPT_DIR / "assets" / "dash_frame1"
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
-
 
 
 def dash(parent):
@@ -102,40 +104,74 @@ def dash(parent):
         image=image_image_8
     )
 
-
+    
+    
     canvas.create_text(
-        124.0,
-        100.0,
-        anchor="nw",
-        text="120",
+        190.0,
+        105.0,
+        anchor="ne",
+        text=db_controller.tot_applicant(),
         fill="#0F2634",
-        font=("Montserrat", 30, "bold")
+        font=("Montserrat", 25, "bold")
     )
 
     canvas.create_text(
-        307.0,
-        100.0,
-        anchor="nw",
-        text="58",
+        355.0,
+        105.0,
+        anchor="ne",
+        text=db_controller.full_time(),
         fill="#0F2634",
-        font=("Montserrat", 30, "bold")
+        font=("Montserrat", 25, "bold")
     )
 
     canvas.create_text(
-        476.0,
-        100.0,
-        anchor="nw",
-        text="62",
+        525.0,
+        105.0,
+        anchor="ne",
+        text=db_controller.part_time(),
         fill="#0F2634",
-        font=("Montserrat", 30, "bold")
+        font=("Montserrat", 25, "bold")
     )
 
     canvas.create_text(
-        585.0,
-        100.0,
-        anchor="nw",
-        text="₱ 62,300",
+        770.0,
+        105.0,
+        anchor="ne",
+        text="₱{:,.0f}".format(db_controller.avg_des_sal()),
         fill="#0F2634",
-        font=("Montserrat", 30, "bold")
+        font=("Montserrat", 25, "bold")
     )
 
+
+    # job_pos_table = ttk.Treeview(
+    #     parent,
+    #     columns=("Job Position", "Number of Applicants"),
+    #     show="headings"
+    # )
+
+    # job_pos_table.place(x=209, y=341)
+
+    table_columns = ["Job Position", "Total Count"]
+    # Create a treeview (table)
+    tree = ttk.Treeview(parent, columns=table_columns, show="headings")
+
+    # Define column headings
+    tree.heading("#0", text="Job Position", anchor="center")
+    tree.heading("#1", text="Total Count", anchor="center")
+
+    
+    for column in table_columns:
+        tree.heading(column=column, text=column)
+        tree.column(column=column, width=70)
+
+    
+    # Configure header color
+    tree["style"] = "mystyle.Treeview"
+    style = ttk.Style()
+    style.theme_use("default")
+    style.configure("mystyle.Treeview.Heading", background="#4a6778", foreground="white")
+
+    # Configure selected row color
+    style.map("Treeview", background=[("selected", "#ccd4d9")])
+
+    tree.place(x=209, y=310)

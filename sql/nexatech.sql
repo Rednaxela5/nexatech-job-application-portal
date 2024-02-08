@@ -571,3 +571,106 @@ VALUES
 	(6, 'EH00013',' QWE Company', '2011-05-15', '2019-10-03', 'Data Analyst', 'Contract ended'),
 	(6, 'EH00014',' YES Enterprise', '2019-10-15', '2020-02-09', 'UI/UX Designer', 'Bankrupt'),
 	(7, 'EH00015',' ABC Corporation', '2012-01-23', '2018-06-10', 'Data Administrator', 'Relocation');
+
+
+-- Retrieve information of an applicant from the applicant_details table based on the given applicantNo
+DELIMITER $$
+CREATE PROCEDURE find_applicant(IN id INT)
+BEGIN
+    SELECT *
+    FROM applicant_details
+    WHERE applicantNo = id;
+END $$
+DELIMITER ;
+
+CALL find_applicant(4);
+
+
+SELECT COUNT(applicantNo) AS Total_Applicants
+FROM applicant_details;
+
+
+-- STORED PROCEDURE TO COUNT TOTAL APPLICANTS
+DELIMITER //
+
+CREATE PROCEDURE CountTotalApplicants()
+BEGIN
+	-- Declare variables
+    DECLARE totalApplicants INT;
+    
+    -- Count total applicants
+    SELECT COUNT(*) INTO totalApplicants
+    FROM applicant_details;
+    
+    SELECT totalApplicants AS Total_Applicants;
+END//
+
+DELIMITER ;
+
+-- CALL the procedure to count total applicants
+CALL CountTotalApplicants();
+
+
+-- STORED PROCEDURE TO COUNT FULL-TIME APPLICANTS
+DELIMITER //
+
+CREATE PROCEDURE CountFullTimeApplicants()
+BEGIN
+	-- Declare variables
+    DECLARE fullTimeApplicants INT;
+	
+    -- Count full-time applicants
+    SELECT COUNT(*) INTO fullTimeApplicants
+    FROM applicant_details
+    WHERE employmentType = 'Full-time';
+
+    -- Return full-time applicants
+    SELECT fullTimeApplicants AS Full_Time;
+END//
+
+DELIMITER ;
+
+-- CALL the procedure to count full-time applicants
+CALL CountFullTimeApplicants();
+
+
+-- STORED PROCEDURE TO COUNT FULL-TIME APPLICANTS
+DELIMITER //
+
+CREATE PROCEDURE CountPartTimeApplicants()
+BEGIN
+	-- Declare variables
+    DECLARE partTimeApplicants INT;
+	
+    -- Count full-time applicants
+    SELECT COUNT(*) INTO partTimeApplicants
+    FROM applicant_details
+    WHERE employmentType = 'Part-time';
+
+    -- Return full-time applicants
+    SELECT partTimeApplicants AS Part_Time;
+END//
+
+DELIMITER ;
+
+CALL CountPartTimeApplicants();
+
+-- STORED PROCEDURE TO GET THE AVERAGE DESIRED SALARY OF THE APPLICANTS
+DELIMITER //
+
+CREATE PROCEDURE AverageDesiredSalary()
+BEGIN
+    SELECT AVG(desiredSalary) AS Desired_Salary
+    FROM applicant_details;
+END //
+
+DELIMITER ;
+
+CALL AverageDesiredSalary();
+
+
+-- COUNT THE MOST COMMON JOB POSITION IN THE APPLICATION
+SELECT jobPosition, COUNT(*) AS Total_Count
+FROM applicant_details
+GROUP BY jobPosition;
+

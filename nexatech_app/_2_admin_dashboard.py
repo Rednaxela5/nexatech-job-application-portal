@@ -1,8 +1,7 @@
 from pathlib import Path
 import sys
 import os
-
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label, Frame, BOTH
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label, Frame, BOTH, messagebox
 from PIL import Image, ImageTk
 from _2_admin_dashboard_d import dash
 from _2_admin_new_applicant import new_app
@@ -25,11 +24,18 @@ def dashboard():
 
 
     def logout_clicked():
-        # Close the login window
-        window.destroy()
-        # Open the main application window
-        from _1_login_page import login_menu
-        login_menu()
+        confirmation_message = "Are you sure you want to logout?"
+
+        confirm = messagebox.askyesno("Confirmation", confirmation_message)
+        if confirm:
+            # Close the login window
+            window.destroy()
+            # Open the main application window
+            from _1_login_page import login_menu
+            login_menu()
+        else:
+            pass
+        
 
     def delete_pages():
         for frame in main_frame.winfo_children():
