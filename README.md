@@ -206,7 +206,9 @@ Take a look at some screenshots showcasing the intuitive application form and po
 
 The following tools and techonologies were involved in the making of this project
 
+* [Figma](https://www.figma.com/)
 * [Python 🐍](https://www.python.org/)
+* [Visual Studio Code](https://code.visualstudio.com/)
 * [MySQL Server 🐬](https://www.mysql.com/products/workbench/)
 * [MySQL Connector Python](https://dev.mysql.com/doc/connector-python/en/)
 * [Tkinter Designer](https://github.com/ParthJadhav/Tkinter-Designer)
