@@ -5,19 +5,23 @@ import os
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label, Frame, BOTH
 from PIL import Image, ImageTk
 from _2_admin_dashboard_d import dash
+from _2_admin_new_applicant import new_app
+from _2_admin_applicants import applicant
+from _2_admin_about import about
 
 
+# Get the script's directory path
+SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
+
+# Set the relative path to the assets directory
+ASSETS_PATH = SCRIPT_DIR / "assets" / "dash_frame0"
+
+
+def relative_to_assets(path: str) -> Path:
+    return ASSETS_PATH / Path(path)
 
 def dashboard():
-    # Get the script's directory path
-    SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
-
-    # Set the relative path to the assets directory
-    ASSETS_PATH = SCRIPT_DIR / "assets" / "dash_frame0"
-
-
-    def relative_to_assets(path: str) -> Path:
-        return ASSETS_PATH / Path(path)
+    
 
 
     def logout_clicked():
@@ -36,6 +40,12 @@ def dashboard():
         global current_window
         if btn_name == "dash":
             current_window = dash(window)
+        elif btn_name == "new_applicant":
+            current_window = new_app(window)
+        elif btn_name == "applicant":
+            current_window = applicant(window)
+        elif btn_name == "about":
+            current_window = about(window)
 
 
     def hide_indicators():
@@ -60,38 +70,38 @@ def dashboard():
 
 
 
-    def new_applicant_clicked():
-        new_applicant_frame = Frame(main_frame)
+    # def new_applicant_clicked():
+    #     new_applicant_frame = Frame(main_frame)
 
 
-        lb = Label(new_applicant_frame, text="New Applicant\n\nPage: 2", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
-        lb.pack()
+    #     lb = Label(new_applicant_frame, text="New Applicant\n\nPage: 2", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
+    #     lb.pack()
 
-        new_applicant_frame.pack(pady=20)
+    #     new_applicant_frame.pack(pady=20)
     
-    def applicant_clicked():
-        applicant_frame = Frame(main_frame)
+    # def applicant_clicked():
+    #     applicant_frame = Frame(main_frame)
 
 
-        lb = Label(applicant_frame, text="Applicants\n\nPage: 3", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
-        lb.pack()
+    #     lb = Label(applicant_frame, text="Applicants\n\nPage: 3", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
+    #     lb.pack()
 
-        book_title = Label(applicant_frame, text="Book Title")
-        book_title.pack()
+    #     book_title = Label(applicant_frame, text="Book Title")
+    #     book_title.pack()
 
-        book_entry = Entry(applicant_frame)
-        book_entry.pack()
+    #     book_entry = Entry(applicant_frame)
+    #     book_entry.pack()
 
-        applicant_frame.pack(pady=20)
+    #     applicant_frame.pack(pady=20)
 
-    def about_clicked():
-        about_frame = Frame(main_frame)
+    # def about_clicked():
+    #     about_frame = Frame(main_frame)
 
 
-        lb = Label(about_frame, text="About\n\nPage: 4", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
-        lb.pack()
+    #     lb = Label(about_frame, text="About\n\nPage: 4", bg="#CCD4D9", fg="#464040", font=("Montserrat", 20, "bold"))
+    #     lb.pack()
 
-        about_frame.pack(pady=20)
+    #     about_frame.pack(pady=20)
 
     
     
@@ -123,8 +133,6 @@ def dashboard():
         relief = "ridge"
     )
     canvas.place(x = 0, y = 0)
-
-
 
     # Main Frame
     canvas.create_rectangle(
@@ -264,7 +272,7 @@ def dashboard():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: indicate(about_indicate, about_clicked),
+        command=lambda: indicate(about_indicate, handle_button_press("about")),
         activebackground="#0F2634",
         cursor='hand2',
         relief="flat"
@@ -301,7 +309,7 @@ def dashboard():
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: indicate(applicant_indicate, applicant_clicked),
+        command=lambda: indicate(applicant_indicate, handle_button_press("applicant")),
         activebackground="#0F2634",
         cursor='hand2',
         relief="flat"
@@ -337,7 +345,7 @@ def dashboard():
         image=button_image_5,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: indicate(new_applicant_indicate, new_applicant_clicked),
+        command=lambda: indicate(new_applicant_indicate, handle_button_press("new_applicant")),
         activebackground="#0F2634",
         cursor='hand2',
         relief="flat"
