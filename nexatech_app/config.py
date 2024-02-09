@@ -77,3 +77,19 @@ def count_common_skills():
     result = cursor.fetchall()
     cursor.close()
     return result
+
+def display_applicant_details():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL DisplayApplicantsByName('filter_name');")
+    result = cursor.fetchall()
+    cursor.close()
+    return result
+
+def search_applicant_details(search_key):
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL DisplayApplicantsByName(filter_name);")
+    result = cursor.fetchall()
+    cursor.close()
+    return result

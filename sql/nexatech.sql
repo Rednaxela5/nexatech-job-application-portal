@@ -698,3 +698,8 @@ DELIMITER ;
 
 
 CALL CountCommonSkill();
+
+
+SELECT applicantNo, name, dateOfBirth, SSS_ID, CONCAT_WS(', ', address, city, province, zipcode) AS Adress, phoneNumber, emailAddress
+FROM applicant_details
+ORDER BY applicantNo ASC;
