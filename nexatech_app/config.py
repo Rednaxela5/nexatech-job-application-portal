@@ -61,3 +61,19 @@ def avg_des_sal():
     # Extracting the average salary from the result set
     average_salary = result[0][0] if result else 0.0
     return average_salary
+
+def count_common_job_pos():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL CountJobPos();")
+    result = cursor.fetchall()
+    cursor.close()
+    return result
+
+def count_common_skills():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL CountCommonSkill();")
+    result = cursor.fetchall()
+    cursor.close()
+    return result

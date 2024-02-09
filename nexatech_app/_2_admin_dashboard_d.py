@@ -16,9 +16,38 @@ ASSETS_PATH = SCRIPT_DIR / "assets" / "dash_frame1"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def fetch_data():
+    # Connect to MySQL database
+    conn = db_controller.connect_to_mysql()
+    if conn is None:
+        return []
+
+    cursor = conn.cursor()
+    cursor.callproc('CountJobPos')
+    
+    # Fetch all rows
+    rows = cursor.fetchall()
+    conn.close()
+    
+    return rows
+
+# def populate_table():
+#     # Clear existing data
+#     for row in tree.get_children():
+#         tree.delete(row)
+    
+#     # Fetch data from the database
+#     data = fetch_data()
+    
+#     # Insert fetched data into the table
+#     for row in data:
+#         tree.insert('', 'end', values=row)
 
 def dash(parent):
-    
+
+    # --------------------------------------------------------------------------------#
+    # ---------------------------------- GUI SETUP ---------------------------------- #
+    # --------------------------------------------------------------------------------# 
 
     canvas = Canvas(
         parent,
@@ -143,35 +172,72 @@ def dash(parent):
     )
 
 
-    # job_pos_table = ttk.Treeview(
-    #     parent,
-    #     columns=("Job Position", "Number of Applicants"),
-    #     show="headings"
-    # )
+    # --------------------------------------------------------------------------------#
+    # ---------------------------- TREEVIEW/TABLE SETUP ----------------------------- #
+    # --------------------------------------------------------------------------------#
 
-    # job_pos_table.place(x=209, y=341)
-
-    table_columns = ["Job Position", "Total Count"]
-    # Create a treeview (table)
-    tree = ttk.Treeview(parent, columns=table_columns, show="headings")
+    # ============================ JOB POSITIONS TABLE ============================ #
+    job_pos_table = ttk.Treeview(
+        master=parent, 
+        columns=('Job Position', 'Total'), 
+        height=8, 
+        show='headings'
+    )
 
     # Define column headings
-    tree.heading("#0", text="Job Position", anchor="center")
-    tree.heading("#1", text="Total Count", anchor="center")
-
+    job_pos_table.heading('#0', text='Job Position')
+    job_pos_table.heading('#1', text='Total')
     
-    for column in table_columns:
-        tree.heading(column=column, text=column)
-        tree.column(column=column, width=70)
+    # Configure heading
+    job_pos_table.heading("Job Position", text="Job Position", anchor="center")
+    job_pos_table.heading("Total", text="Total", anchor="center")
 
-    
-    # Configure header color
-    tree["style"] = "mystyle.Treeview"
-    style = ttk.Style()
-    style.theme_use("default")
-    style.configure("mystyle.Treeview.Heading", background="#4a6778", foreground="white")
+    #Configure column width
+    job_pos_table.column("Job Position", width=210)
+    job_pos_table.column("Total", width=110, anchor="center")
 
     # Configure selected row color
-    style.map("Treeview", background=[("selected", "#ccd4d9")])
+    style = ttk.Style()
+    style.theme_use("default")
+    style.configure("Treeview", font=("Montserrat", 10))
+    style.configure("Treeview.Heading", background="#1a415a", fieldbackground="#1a415a", foreground="white", font=("Montserrat SemiBold", 11,))
+    style.map("Treeview", background=[("selected", "#1a415a")])
 
-    tree.place(x=209, y=310)
+    # Place the table
+    job_pos_table.place(x=253.0, y=324.0)
+
+    # Populate the table
+    common_count_job_data = db_controller.count_common_job_pos()
+
+    for job_data in common_count_job_data:
+        job_pos_table.insert('', 'end', values=job_data)
+
+
+    # ==================== COMMON SKILLS TABLE ==================== #
+    common_skills_table = ttk.Treeview(
+        master=parent, 
+        columns=('Skill Name', 'Total'), 
+        height=8, 
+        show='headings'
+    )
+
+    # Define column headings
+    common_skills_table.heading('#0', text='Skill Name')
+    common_skills_table.heading('#1', text='Total')
+
+    # Configure heading
+    common_skills_table.heading("Skill Name", text="Skill Name", anchor="center")
+    common_skills_table.heading("Total", text="Total", anchor="center")
+
+    #Configure column width
+    common_skills_table.column("Skill Name", width=220)
+    common_skills_table.column("Total", width=110, anchor="center")
+
+    # Place the table
+    common_skills_table.place(x=640.0, y=324.0)
+
+    # Populate the Common Skills Table
+    common_count_skills_data = db_controller.count_common_skills()
+
+    for skill_data in common_count_skills_data:
+        common_skills_table.insert('', 'end', values=skill_data)

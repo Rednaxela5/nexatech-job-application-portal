@@ -668,9 +668,33 @@ DELIMITER ;
 
 CALL AverageDesiredSalary();
 
+-- STORED PROCEDURE TO COUNT THE MOST COMMON JOB POSITION IN THE APPLICATION
+DELIMITER //
 
--- COUNT THE MOST COMMON JOB POSITION IN THE APPLICATION
-SELECT jobPosition, COUNT(*) AS Total_Count
-FROM applicant_details
-GROUP BY jobPosition;
+CREATE PROCEDURE CountJobPos()
+BEGIN
+	SELECT jobPosition, COUNT(*) AS Total_Count
+	FROM applicant_details
+	GROUP BY jobPosition;
+END //
 
+DELIMITER ;
+
+CALL CountJobPos();
+
+DELIMITER //
+
+CREATE PROCEDURE CountCommonSkill()
+BEGIN
+	SELECT sdb.skillName, COUNT(*) AS Total
+	FROM major_skill AS ms 
+	JOIN skills_db AS sdb ON ms.skillcode = sdb.skillcode
+	GROUP BY sdb.skillName
+	ORDER BY COUNT(*) desc
+	LIMIT 8;
+END //
+
+DELIMITER ;
+
+
+CALL CountCommonSkill();
