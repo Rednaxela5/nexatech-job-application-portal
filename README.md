@@ -225,8 +225,9 @@ Run the `application.bat` and you should see the home page window if there are n
 -   [x] ~~Add error handler for each page in application from~~
 -   [x] ~~Improve the database~~
 -   [x] ~~Redesign the admin control (make it real)~~
--   [] Add and improve the add new applicant section (Admin Control)
--   [] Add more features in the Admin Control
+-   [ ] Add and improve the add new applicant section (Admin Control)
+-   [ ] Add more features in the Admin Control
+-   [ ] Add graph and statistics in the Admin Control using matplotlib
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 # Contribute
