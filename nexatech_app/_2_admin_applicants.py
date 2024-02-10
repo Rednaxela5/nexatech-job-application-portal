@@ -6,6 +6,7 @@ from default_entry import DefaultTextEntry
 from _2_admin_edit_applicant import edit_applicant
 import mysql.connector
 import config as db_controller
+from storage import applicant_data as ad
 
 # Get the script's directory path
 SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
@@ -19,16 +20,37 @@ def relative_to_assets(path: str) -> Path:
 def edit_applicant_clicked(parent):
     edit_applicant(parent)
 
-def filter_treeview_records(query):
-    applicant_table.treeview.delete(*applicant_table.treeview.get_children())
-    # applicant_data = db_controller.search_applicant_details(query)
+def filter_treeview_records(event):
+    query = entry_1.get()
+    applicant_table.delete(*applicant_table.get_children())
+    applicant_data = db_controller.display_applicant_details(query)
     
     for row in applicant_data:
         # Check if query exists in any value from data
         if query.lower() in str(row).lower():
-            applicant_table.treeview.insert('', 'end', values=row)
-def applicant(parent):
+            applicant_table.insert('', 'end', values=row)
 
+def on_table_select(event):
+    button_1.config(state="normal")
+    button_2.config(state="normal")
+
+    try:
+        applicant_table.select()[0]
+    except:
+        applicant_table.selection_id = None
+        return
+    
+    # Get the selected item
+    global item
+    item = applicant_table.selection()[0]
+
+    # Get the values of the selected item
+    applicant_table.selection_id = applicant_table.item(item, "values")[0]
+
+
+
+
+def applicant(parent):
     # --------------------------------------------------------------------------------#
     # ---------------------------------- GUI SETUP ---------------------------------- #
     # --------------------------------------------------------------------------------#
@@ -66,7 +88,7 @@ def applicant(parent):
         height=35.0
     )
 
-    entry_1.bind("KeyRelease", lambda event: filter_treeview_records(entry_1.get()) )
+    entry_1.bind("<KeyRelease>", filter_treeview_records)
 
     global image_image_1
     image_image_1 = PhotoImage(
@@ -172,10 +194,13 @@ def applicant(parent):
     applicant_table.place(x=262, y=215)
     
     global applicant_data
-    applicant_data = db_controller.display_applicant_details()
+    applicant_data = db_controller.display_applicant_details(None)
 
     for app_data in applicant_data:
         applicant_table.insert('', 'end', values=app_data)
+
+    # Add Selection Event
+    applicant_table.bind("<<TreeviewSelect>>", on_table_select)
 
     # Populate the table
     # --------------------------------------------------------------------------------#
@@ -184,6 +209,8 @@ def applicant(parent):
     global button_image_1
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
+    
+    global button_1
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
@@ -191,7 +218,8 @@ def applicant(parent):
         command=lambda: print("button_1 clicked"),
         activebackground="#ffffff",
         cursor='hand2',
-        relief="flat"
+        relief="flat",
+        state="disabled"
     )
     button_1.place(
         x=845.0,
@@ -212,7 +240,8 @@ def applicant(parent):
         command=lambda: edit_applicant_clicked(parent),
         activebackground="#ffffff",
         cursor='hand2',
-        relief="flat"
+        relief="flat",
+        state="disabled"
     )
     button_2.place(
         x=725.0,
@@ -230,3 +259,4 @@ def applicant(parent):
         image=image_image_7
     )
 
+    

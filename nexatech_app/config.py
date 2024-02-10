@@ -78,18 +78,28 @@ def count_common_skills():
     cursor.close()
     return result
 
-def display_applicant_details():
-    conn = connect_to_mysql()
-    cursor = conn.cursor()
-    cursor.execute("CALL DisplayApplicantsByName('filter_name');")
-    result = cursor.fetchall()
-    cursor.close()
-    return result
+def display_applicant_details(query=None):
+    if query is None:
+        conn = connect_to_mysql()
+        cursor = conn.cursor()
+        cursor.execute("CALL DisplayApplicants();")
+        result = cursor.fetchall()
+        cursor.close()
+        return result
+    else:
+        conn = connect_to_mysql()
+        cursor = conn.cursor()
+        cursor.execute("CALL DisplayApplicantsByName(%s);", (query,))
+        result = cursor.fetchall()
+        cursor.close()
+        return result
 
-def search_applicant_details(search_key):
+
+def display_applicant_entry(item):
     conn = connect_to_mysql()
     cursor = conn.cursor()
-    cursor.execute("CALL DisplayApplicantsByName(filter_name);")
+    cursor.execute("SELECT name, dateOfBirth, SSS_ID, address, city, province, zipcode, phoneNumber, emailAddress FROM applicant_details WHERE applicantNo = %s;", (item,))
     result = cursor.fetchall()
     cursor.close()
     return result
+    

@@ -21,6 +21,15 @@ def relative_to_assets(path: str) -> Path:
 # def update_date():
 #     dateOfBirth.set_date(datetime.date.today())
 
+def display_values():
+    # Run Query to get the applicant details
+    # Insert the datas in the variables
+    # Insert each value to the entry boxes
+    # Make readonly the important parts 
+
+
+    pass
+
 def back_clicked(parent):
     from _2_admin_applicants import applicant
     applicant(parent)
@@ -462,6 +471,7 @@ def edit_applicant(parent):
         height=41.0
     )
 
+    display_values()
 
 
 
