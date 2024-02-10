@@ -391,5 +391,142 @@ def connection_database():
         insert_major_skill(sn6.skill_name)
 
 
+
+
+def tot_applicant():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL CountTotalApplicants();")
+    result = cursor.fetchall()
+    cursor.close()
+    return result
+
+
+def full_time():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL CountFullTimeApplicants();")
+    result = cursor.fetchall()
+    cursor.close()
+    return result
+
+
+def part_time():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL CountPartTimeApplicants();")
+    result = cursor.fetchall()
+    cursor.close()
+    return result
+
+def avg_des_sal():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL AverageDesiredSalary();")
+    result = cursor.fetchall()
+    cursor.close()
+    # Extracting the average salary from the result set
+    average_salary = result[0][0] if result else 0.0
+    return average_salary
+
+def count_common_job_pos():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL CountJobPos();")
+    result = cursor.fetchall()
+    cursor.close()
+    return result
+
+def count_common_skills():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL CountCommonSkill();")
+    result = cursor.fetchall()
+    cursor.close()
+    return result
+
+def display_applicant_details(query=None):
+    if query is None:
+        conn = connect_to_mysql()
+        cursor = conn.cursor()
+        cursor.execute("CALL DisplayApplicants();")
+        result = cursor.fetchall()
+        cursor.close()
+        return result
+    else:
+        conn = connect_to_mysql()
+        cursor = conn.cursor()
+        cursor.execute("CALL DisplayApplicantsByName(%s);", (query,))
+        result = cursor.fetchall()
+        cursor.close()
+        return result
+
+
+
+
+def display_applicant_entry():
+    conn = connect_to_mysql()
+    cursor = conn.cursor()
+    cursor.execute("CALL GetApplicantDetails(%s)", (ad.applicantNo,))
+    result = cursor.fetchone()  # Assuming applicantNo is unique, so fetch one row
+    cursor.close()
+    if result:
+        ad.name = result[0]
+        ad.birthdate = result[1]  # Assuming self is referring to some object instance
+        ad.sss_id = result[2]
+        ad.address = result[3]
+        ad.city = result[4]
+        ad.province = result[5]
+        ad.zipcode = result[6]
+        ad.phoneNumber = result[7]
+        ad.emailaddress = result[8]
+
+        # Assuming other attributes are of ad object
+        print("Applicant details retrieved successfully.")
+        return True  # Indicate success
+    else:
+        return False  # No applicant found with given applicantNo
+
+def update_applicant_details():
+    conn = connect_to_mysql()
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            query = "CALL UpdateApplicantDetails(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            values = (ad.applicantNo, ad.name, ad.birthdate, ad.sss_id, ad.address, ad.city, ad.province, ad.zipcode, ad.phoneNumber, ad.emailaddress)
+            cursor.execute(query, values)
+            conn.commit()
+            print("Applicant details updated successfully.")
+            return True
+        except mysql.connector.Error as err:
+            print("Error inserting applicant details:", err)
+            return False
+        finally:
+            cursor.close()
+            conn.close()
+    else:
+        return False
+    
+def delete_applicant_info():
+    conn = connect_to_mysql()
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            query = "CALL DeleteApplicantInfo(%s)"
+            values = (ad.applicantNo,)
+            cursor.execute(query, values)
+            conn.commit()
+            print("Applicant details deleted successfully.")
+            return True
+        except mysql.connector.Error as err:
+            print("Error deleting applicant details:", err)
+            return False
+        finally:
+            cursor.close()
+            conn.close()
+    else:
+        return False
+    
+    
 if __name__ == "__main__":
     connection_database()

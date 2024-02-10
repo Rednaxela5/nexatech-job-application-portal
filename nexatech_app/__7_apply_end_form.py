@@ -1,7 +1,5 @@
 from pathlib import Path
 import sys
-# from tkinter import *
-# Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from storage import applicant_data as ad, school_data_1 as sd1, school_data_2 as sd2, school_data_3 as sd3, work_data_1 as wd1, work_data_2 as wd2, work_data_3 as wd3, skill_data_1 as md1, skill_data_2 as md2, skill_data_3 as md3, skill_data_4 as md4, skill_data_5 as md5, skill_data_6 as md6
 

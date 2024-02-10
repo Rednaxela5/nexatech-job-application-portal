@@ -5,7 +5,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar, Labe
 from default_entry import DefaultTextEntry
 from _2_admin_edit_applicant import edit_applicant
 import mysql.connector
-import config as db_controller
+import sql_connection as db_controller
 from storage import applicant_data as ad
 
 # Get the script's directory path
@@ -18,7 +18,23 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 def edit_applicant_clicked(parent):
+    db_controller.display_applicant_entry()
     edit_applicant(parent)
+
+def delete_applicant_clicked(parent):
+    confirmation_message = "Do you want to delete this record?"
+    confirm = messagebox.askyesno("Confirmation", confirmation_message)
+    if confirm:
+        if db_controller.delete_applicant_info(): 
+            messagebox.showinfo("Success", "Record has been deleted.")
+            applicant(parent)
+        else:
+            messagebox.showerror("Error", "Failed to delete the record.")  
+    else:
+        pass
+
+
+
 
 def filter_treeview_records(event):
     query = entry_1.get()
@@ -35,17 +51,15 @@ def on_table_select(event):
     button_2.config(state="normal")
 
     try:
-        applicant_table.select()[0]
-    except:
-        applicant_table.selection_id = None
-        return
-    
-    # Get the selected item
-    global item
-    item = applicant_table.selection()[0]
-
-    # Get the values of the selected item
-    applicant_table.selection_id = applicant_table.item(item, "values")[0]
+        selected_item = applicant_table.selection()[0]
+        # Get the values of the selected item
+        values = applicant_table.item(selected_item, "values")
+        if values:
+            ad.applicantNo = values[0]  # Assuming applicantNo is the first value in the row
+    except IndexError:
+        # No item selected, reset applicantNo
+        print("No item selected")
+        ad.applicantNo = None
 
 
 
@@ -215,7 +229,7 @@ def applicant(parent):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda: delete_applicant_clicked(parent),
         activebackground="#ffffff",
         cursor='hand2',
         relief="flat",

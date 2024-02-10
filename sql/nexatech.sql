@@ -436,7 +436,7 @@ CREATE TABLE IF NOT EXISTS school (
     dateGraduated DATE NOT NULL,
     educationAttainment CHAR(3) NOT NULL,
     PRIMARY KEY (applicantNo, school_ID),
-    FOREIGN KEY (applicantNo) REFERENCES applicant_details(applicantNo)
+    FOREIGN KEY (applicantNo) REFERENCES applicant_details(applicantNo) ON DELETE CASCADE
 );
 
 -- INSERT DATA INTO THE TABLE
@@ -501,7 +501,7 @@ CREATE TABLE IF NOT EXISTS major_skill (
 	applicantNo INT NOT NULL,
     skillcode VARCHAR(7) NOT NULL,
     PRIMARY KEY (applicantNo, skillcode),
-    FOREIGN KEY (applicantNo) REFERENCES applicant_details(applicantNo),
+    FOREIGN KEY (applicantNo) REFERENCES applicant_details(applicantNo) ON DELETE CASCADE,
     FOREIGN KEY (skillcode) REFERENCES skills_db(skillcode)
 );
 
@@ -550,7 +550,7 @@ CREATE TABLE IF NOT EXISTS work_experience (
     workPosition VARCHAR(30) NOT NULL,
     reasonForLeaving VARCHAR(200) NOT NULL,
     PRIMARY KEY (w_dump_id, applicantNo, employmentHistory_ID),
-    FOREIGN KEY (applicantNo) REFERENCES applicant_details(applicantNo)
+    FOREIGN KEY (applicantNo) REFERENCES applicant_details(applicantNo) ON DELETE CASCADE
 );
 
 -- INSERT DATA INTO THE TABLE
@@ -573,22 +573,9 @@ VALUES
 	(7, 'EH00015',' ABC Corporation', '2012-01-23', '2018-06-10', 'Data Administrator', 'Relocation');
 
 
--- Retrieve information of an applicant from the applicant_details table based on the given applicantNo
-DELIMITER $$
-CREATE PROCEDURE find_applicant(IN id INT)
-BEGIN
-    SELECT *
-    FROM applicant_details
-    WHERE applicantNo = id;
-END $$
-DELIMITER ;
-
-CALL find_applicant(4);
-
-
-SELECT COUNT(applicantNo) AS Total_Applicants
-FROM applicant_details;
-
+-- ------------------------------------------------------------------------------
+-- ------------------------- STORE PROCEDURES -----------------------------------
+-- ------------------------------------------------------------------------------
 
 -- STORED PROCEDURE TO COUNT TOTAL APPLICANTS
 DELIMITER //
@@ -606,9 +593,6 @@ BEGIN
 END//
 
 DELIMITER ;
-
--- CALL the procedure to count total applicants
-CALL CountTotalApplicants();
 
 
 -- STORED PROCEDURE TO COUNT FULL-TIME APPLICANTS
@@ -630,8 +614,6 @@ END//
 
 DELIMITER ;
 
--- CALL the procedure to count full-time applicants
-CALL CountFullTimeApplicants();
 
 
 -- STORED PROCEDURE TO COUNT FULL-TIME APPLICANTS
@@ -653,7 +635,7 @@ END//
 
 DELIMITER ;
 
-CALL CountPartTimeApplicants();
+
 
 -- STORED PROCEDURE TO GET THE AVERAGE DESIRED SALARY OF THE APPLICANTS
 DELIMITER //
@@ -666,7 +648,7 @@ END //
 
 DELIMITER ;
 
-CALL AverageDesiredSalary();
+
 
 -- STORED PROCEDURE TO COUNT THE MOST COMMON JOB POSITION IN THE APPLICATION
 DELIMITER //
@@ -680,8 +662,8 @@ END //
 
 DELIMITER ;
 
-CALL CountJobPos();
 
+-- STORED PROCEDURE TO DISPLAY THE TOTAL COUNT IN EACH COMMON SKILL LIMITED TO 8
 DELIMITER //
 
 CREATE PROCEDURE CountCommonSkill()
@@ -697,9 +679,85 @@ END //
 DELIMITER ;
 
 
-CALL CountCommonSkill();
+-- STORED PROCEDURE TO DISPLAY THE APPLICANT DETAILS
+DELIMITER //
+
+CREATE PROCEDURE DisplayApplicants()
+BEGIN
+	SELECT applicantNo, name, dateOfBirth, SSS_ID, CONCAT_WS(', ', address, city, province, zipcode) AS Address
+	FROM applicant_details
+	ORDER BY applicantNo ASC;
+END //
+
+DELIMITER ;
 
 
-SELECT applicantNo, name, dateOfBirth, SSS_ID, CONCAT_WS(', ', address, city, province, zipcode) AS Adress, phoneNumber, emailAddress
-FROM applicant_details
-ORDER BY applicantNo ASC;
+
+-- STORED PROCEDURE TO DISPLAY THE APPLICANT DETAILS BY NAME
+DELIMITER //
+
+CREATE PROCEDURE DisplayApplicantsByName(
+    IN filter_name VARCHAR(50) -- Parameter to specify the name for filtering
+)
+BEGIN
+    -- Execute the query with filtering by name
+    SELECT applicantNo, name, dateOfBirth, SSS_ID, CONCAT_WS(', ', address, city, province, zipcode) AS Address
+    FROM applicant_details
+    WHERE name LIKE CONCAT('%', filter_name, '%')
+    ORDER BY applicantNo ASC;
+END //
+
+DELIMITER ;
+
+
+
+-- STORED PROCEDURE TO DISPLAY THE APPLICANT DETAILS IN THE FIRST PAGE
+DELIMITER //
+
+CREATE PROCEDURE GetApplicantDetails(IN applicantNumber INT)
+BEGIN
+    SELECT 
+        name, dateOfBirth, SSS_ID, address, city, province, zipcode, phoneNumber, emailAddress
+    FROM 
+        applicant_details
+    WHERE 
+        applicantNo = applicantNumber;
+END //
+
+DELIMITER ;
+
+
+
+-- STORED PROCEDURE TO UPDATE THE APPLICANT DETAILS
+DELIMITER //
+CREATE PROCEDURE UpdateApplicantDetails(d_id INT, d_name VARCHAR(50), d_dateOfBirth DATE, d_SSS_ID VARCHAR(15), d_address VARCHAR(100), d_city VARCHAR(30), d_province VARCHAR(30), d_zipcode INT, d_phoneNumber VARCHAR(12), d_emailAddress VARCHAR(40))
+BEGIN
+    UPDATE applicant_details SET 
+        name = d_name, 
+        dateOfBirth = d_dateOfBirth, 
+        SSS_ID = d_SSS_ID, 
+        address = d_address, 
+        city = d_city, 
+        province = d_province, 
+        zipcode = d_zipcode, 
+        phoneNumber = d_phoneNumber, 
+        emailAddress = d_emailAddress 
+    WHERE applicantNO = d_id;
+END //
+DELIMITER ;
+
+-- STORED PROCEDURE TO DELETE APPLICANT INFO
+DELIMITER //
+CREATE PROCEDURE DeleteApplicantInfo(IN applicantNoToDelete INT)
+BEGIN
+	DELETE FROM applicant_details WHERE applicantNo = applicantNoToDelete;
+END //
+DELIMITER ;
+
+
+
+
+
+
+
+

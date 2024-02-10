@@ -2,7 +2,6 @@ from pathlib import Path
 import sys
 import os
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label, Frame, BOTH, messagebox
-from PIL import Image, ImageTk
 from _2_admin_dashboard_d import dash
 from _2_admin_new_applicant import new_app
 from _2_admin_applicants import applicant

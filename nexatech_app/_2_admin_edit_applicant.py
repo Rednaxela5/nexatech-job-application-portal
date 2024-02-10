@@ -7,6 +7,7 @@ import tkinter as tk
 from tkcalendar import DateEntry
 import datetime
 from storage import applicant_data as ad
+import sql_connection as db_controller
 
 
 # Get the script's directory path
@@ -22,17 +23,156 @@ def relative_to_assets(path: str) -> Path:
 #     dateOfBirth.set_date(datetime.date.today())
 
 def display_values():
-    # Run Query to get the applicant details
-    # Insert the datas in the variables
-    # Insert each value to the entry boxes
-    # Make readonly the important parts 
 
 
-    pass
+    # Full Name
+    if ad.name == d_fullname_entry:
+        pass
+    elif ad.name != "":
+        fullname_entry.delete(0, tk.END)
+        fullname_entry.insert(0, ad.name)
+        fullname_entry.config(fg="black")
+
+    # Date of Birth
+    if ad.birthdate != "":
+        dateOfBirth.set_date(ad.birthdate)
+    # SSS ID
+    if ad.sss_id == d_sssID_entry:
+        pass
+    elif ad.sss_id != "":
+        sssID_entry.delete(0, tk.END)
+        sssID_entry.insert(0, ad.sss_id)
+        sssID_entry.config(fg="black")
+    
+    # Address
+    if ad.address == d_address_entry:
+        pass
+    elif ad.address != "":
+        address_entry.delete(0, tk.END)
+        address_entry.insert(0, ad.address)
+        address_entry.config(fg="black")
+
+    # City
+    if ad.city == d_city_entry:
+        pass
+    elif ad.city != "":
+        city_entry.delete(0, tk.END)
+        city_entry.insert(0, ad.city)
+        city_entry.config(fg="black")
+
+    # Province
+    if ad.province == d_province_entry:
+        pass
+    elif ad.province != "":
+        province_entry.delete(0, tk.END)
+        province_entry.insert(0, ad.province)
+        province_entry.config(fg="black")
+    
+    # ZIP Code
+    if ad.zipcode == d_zipcode_entry:
+        pass
+    elif ad.zipcode != "":
+        zip_code_entry.delete(0, tk.END)
+        zip_code_entry.insert(0, ad.zipcode)
+        zip_code_entry.config(fg="black")
+    
+    # Phone Number
+    if ad.phoneNumber == d_phone_number_entry:
+        pass
+    elif ad.phoneNumber != "":
+        phone_number_entry.delete(0, tk.END)
+        phone_number_entry.insert(0, ad.phoneNumber)
+        phone_number_entry.config(fg="black")
+    
+    # Email Address
+    if ad.emailaddress == d_email_address_entry:
+        pass
+    elif ad.emailaddress != "":
+        email_address_entry.delete(0, tk.END)
+        email_address_entry.insert(0, ad.emailaddress)
+        email_address_entry.config(fg="black")
 
 def back_clicked(parent):
     from _2_admin_applicants import applicant
     applicant(parent)
+
+def update_clicked(parent):
+    name = fullname_entry.get()
+    birthdate = dateOfBirth.get_date()
+    sss_id = sssID_entry.get()
+    address = address_entry.get()
+    city = city_entry.get()
+    province = province_entry.get()
+    zipcode = zip_code_entry.get()
+    phoneNumber = phone_number_entry.get()
+    emailaddress = email_address_entry.get()
+    
+    if not (name or birthdate or sss_id or address or city or province or zipcode or phoneNumber or emailaddress) or name == d_fullname_entry or birthdate == "" or sss_id == d_sssID_entry or address == d_address_entry or city == d_city_entry or province == d_province_entry or zipcode == d_zipcode_entry or phoneNumber == d_phone_number_entry or emailaddress == d_email_address_entry:
+        messagebox.showerror("Error", "Please fill out all fields.")
+    elif len(name) < 3:
+        messagebox.showerror("Error", "Enter valid name.")
+    elif not sss_id.isdigit() or len(sss_id) != 10:
+        messagebox.showerror("Error", "SSS ID should be a 10-digit number.")
+    elif address == d_address_entry or not address.strip() or len(address) < 5:
+        messagebox.showerror("Error", "Please provide a valid address.")
+    elif city == d_city_entry or not city.strip():
+        messagebox.showerror("Error", "Please provide a valid city.")
+    elif province == d_province_entry or not province.strip():
+        messagebox.showerror("Error", "Please provide a valid province.")
+    elif not zipcode.isdigit() or len(zipcode) != 4:
+        messagebox.showerror("Error", "Zip code should be a 4-digit number.")
+    elif not phoneNumber.isdigit() or len(phoneNumber) > 11:
+        messagebox.showerror("Error", "Phone number should be a valid number with up to 11 digits.")
+    elif "@" not in emailaddress:
+        messagebox.showerror("Error", "Please provide a valid email address.")
+        
+    else:
+
+        ad.name = fullname_entry.get()
+        ad.birthdate = dateOfBirth.get_date()
+        ad.sss_id = sssID_entry.get()
+        ad.address = address_entry.get()
+        ad.city = city_entry.get()
+        ad.province = province_entry.get()
+        ad.zipcode = zip_code_entry.get()
+        ad.phoneNumber = phone_number_entry.get()
+        ad.emailaddress = email_address_entry.get()
+
+        confirmation_message = "Do you want to update the details?"
+        confirm = messagebox.askyesno("Confirmation", confirmation_message)
+        if confirm:
+            if db_controller.update_applicant_details():  # Assuming update_applicant_details returns True on success
+                messagebox.showinfo("Success", "Applicant details updated successfully.")
+                from _2_admin_applicants import applicant
+                applicant(parent)
+            else:
+                messagebox.showerror("Error", "Failed to update applicant details.")  # Assuming update_applicant_details returns False on failure
+        else:
+            pass
+
+        # For Debugging Purposes
+        # print(applicant_data.name)
+        # print(applicant_data.birthdate)
+        # print(applicant_data.sss_id)
+        # print(applicant_data.address)
+        # print(applicant_data.city)
+        # print(applicant_data.province)
+        # print(applicant_data.zipcode)
+        # print(applicant_data.phoneNumber)
+        # print(applicant_data.emailaddress)
+        
+        # fullname_entry.place_forget()
+        # dateOfBirth.place_forget()
+        # sssID_entry.place_forget()
+        # address_entry.place_forget()
+        # city_entry.place_forget()
+        # province_entry.place_forget()
+        # zip_code_entry.place_forget()
+        # phone_number_entry.place_forget()
+        # email_address_entry.place_forget()
+        # canvas.place_forget()
+
+
 
 def edit_applicant(parent):
     # Global Variables
@@ -437,7 +577,7 @@ def edit_applicant(parent):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda: update_clicked(parent),
         activebackground="#ccd4d9",
         cursor='hand2',
         relief="flat"

@@ -4,7 +4,7 @@ import os
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar, Label, Frame, ttk, messagebox
 from config import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
 import mysql.connector
-import config as db_controller
+import sql_connection as db_controller
 
 # Get the script's directory path
 SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
