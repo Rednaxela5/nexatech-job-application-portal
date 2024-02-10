@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 import os
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar, Label, Frame, ttk, messagebox
-
+from storage import applicant_data as ad
 
 # Get the script's directory path
 SCRIPT_DIR = Path(sys.argv[0]).resolve().parent
@@ -24,6 +24,7 @@ def new_app(parent):
         confirm = messagebox.askyesno("Confirmation", confirmation_message)
         if confirm:
             from __2_apply_personal_info import personal_main
+            ad.reset_values()
             personal_main(parent)
         else:
             pass
