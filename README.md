@@ -103,99 +103,33 @@ Take a look at some screenshots showcasing the intuitive application form and po
     </tr>
     <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/Main Menu.png" alt="Main Menu" />
+            <img src="assets/readme-assets/screenshots/Dashboard page.png" alt="Dashboard" />
             <br />
-            <p align="center">Main Menu</p></td>
+            <p align="center">Dashboard</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Easy.png" alt="Easy" />
+            <img src="assets/readme-assets/screenshots/New Applicant Page.png" alt="New Applicant" />
             <br />
-            <p align="center">Easy</p></td>
+            <p align="center">New Applicant</p></td>
     </tr>
     <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/Easy 1.png" alt="Easy 1" />
+            <img src="assets/readme-assets/screenshots/View Applicants Page.png" alt="View Applicants" />
             <br />
-            <p align="center">Easy 1</p></td>
+            <p align="center">View Applicants</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Easy 2.png" alt="Easy 2" />
+            <img src="assets/readme-assets/screenshots/Update Applicant Page.png" alt="Update Applicant" />
             <br />
-            <p align="center">Easy 2</p></td>
+            <p align="center">Update Applicant</p></td>
     </tr>
     <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/Easy 3.png" alt="Easy 3" />
+            <img src="assets/readme-assets/screenshots/About Page.png" alt="About Page" />
             <br />
-            <p align="center">Easy 3</p></td>
+            <p align="center">About Page</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Easy 4.png" alt="Easy 4" />
+            <img src="assets/readme-assets/screenshots/Confirm Logout.png" alt="Confirm Logout" />
             <br />
-            <p align="center">Easy 4</p></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="assets/readme-assets/screenshots/Easy 5.png" alt="Easy 5" />
-            <br />
-            <p align="center">Easy 5</p></td>
-        <td>
-            <img src="assets/readme-assets/screenshots/Medium.png" alt="Medium" />
-            <br />
-            <p align="center">Medium</p></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="assets/readme-assets/screenshots/Medium 1.png" alt="Medium 1" />
-            <br />
-            <p align="center">Medium 1</p></td>
-        <td>
-            <img src="assets/readme-assets/screenshots/Medium 2.png" alt="Medium 2" />
-            <br />
-            <p align="center">Medium 2</p></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="assets/readme-assets/screenshots/Medium 3.png" alt="Medium 3" />
-            <br />
-            <p align="center">Medium 3</p></td>
-        <td>
-            <img src="assets/readme-assets/screenshots/Medium 4.png" alt="Medium 4" />
-            <br />
-            <p align="center">Medium 4</p></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="assets/readme-assets/screenshots/Medium 5.png" alt="Medium 5" />
-            <br />
-            <p align="center">Medium 5</p></td>
-        <td>
-            <img src="assets/readme-assets/screenshots/Hard.png" alt="Hard" />
-            <br />
-            <p align="center">Hard</p></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="assets/readme-assets/screenshots/Hard 1.png" alt="Hard 1" />
-            <br />
-            <p align="center">Hard 1</p></td>
-        <td>
-            <img src="assets/readme-assets/screenshots/Hard 2.png" alt="Hard 2" />
-            <br />
-            <p align="center">Hard 2</p></td>
-    </tr>
-    <tr>
-        <td>
-            <img src="assets/readme-assets/screenshots/Hard 3.png" alt="Hard 3" />
-            <br />
-            <p align="center">Hard 3</p></td>
-        <td>
-            <img src="assets/readme-assets/screenshots/Hard 4.png" alt="Hard 4" />
-            <br />
-            <p align="center">Hard 4</p></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <img src="assets/readme-assets/screenshots/Hard 5.png" alt="Hard 5"/>
-            <br />
-            <p align="center">Hard 5</p></td>
+            <p align="center">Confirm Logout</p></td>
     </tr>
       
 </table> 
@@ -289,8 +223,10 @@ Run the `application.bat` and you should see the home page window if there are n
 
 -   [x] ~~Improve the education page~~
 -   [x] ~~Add error handler for each page in application from~~
--   [ ] Improve the database
--   [ ] Redesign the admin control (make it real)
+-   [x] ~~Improve the database~~
+-   [x] ~~Redesign the admin control (make it real)~~
+-   [] Add and improve the add new applicant section (Admin Control)
+-   [] Add more features in the Admin Control
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 # Contribute

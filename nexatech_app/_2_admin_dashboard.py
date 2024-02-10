@@ -116,7 +116,7 @@ def dashboard():
     # --------------------------------------------------------------------------------#
     
     window = Tk()
-    window.title("Nexatech Job Portal")
+    window.title("Nexatech System Administration")
     window.geometry("1024x568")
     window.configure(bg = "#0F2634")
 

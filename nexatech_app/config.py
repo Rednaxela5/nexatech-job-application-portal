@@ -1,6 +1,3 @@
-import mysql.connector
-import os
-
 # Login Page
 USERNAME = "admin"
 PASSWORD = "password"
