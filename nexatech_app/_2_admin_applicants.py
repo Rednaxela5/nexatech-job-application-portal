@@ -192,10 +192,10 @@ def applicant(parent):
 
     # Configure Column Width
     applicant_table.column("ID", width=60, anchor="center")
-    applicant_table.column("Name", width=100, anchor="w")
+    applicant_table.column("Name", width=120, anchor="w")
     applicant_table.column("Birthdate", width=90, anchor="center")
     applicant_table.column("SSS ID", width=100, anchor="center")
-    applicant_table.column("Address", width=365, anchor="w")
+    applicant_table.column("Address", width=345, anchor="w")
 
     # Configure selected row color
     style = ttk.Style()
