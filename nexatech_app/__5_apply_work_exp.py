@@ -1,8 +1,6 @@
 from pathlib import Path
 import sys
 import tkinter as tk
-# from tkinter import *
-# Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Button, PhotoImage, Entry, ttk, messagebox
 from tkcalendar import DateEntry
 from default_entry import DefaultTextEntry

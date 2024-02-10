@@ -1,8 +1,6 @@
 from pathlib import Path
 import sys
 import os
-# from tkinter import *
-# Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar, ttk, messagebox
 from default_entry import DefaultTextEntry
 import tkinter as tk
@@ -215,7 +213,7 @@ def personal_main(parent):
     global d_phone_number_entry
     global d_email_address_entry
     
-    # Default Text for Eac Entry Box
+    # Default Text for Each Entry Box
     d_fullname_entry = "Enter Full Name"
     d_sssID_entry = "Enter SSS ID"
     d_address_entry = "Enter Address"
