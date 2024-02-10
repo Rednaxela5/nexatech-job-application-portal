@@ -63,71 +63,71 @@ Take a look at some screenshots showcasing the intuitive application form and po
 <table>
    <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/Homepage.png" alt="Homepage" />
+            <img src="assets/readme-assets/screenshots/01-2 Homepage.png" alt="Homepage" />
             <br />
             <p align="center">Homepage</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Personal Information.png" alt="Personal Information" />
+            <img src="assets/readme-assets/screenshots/02 Personal Information.png" alt="Personal Information" />
             <br />
             <p align="center">Personal Information</p></td>
     </tr>
     <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/Desired Employment.png" alt="Desired Employment" />
+            <img src="assets/readme-assets/screenshots/03 Desired Employment.png" alt="Desired Employment" />
             <br />
             <p align="center">Desired Employment</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Education Page.png" alt="Education" />
+            <img src="assets/readme-assets/screenshots/04 Education Page.png" alt="Education" />
             <br />
             <p align="center">Education</p></td>
     </tr>
     <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/Work Experience.png" alt="Work Experience" />
+            <img src="assets/readme-assets/screenshots/05 Work Experience.png" alt="Work Experience" />
             <br />
             <p align="center">Work Experience</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Major-Skills.png" alt="Major Skills" />
+            <img src="assets/readme-assets/screenshots/06 Major-Skills.png" alt="Major Skills" />
             <br />
             <p align="center">Major Skills</p></td>
     </tr>
     <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/Ending Page.png" alt="Ending Page" />
+            <img src="assets/readme-assets/screenshots/07 Ending Page.png" alt="Ending Page" />
             <br />
             <p align="center">Ending Page</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Login page.png" alt="Login Page" />
+            <img src="assets/readme-assets/screenshots/08 Login page.png" alt="Login Page" />
             <br />
             <p align="center">Login Page</p></td>
     </tr>
     <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/Dashboard page.png" alt="Dashboard" />
+            <img src="assets/readme-assets/screenshots/09 Dashboard page.png" alt="Dashboard" />
             <br />
             <p align="center">Dashboard</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/New Applicant Page.png" alt="New Applicant" />
+            <img src="assets/readme-assets/screenshots/10 New Applicant Page.png" alt="New Applicant" />
             <br />
             <p align="center">New Applicant</p></td>
     </tr>
     <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/View Applicants Page.png" alt="View Applicants" />
+            <img src="assets/readme-assets/screenshots/11 View Applicants Page.png" alt="View Applicants" />
             <br />
             <p align="center">View Applicants</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Update Applicant Page.png" alt="Update Applicant" />
+            <img src="assets/readme-assets/screenshots/12 Update Applicant Page.png" alt="Update Applicant" />
             <br />
             <p align="center">Update Applicant</p></td>
     </tr>
     <tr>
         <td>
-            <img src="assets/readme-assets/screenshots/About Page.png" alt="About Page" />
+            <img src="assets/readme-assets/screenshots/13 About Page.png" alt="About Page" />
             <br />
             <p align="center">About Page</p></td>
         <td>
-            <img src="assets/readme-assets/screenshots/Confirm Logout.png" alt="Confirm Logout" />
+            <img src="assets/readme-assets/screenshots/14 Confirm Logout.png" alt="Confirm Logout" />
             <br />
             <p align="center">Confirm Logout</p></td>
     </tr>
